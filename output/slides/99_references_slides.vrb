@@ -1,0 +1,11 @@
+\frametitle{References}
+The bibliography is generated automatically during PDF compilation from
+\texttt{references.bib}. Every citation key used in the manuscript has a
+matching bibliography entry, and the checked-in bibliography contains
+only sources required by the manuscript sections. Pandoc's
+\texttt{-\/-natbib} flag injects
+\texttt{\textbackslash{}usepackage\{natbib\}} and
+\texttt{\textbackslash{}bibliographystyle\{plainnat\}}, so neither
+directive appears in this section or in \texttt{preamble.md}.
+
+\bibliography{references}

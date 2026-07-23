@@ -1,0 +1,46 @@
+conditions:
+  - name: tracked_multi_phase_snapshot
+    role: reference
+    description: "Run deterministic downstream analysis over the tracked three-phase exoplanet evidence snapshot with no new network or LLM dependency."
+  - name: live_multi_phase_retrieval
+    role: proposed
+    description: "Run enabled engines with phase-specific queries against live services with graceful phase-level degradation."
+  - name: cross_phase_validation_only
+    role: variant
+    description: "Skip new retrieval; validate existing hypotheses across temporal phases with cross-phase consistency checks."
+  - name: single_phase_baseline
+    role: variant
+    description: "Run only the foundation phase for comparison with full multi-phase architecture."
+metrics:
+  primary:
+    name: cross_phase_validation_score
+    direction: maximize
+  secondary:
+    - name: phase_boundary_violations
+      direction: minimize
+    - name: temporal_coherence_score
+      direction: maximize
+    - name: llm_filter_precision
+      direction: maximize
+    - name: knowledge_graph_cross_phase_assertions
+      direction: maximize
+protocol: "Execute 3-phase search with temporal boundaries, apply deterministic + LLM filtering, extract phase-aware knowledge graph, validate hypotheses cross-temporally, generate phase statistics, and render manuscript with cross-phase analysis."
+expected_figures:
+  - fig:phase_timeline
+  - fig:cross_phase_validation_heatmap
+  - fig:growth_curves_by_phase
+  - fig:subfield_evolution_sankey
+  - fig:citation_network_temporal
+  - fig:topic_terms_phase_comparison
+  - fig:embeddings_phase_clusters
+  - fig:hypothesis_confidence_intervals
+expected_tables:
+  - tbl:phase_statistics_summary
+  - tbl:cross_phase_hypothesis_validation
+  - tbl:temporal_subfield_evolution
+  - tbl:llm_filter_performance_by_phase
+baselines:
+  - tracked_multi_phase_snapshot
+  - single_phase_baseline
+ablations:
+  - cross_phase_validation_only

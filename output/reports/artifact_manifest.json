@@ -1,0 +1,14 @@
+{
+  "entries": [
+    {
+      "contract_match": true,
+      "path": "output/data/deep_research_replay.json",
+      "sha256": "697f4935e162f0b88f7b9bb2680d41695917fea4b80a3d5ff74b5a8dfe3427be",
+      "size_bytes": 1018,
+      "stage_name": "current-output-snapshot",
+      "stage_num": 0,
+      "timestamp": ""
+    }
+  ],
+  "issues": []
+}

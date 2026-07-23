@@ -1,0 +1,49 @@
+{
+  "num_nodes": 70,
+  "num_edges": 132,
+  "density": 0.02732919254658385,
+  "avg_in_degree": 1.8857142857142857,
+  "avg_out_degree": 1.8857142857142857,
+  "max_in_degree": 11,
+  "max_out_degree": 4,
+  "connected_components": 7,
+  "num_communities": 13,
+  "total_references": 145,
+  "top_pagerank": {
+    "doi:10.5555/exoplanet atmospheres.0000": 0.148856350885,
+    "doi:10.5555/exoplanet atmospheres.0001": 0.099288280789,
+    "doi:10.5555/exoplanet atmospheres.0002": 0.064271063115,
+    "doi:10.5555/exoplanet atmospheres.0003": 0.035830158788,
+    "doi:10.5555/exoplanet atmospheres.0005": 0.034904838785
+  },
+  "top_hubs": {
+    "doi:10.5555/exoplanet atmospheres.0004": 0.085377776949,
+    "doi:10.5555/exoplanet atmospheres.0006": 0.071579051207,
+    "doi:10.5555/exoplanet atmospheres.0003": 0.070051527733,
+    "doi:10.5555/exoplanet atmospheres.0005": 0.066583469395,
+    "doi:10.5555/exoplanet atmospheres.0022": 0.065418239238
+  },
+  "top_authorities": {
+    "doi:10.5555/exoplanet atmospheres.0001": 0.210358839083,
+    "doi:10.5555/exoplanet atmospheres.0000": 0.122373314093,
+    "doi:10.5555/exoplanet atmospheres.0002": 0.122001747228,
+    "doi:10.5555/exoplanet atmospheres.0003": 0.09948912336,
+    "doi:10.5555/exoplanet atmospheres.0011": 0.053951022417
+  },
+  "top_betweenness": {
+    "doi:10.5555/exoplanet atmospheres.0010": 0.024058681444,
+    "doi:10.5555/exoplanet atmospheres.0015": 0.01264208582,
+    "doi:10.5555/exoplanet atmospheres.0028": 0.012340153453,
+    "doi:10.5555/exoplanet atmospheres.0006": 0.010734583689,
+    "doi:10.5555/exoplanet atmospheres.0057": 0.009626314294
+  },
+  "top_closeness": {
+    "doi:10.5555/exoplanet atmospheres.0001": 0.379733520337,
+    "doi:10.5555/exoplanet atmospheres.0000": 0.327205524754,
+    "doi:10.5555/exoplanet atmospheres.0002": 0.32474503489,
+    "doi:10.5555/exoplanet atmospheres.0003": 0.274483970136,
+    "doi:10.5555/exoplanet atmospheres.0005": 0.19335173683
+  },
+  "degree_assortativity": 0.17077730090605558,
+  "avg_clustering": 0.06259431045145332
+}

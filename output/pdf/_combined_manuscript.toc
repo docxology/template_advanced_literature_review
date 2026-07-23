@@ -1,0 +1,97 @@
+\babel@toc {english}{}\relax 
+\contentsline {section}{\numberline {1}Abstract}{4}{section.1}%
+\contentsline {section}{\numberline {2}Introduction}{5}{section.2}%
+\contentsline {subsection}{\numberline {2.1}Research Questions}{5}{subsection.2.1}%
+\contentsline {subsection}{\numberline {2.2}Scope and contribution}{5}{subsection.2.2}%
+\contentsline {section}{\numberline {3}Methods Overview}{6}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Pipeline stages}{6}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}Reproducibility model}{6}{subsection.3.2}%
+\contentsline {subsection}{\numberline {3.3}Configuration surface}{6}{subsection.3.3}%
+\contentsline {section}{\numberline {4}Retrieval and De-duplication}{7}{section.4}%
+\contentsline {subsection}{\numberline {4.1}Engine Details}{7}{subsection.4.1}%
+\contentsline {subsection}{\numberline {4.2}Canonical Identifier Hierarchy}{7}{subsection.4.2}%
+\contentsline {subsection}{\numberline {4.3}Relevance Filtering}{7}{subsection.4.3}%
+\contentsline {section}{\numberline {5}Full Text, Language, and Embeddings}{9}{section.5}%
+\contentsline {subsection}{\numberline {5.1}Full-Text Availability}{9}{subsection.5.1}%
+\contentsline {subsection}{\numberline {5.2}Language and Entity Extraction}{9}{subsection.5.2}%
+\contentsline {subsection}{\numberline {5.3}Embeddings}{9}{subsection.5.3}%
+\contentsline {section}{\numberline {6}Bibliometric and Temporal Analysis}{10}{section.6}%
+\contentsline {subsection}{\numberline {6.1}Growth Metrics}{10}{subsection.6.1}%
+\contentsline {subsection}{\numberline {6.2}Subfield Classification}{10}{subsection.6.2}%
+\contentsline {subsection}{\numberline {6.3}Topic Modeling}{10}{subsection.6.3}%
+\contentsline {section}{\numberline {7}Optional Knowledge-Graph Layer}{11}{section.7}%
+\contentsline {subsection}{\numberline {7.1}Assertion Model}{11}{subsection.7.1}%
+\contentsline {subsection}{\numberline {7.2}Incremental Extraction}{11}{subsection.7.2}%
+\contentsline {subsection}{\numberline {7.3}Gating and Defaults}{11}{subsection.7.3}%
+\contentsline {section}{\numberline {8}Visualization and Manuscript Injection}{12}{section.8}%
+\contentsline {subsection}{\numberline {8.1}Figure Generation}{12}{subsection.8.1}%
+\contentsline {subsection}{\numberline {8.2}Variable Injection}{12}{subsection.8.2}%
+\contentsline {section}{\numberline {9}Multi-Phase Search Strategy and Results}{13}{section.9}%
+\contentsline {subsection}{\numberline {9.1}Three-Phase Architecture}{13}{subsection.9.1}%
+\contentsline {subsubsection}{\numberline {9.1.1}Phase 1: Exoplanet Atmosphere Foundation}{13}{subsubsection.9.1.1}%
+\contentsline {subsubsection}{\numberline {9.1.2}Phase 2: James Webb Space Telescope Studies}{13}{subsubsection.9.1.2}%
+\contentsline {subsubsection}{\numberline {9.1.3}Phase 3: Molecular Detection Studies}{13}{subsubsection.9.1.3}%
+\contentsline {subsection}{\numberline {9.2}Cross-Phase Analysis}{14}{subsection.9.2}%
+\contentsline {subsubsection}{\numberline {9.2.1}Phase Overlap}{14}{subsubsection.9.2.1}%
+\contentsline {subsubsection}{\numberline {9.2.2}Citation Validation}{14}{subsubsection.9.2.2}%
+\contentsline {subsubsection}{\numberline {9.2.3}Combined Corpus}{14}{subsubsection.9.2.3}%
+\contentsline {subsection}{\numberline {9.3}LLM-Based Content Filtering}{14}{subsection.9.3}%
+\contentsline {section}{\numberline {10}Results: Hypotheses and Evidence}{15}{section.10}%
+\contentsline {subsection}{\numberline {10.1}Configured questions}{15}{subsection.10.1}%
+\contentsline {section}{\numberline {11}Results: Field Overview}{16}{section.11}%
+\contentsline {subsection}{\numberline {11.1}RQ1: Field Size and Growth}{16}{subsection.11.1}%
+\contentsline {subsection}{\numberline {11.2}RQ2: Subfield Composition}{16}{subsection.11.2}%
+\contentsline {subsection}{\numberline {11.3}Identifier and Full-Text Coverage}{17}{subsection.11.3}%
+\contentsline {subsection}{\numberline {11.4}Descriptive Bibliometrics}{17}{subsection.11.4}%
+\contentsline {section}{\numberline {12}Results: Subfield Structure}{21}{section.12}%
+\contentsline {subsection}{\numberline {12.1}Per-subfield characterization}{21}{subsection.12.1}%
+\contentsline {section}{\numberline {13}Results: Language, Topics, and Embeddings}{22}{section.13}%
+\contentsline {subsection}{\numberline {13.1}RQ3: Topical and Linguistic Structure}{22}{subsection.13.1}%
+\contentsline {subsection}{\numberline {13.2}Document Embeddings}{22}{subsection.13.2}%
+\contentsline {subsection}{\numberline {13.3}Term Analysis}{22}{subsection.13.3}%
+\contentsline {subsection}{\numberline {13.4}Named Entity Analysis}{23}{subsection.13.4}%
+\contentsline {subsection}{\numberline {13.5}Embedding Similarity and Clustering}{26}{subsection.13.5}%
+\contentsline {section}{\numberline {14}Results: Citation Network}{29}{section.14}%
+\contentsline {subsection}{\numberline {14.1}RQ4: Citation Geometry}{29}{subsection.14.1}%
+\contentsline {subsection}{\numberline {14.2}Centrality Analysis}{29}{subsection.14.2}%
+\contentsline {subsection}{\numberline {14.3}Advanced Network Metrics}{29}{subsection.14.3}%
+\contentsline {section}{\numberline {15}Results: Reproducibility Assessment}{31}{section.15}%
+\contentsline {subsection}{\numberline {15.1}Low-Scoring Papers}{31}{subsection.15.1}%
+\contentsline {subsection}{\numberline {15.2}Gating and Defaults}{31}{subsection.15.2}%
+\contentsline {subsection}{\numberline {15.3}Interpretation}{31}{subsection.15.3}%
+\contentsline {section}{\numberline {16}Multi-Phase Results and Cross-Phase Analysis}{32}{section.16}%
+\contentsline {subsection}{\numberline {16.1}Phase-Specific Findings}{32}{subsection.16.1}%
+\contentsline {subsubsection}{\numberline {16.1.1}Foundation Phase (Phase 1)}{32}{subsubsection.16.1.1}%
+\contentsline {subsubsection}{\numberline {16.1.2}JWST Phase (Phase 2)}{32}{subsubsection.16.1.2}%
+\contentsline {subsubsection}{\numberline {16.1.3}Molecular Detection Phase (Phase 3)}{32}{subsubsection.16.1.3}%
+\contentsline {subsection}{\numberline {16.2}Knowledge Graph Results}{32}{subsection.16.2}%
+\contentsline {subsection}{\numberline {16.3}Citation Network Analysis}{32}{subsection.16.3}%
+\contentsline {subsection}{\numberline {16.4}Reproducibility Assessment}{32}{subsection.16.4}%
+\contentsline {section}{\numberline {17}Discussion}{33}{section.17}%
+\contentsline {subsection}{\numberline {17.1}Interpretation boundary}{33}{subsection.17.1}%
+\contentsline {subsection}{\numberline {17.2}Retrieval and phase bias}{33}{subsection.17.2}%
+\contentsline {subsection}{\numberline {17.3}Fixture and live modes}{33}{subsection.17.3}%
+\contentsline {subsection}{\numberline {17.4}Limitations and extensions}{33}{subsection.17.4}%
+\contentsline {section}{\numberline {18}Conclusion}{34}{section.18}%
+\contentsline {subsection}{\numberline {18.1}Reproducibility}{34}{subsection.18.1}%
+\contentsline {section}{\numberline {19}Appendix A: Tooling and Reproduction}{35}{section.19}%
+\contentsline {subsection}{\numberline {19.1}Reproduce the Offline Default Run}{35}{subsection.19.1}%
+\contentsline {subsection}{\numberline {19.2}Reproduce the Live Run}{35}{subsection.19.2}%
+\contentsline {subsection}{\numberline {19.3}Re-target to Another Topic}{35}{subsection.19.3}%
+\contentsline {subsection}{\numberline {19.4}Live Retrieval}{35}{subsection.19.4}%
+\contentsline {subsection}{\numberline {19.5}Deep Research (Offline Fixture Replay)}{35}{subsection.19.5}%
+\contentsline {subsection}{\numberline {19.6}Test Suite}{36}{subsection.19.6}%
+\contentsline {section}{\numberline {20}Appendix B: Technical Notes}{37}{section.20}%
+\contentsline {subsection}{\numberline {20.1}Determinism}{37}{subsection.20.1}%
+\contentsline {subsection}{\numberline {20.2}Data Model}{37}{subsection.20.2}%
+\contentsline {subsection}{\numberline {20.3}NMF Mathematics}{37}{subsection.20.3}%
+\contentsline {subsection}{\numberline {20.4}Growth Rate Estimation}{37}{subsection.20.4}%
+\contentsline {subsection}{\numberline {20.5}Configuration Surface}{37}{subsection.20.5}%
+\contentsline {subsection}{\numberline {20.6}Artifacts}{38}{subsection.20.6}%
+\contentsline {section}{\numberline {21}Appendix C: Accessibility and Provenance}{39}{section.21}%
+\contentsline {subsection}{\numberline {21.1}Figure Accessibility}{39}{subsection.21.1}%
+\contentsline {subsection}{\numberline {21.2}Provenance Chain}{39}{subsection.21.2}%
+\contentsline {subsection}{\numberline {21.3}FAIR Data Principles}{39}{subsection.21.3}%
+\contentsline {subsection}{\numberline {21.4}Honesty}{39}{subsection.21.4}%
+\contentsline {section}{\numberline {22}Glossary}{40}{section.22}%
+\contentsline {section}{\numberline {23}References}{41}{section.23}%

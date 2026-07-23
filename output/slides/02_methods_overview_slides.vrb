@@ -1,0 +1,9 @@
+\frametitle{Configuration surface}
+\phantomsection\label{configuration-surface}
+\breaktt{manuscript/config.yaml} owns search terms, engines, phase
+boundaries, filters, sampling seeds, full-text policy, embedding
+settings, knowledge-graph settings, hypotheses, and subfield taxonomy.
+\breaktt{domain\_profile.yaml} owns package and gate expectations;
+\breaktt{experiment\_plan.yaml} records the review design;
+\breaktt{data/claim\_ledger.yaml} records the provenance tier and
+fixture/synthetic status of manuscript-facing claims.

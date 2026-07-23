@@ -1,0 +1,57 @@
+claims:
+  - claim_id: configured-default-search-term
+    kind: string
+    value: exoplanet atmospheres
+    source: projects/templates/template_advanced_literature_review/manuscript/config.yaml project_config.search.term
+    source_tier: project_config
+    freshness: active
+    artifact_path: manuscript/config.yaml
+  - claim_id: configured-search-phase-count
+    kind: number
+    value: 3
+    source: projects/templates/template_advanced_literature_review/manuscript/config.yaml project_config.search_phases
+    source_tier: project_config
+    freshness: active
+    artifact_path: manuscript/config.yaml
+  - claim_id: offline-replay-citation-count
+    kind: number
+    value: 2
+    source: projects/templates/template_advanced_literature_review/src/deep_research/fixtures/recorded_report.json citations
+    source_tier: fixture
+    freshness: active
+    artifact_path: src/deep_research/fixtures/recorded_report.json
+  - claim_id: crossref-page-size
+    kind: number
+    value: 1000
+    source: src/literature/crossref_client.py default page-size contract
+    source_tier: method
+    freshness: active
+    artifact_path: src/literature/crossref_client.py
+  - claim_id: evidence-score-lower-bound
+    kind: number
+    value: -1
+    source: manuscript/02d_methods_knowledge_graph.md evidence-score definition
+    source_tier: method
+    freshness: active
+    artifact_path: manuscript/02d_methods_knowledge_graph.md
+  - claim_id: figure-label-font-size
+    kind: number
+    value: 16
+    source: manuscript/02e_methods_viz_injection.md centralized figure style contract
+    source_tier: method
+    freshness: active
+    artifact_path: manuscript/02e_methods_viz_injection.md
+  - claim_id: visualization-palette-size
+    kind: number
+    value: 8
+    source: src/visualization/style.py VIZ_CONFIG.palette length
+    source_tier: method
+    freshness: active
+    artifact_path: src/visualization/style.py
+  - claim_id: literature-engine-client-count
+    kind: number
+    value: 9
+    source: src/literature/engine_dispatch.py ENGINE_SPECS length
+    source_tier: method
+    freshness: active
+    artifact_path: src/literature/engine_dispatch.py

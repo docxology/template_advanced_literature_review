@@ -1,0 +1,147 @@
+{
+  "citation_validation": {
+    "phase_2_jwst": {
+      "citation_rate": 0.23529411764705882,
+      "depends_on": [
+        "phase_1_foundation"
+      ],
+      "min_required_citations": 2,
+      "papers_with_sufficient_citations": 4,
+      "total_papers": 17
+    },
+    "phase_3_molecules": {
+      "citation_rate": 0.5517241379310345,
+      "depends_on": [
+        "phase_1_foundation",
+        "phase_2_jwst"
+      ],
+      "min_required_citations": 2,
+      "papers_with_sufficient_citations": 16,
+      "total_papers": 29
+    }
+  },
+  "phase_overlap": {
+    "phase_1_foundation": {
+      "phase_2_jwst": {
+        "intersection": 17,
+        "jaccard_similarity": 0.3695652173913043
+      },
+      "phase_3_molecules": {
+        "intersection": 29,
+        "jaccard_similarity": 0.6304347826086957
+      }
+    },
+    "phase_2_jwst": {
+      "phase_1_foundation": {
+        "intersection": 17,
+        "jaccard_similarity": 0.3695652173913043
+      },
+      "phase_3_molecules": {
+        "intersection": 15,
+        "jaccard_similarity": 0.4838709677419355
+      }
+    },
+    "phase_3_molecules": {
+      "phase_1_foundation": {
+        "intersection": 29,
+        "jaccard_similarity": 0.6304347826086957
+      },
+      "phase_2_jwst": {
+        "intersection": 15,
+        "jaccard_similarity": 0.4838709677419355
+      }
+    }
+  },
+  "phase_validation": {
+    "issues": [],
+    "phase_order": [
+      "phase_1_foundation",
+      "phase_2_jwst",
+      "phase_3_molecules"
+    ],
+    "schema_version": "advanced-literature-review/phase-validation/1",
+    "status": "pass"
+  },
+  "phases": {
+    "phase_1_foundation": {
+      "depends_on": [],
+      "description": "Core papers on exoplanet atmospheric studies",
+      "deterministic_filters_applied": {
+        "max_year": 2026,
+        "min_citation_count": 0,
+        "min_year": 2010
+      },
+      "end_time": 0.0,
+      "llm_filters_applied": [],
+      "name": "Exoplanet Atmosphere Foundation",
+      "papers_after_deterministic_filters": 46,
+      "papers_after_llm_filters": 46,
+      "papers_discovered": 80,
+      "papers_final": 46,
+      "phase_id": "phase_1_foundation",
+      "queries_executed": [
+        "\"exoplanet atmosphere\" OR \"exoplanet atmospheric\"",
+        "\"transit spectroscopy\" AND \"atmosphere\"",
+        "\"atmospheric composition\" AND \"exoplanet\""
+      ],
+      "start_time": 0.0
+    },
+    "phase_2_jwst": {
+      "depends_on": [
+        "phase_1_foundation"
+      ],
+      "description": "Papers using JWST data for atmospheric analysis",
+      "deterministic_filters_applied": {
+        "max_year": 2026,
+        "min_citation_count": 0,
+        "min_year": 2020
+      },
+      "end_time": 0.0,
+      "llm_filters_applied": [],
+      "name": "James Webb Space Telescope Studies",
+      "papers_after_deterministic_filters": 17,
+      "papers_after_llm_filters": 17,
+      "papers_discovered": 67,
+      "papers_final": 17,
+      "phase_id": "phase_2_jwst",
+      "queries_executed": [
+        "\"James Webb\" AND \"atmosphere\" AND (\"exoplanet\" OR \"planet\")",
+        "\"JWST\" AND \"transit\" AND \"spectroscopy\"",
+        "\"NIRSpec\" OR \"MIRI\" OR \"NIRCam\" AND \"exoplanet\""
+      ],
+      "start_time": 0.0
+    },
+    "phase_3_molecules": {
+      "depends_on": [
+        "phase_1_foundation",
+        "phase_2_jwst"
+      ],
+      "description": "Papers detecting specific atmospheric molecules",
+      "deterministic_filters_applied": {
+        "max_year": 2026,
+        "min_citation_count": 0,
+        "min_year": 2015
+      },
+      "end_time": 0.0,
+      "llm_filters_applied": [],
+      "name": "Molecular Detection Studies",
+      "papers_after_deterministic_filters": 29,
+      "papers_after_llm_filters": 29,
+      "papers_discovered": 64,
+      "papers_final": 29,
+      "phase_id": "phase_3_molecules",
+      "queries_executed": [
+        "\"water vapor\" AND \"exoplanet\" AND (\"detection\" OR \"abundance\")",
+        "\"carbon dioxide\" AND \"exoplanet\" AND (\"CO2\" OR \"atmosphere\")",
+        "\"methane\" AND \"exoplanet\" AND (\"CH4\" OR \"atmosphere\")",
+        "\"hydrogen sulfide\" OR \"H2S\" AND \"exoplanet\"",
+        "\"sodium\" OR \"potassium\" AND \"exoplanet atmosphere\""
+      ],
+      "start_time": 0.0
+    }
+  },
+  "replay_mode": "fixture",
+  "source_corpus": "corpus.jsonl",
+  "total_papers": 46,
+  "total_unique_papers": 46
+}

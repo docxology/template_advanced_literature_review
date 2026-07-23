@@ -1,0 +1,204 @@
+{
+  "top_keyphrases": [
+    {
+      "phrase": "jwst",
+      "score": 0.07142857142857142
+    },
+    {
+      "phrase": "population",
+      "score": 0.05555555555555555
+    },
+    {
+      "phrase": "analyses",
+      "score": 0.043478260869565216
+    },
+    {
+      "phrase": "calibration",
+      "score": 0.043478260869565216
+    },
+    {
+      "phrase": "calibration choices",
+      "score": 0.043478260869565216
+    },
+    {
+      "phrase": "choices",
+      "score": 0.043478260869565216
+    },
+    {
+      "phrase": "combined",
+      "score": 0.043478260869565216
+    },
+    {
+      "phrase": "jwst analyses",
+      "score": 0.043478260869565216
+    },
+    {
+      "phrase": "models",
+      "score": 0.043478260869565216
+    },
+    {
+      "phrase": "models calibration",
+      "score": 0.043478260869565216
+    },
+    {
+      "phrase": "models calibration choices",
+      "score": 0.043478260869565216
+    },
+    {
+      "phrase": "model",
+      "score": 0.04
+    },
+    {
+      "phrase": "atmospheric",
+      "score": 0.0392156862745098
+    },
+    {
+      "phrase": "abundance",
+      "score": 0.038461538461538464
+    },
+    {
+      "phrase": "assumptions",
+      "score": 0.038461538461538464
+    },
+    {
+      "phrase": "assumptions carbon",
+      "score": 0.038461538461538464
+    },
+    {
+      "phrase": "assumptions carbon dioxide",
+      "score": 0.038461538461538464
+    },
+    {
+      "phrase": "carbon",
+      "score": 0.038461538461538464
+    },
+    {
+      "phrase": "carbon dioxide",
+      "score": 0.038461538461538464
+    },
+    {
+      "phrase": "carbon dioxide abundance",
+      "score": 0.038461538461538464
+    },
+    {
+      "phrase": "constrained",
+      "score": 0.038461538461538464
+    },
+    {
+      "phrase": "coverage",
+      "score": 0.038461538461538464
+    },
+    {
+      "phrase": "depend",
+      "score": 0.038461538461538464
+    },
+    {
+      "phrase": "atmospheric characterization",
+      "score": 0.03571428571428571
+    },
+    {
+      "phrase": "atmospheric characterization calibration",
+      "score": 0.03571428571428571
+    },
+    {
+      "phrase": "characterization",
+      "score": 0.03571428571428571
+    },
+    {
+      "phrase": "characterization calibration",
+      "score": 0.03571428571428571
+    },
+    {
+      "phrase": "characterization calibration choices",
+      "score": 0.03571428571428571
+    },
+    {
+      "phrase": "analyses jwst",
+      "score": 0.03571428571428571
+    },
+    {
+      "phrase": "analyses jwst spectra",
+      "score": 0.03571428571428571
+    },
+    {
+      "phrase": "checks",
+      "score": 0.034482758620689655
+    },
+    {
+      "phrase": "checks record",
+      "score": 0.034482758620689655
+    },
+    {
+      "phrase": "checks record data",
+      "score": 0.034482758620689655
+    },
+    {
+      "phrase": "code",
+      "score": 0.034482758620689655
+    },
+    {
+      "phrase": "configuration",
+      "score": 0.034482758620689655
+    },
+    {
+      "phrase": "configuration dependencies",
+      "score": 0.034482758620689655
+    },
+    {
+      "phrase": "data",
+      "score": 0.034482758620689655
+    },
+    {
+      "phrase": "data code",
+      "score": 0.034482758620689655
+    },
+    {
+      "phrase": "dependencies",
+      "score": 0.034482758620689655
+    },
+    {
+      "phrase": "effect",
+      "score": 0.034482758620689655
+    },
+    {
+      "phrase": "affect",
+      "score": 0.03333333333333333
+    },
+    {
+      "phrase": "affect uncertainty",
+      "score": 0.03333333333333333
+    },
+    {
+      "phrase": "assumptions affect",
+      "score": 0.03333333333333333
+    },
+    {
+      "phrase": "assumptions affect uncertainty",
+      "score": 0.03333333333333333
+    },
+    {
+      "phrase": "atmospheres",
+      "score": 0.03333333333333333
+    },
+    {
+      "phrase": "alongside",
+      "score": 0.03333333333333333
+    },
+    {
+      "phrase": "alongside astrophysical",
+      "score": 0.03333333333333333
+    },
+    {
+      "phrase": "alongside astrophysical signals",
+      "score": 0.03333333333333333
+    },
+    {
+      "phrase": "astrophysical",
+      "score": 0.03333333333333333
+    },
+    {
+      "phrase": "astrophysical signals",
+      "score": 0.03333333333333333
+    }
+  ]
+}

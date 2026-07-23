@@ -1,0 +1,13 @@
+\beamer@slide {rq3-topical-and-linguistic-structure}{2}
+\beamer@slide {fig:topic_term_bars}{2}
+\beamer@slide {document-embeddings}{4}
+\beamer@slide {fig:pca_embeddings}{4}
+\beamer@slide {fig:dendrogram}{4}
+\beamer@slide {term-analysis}{9}
+\beamer@slide {fig:term_heatmap}{9}
+\beamer@slide {named-entity-analysis}{12}
+\beamer@slide {fig:entity_bar_chart}{12}
+\beamer@slide {embedding-similarity-and-clustering}{16}
+\beamer@slide {fig:similarity_heatmap}{16}
+\beamer@slide {fig:word_cloud}{16}
+\beamer@slide {fig:cooccurrence_matrix}{16}

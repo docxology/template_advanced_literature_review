@@ -1,0 +1,177 @@
+{
+  "num_clusters": 5,
+  "cluster_assignments": {
+    "doi:10.5555/exoplanet atmospheres.0000": 4,
+    "doi:10.5555/exoplanet atmospheres.0001": 2,
+    "doi:10.5555/exoplanet atmospheres.0002": 3,
+    "doi:10.5555/exoplanet atmospheres.0003": 2,
+    "doi:10.5555/exoplanet atmospheres.0004": 0,
+    "doi:10.5555/exoplanet atmospheres.0005": 1,
+    "doi:10.5555/exoplanet atmospheres.0006": 4,
+    "doi:10.5555/exoplanet atmospheres.0007": 2,
+    "doi:10.5555/exoplanet atmospheres.0008": 3,
+    "doi:10.5555/exoplanet atmospheres.0009": 2,
+    "doi:10.5555/exoplanet atmospheres.0010": 0,
+    "doi:10.5555/exoplanet atmospheres.0011": 1,
+    "doi:10.5555/exoplanet atmospheres.0013": 2,
+    "doi:10.5555/exoplanet atmospheres.0014": 3,
+    "doi:10.5555/exoplanet atmospheres.0015": 2,
+    "doi:10.5555/exoplanet atmospheres.0016": 0,
+    "doi:10.5555/exoplanet atmospheres.0017": 1,
+    "doi:10.5555/exoplanet atmospheres.0018": 4,
+    "doi:10.5555/exoplanet atmospheres.0020": 3,
+    "doi:10.5555/exoplanet atmospheres.0021": 2,
+    "doi:10.5555/exoplanet atmospheres.0022": 0,
+    "doi:10.5555/exoplanet atmospheres.0023": 1,
+    "doi:10.5555/exoplanet atmospheres.0024": 4,
+    "doi:10.5555/exoplanet atmospheres.0025": 2,
+    "doi:10.5555/exoplanet atmospheres.0026": 3,
+    "doi:10.5555/exoplanet atmospheres.0027": 2,
+    "doi:10.5555/exoplanet atmospheres.0028": 0,
+    "doi:10.5555/exoplanet atmospheres.0029": 1,
+    "doi:10.5555/exoplanet atmospheres.0030": 4,
+    "doi:10.5555/exoplanet atmospheres.0031": 2,
+    "doi:10.5555/exoplanet atmospheres.0032": 3,
+    "doi:10.5555/exoplanet atmospheres.0034": 0,
+    "doi:10.5555/exoplanet atmospheres.0035": 1,
+    "doi:10.5555/exoplanet atmospheres.0038": 3,
+    "doi:10.5555/exoplanet atmospheres.0039": 2,
+    "doi:10.5555/exoplanet atmospheres.0040": 0,
+    "doi:10.5555/exoplanet atmospheres.0041": 1,
+    "doi:10.5555/exoplanet atmospheres.0043": 2,
+    "doi:10.5555/exoplanet atmospheres.0044": 3,
+    "doi:10.5555/exoplanet atmospheres.0046": 0,
+    "doi:10.5555/exoplanet atmospheres.0047": 1,
+    "doi:10.5555/exoplanet atmospheres.0048": 4,
+    "doi:10.5555/exoplanet atmospheres.0049": 2,
+    "doi:10.5555/exoplanet atmospheres.0050": 3,
+    "doi:10.5555/exoplanet atmospheres.0051": 2,
+    "doi:10.5555/exoplanet atmospheres.0052": 0,
+    "doi:10.5555/exoplanet atmospheres.0053": 1,
+    "doi:10.5555/exoplanet atmospheres.0054": 4,
+    "doi:10.5555/exoplanet atmospheres.0055": 2,
+    "doi:10.5555/exoplanet atmospheres.0056": 3,
+    "doi:10.5555/exoplanet atmospheres.0057": 2,
+    "doi:10.5555/exoplanet atmospheres.0058": 0,
+    "doi:10.5555/exoplanet atmospheres.0059": 1,
+    "doi:10.5555/exoplanet atmospheres.0060": 4,
+    "doi:10.5555/exoplanet atmospheres.0062": 3,
+    "doi:10.5555/exoplanet atmospheres.0063": 2,
+    "doi:10.5555/exoplanet atmospheres.0065": 1,
+    "doi:10.5555/exoplanet atmospheres.0066": 4,
+    "doi:10.5555/exoplanet atmospheres.0067": 2,
+    "doi:10.5555/exoplanet atmospheres.0068": 3,
+    "doi:10.5555/exoplanet atmospheres.0069": 2,
+    "doi:10.5555/exoplanet atmospheres.0070": 0,
+    "doi:10.5555/exoplanet atmospheres.0071": 1,
+    "doi:10.5555/exoplanet atmospheres.0072": 4,
+    "doi:10.5555/exoplanet atmospheres.0073": 2,
+    "doi:10.5555/exoplanet atmospheres.0074": 3,
+    "doi:10.5555/exoplanet atmospheres.0075": 2,
+    "doi:10.5555/exoplanet atmospheres.0077": 1,
+    "doi:10.5555/exoplanet atmospheres.0078": 4,
+    "doi:10.5555/exoplanet atmospheres.0079": 2
+  },
+  "top_similar_pairs": [
+    {
+      "paper_a": "doi:10.5555/exoplanet atmospheres.0003",
+      "paper_b": "doi:10.5555/exoplanet atmospheres.0039",
+      "similarity": 1.0000000000000004
+    },
+    {
+      "paper_a": "doi:10.5555/exoplanet atmospheres.0039",
+      "paper_b": "doi:10.5555/exoplanet atmospheres.0003",
+      "similarity": 1.0000000000000004
+    },
+    {
+      "paper_a": "doi:10.5555/exoplanet atmospheres.0000",
+      "paper_b": "doi:10.5555/exoplanet atmospheres.0006",
+      "similarity": 1.0000000000000002
+    },
+    {
+      "paper_a": "doi:10.5555/exoplanet atmospheres.0000",
+      "paper_b": "doi:10.5555/exoplanet atmospheres.0024",
+      "similarity": 1.0000000000000002
+    },
+    {
+      "paper_a": "doi:10.5555/exoplanet atmospheres.0000",
+      "paper_b": "doi:10.5555/exoplanet atmospheres.0048",
+      "similarity": 1.0000000000000002
+    },
+    {
+      "paper_a": "doi:10.5555/exoplanet atmospheres.0001",
+      "paper_b": "doi:10.5555/exoplanet atmospheres.0007",
+      "similarity": 1.0000000000000002
+    },
+    {
+      "paper_a": "doi:10.5555/exoplanet atmospheres.0001",
+      "paper_b": "doi:10.5555/exoplanet atmospheres.0049",
+      "similarity": 1.0000000000000002
+    },
+    {
+      "paper_a": "doi:10.5555/exoplanet atmospheres.0001",
+      "paper_b": "doi:10.5555/exoplanet atmospheres.0073",
+      "similarity": 1.0000000000000002
+    },
+    {
+      "paper_a": "doi:10.5555/exoplanet atmospheres.0004",
+      "paper_b": "doi:10.5555/exoplanet atmospheres.0058",
+      "similarity": 1.0000000000000002
+    },
+    {
+      "paper_a": "doi:10.5555/exoplanet atmospheres.0006",
+      "paper_b": "doi:10.5555/exoplanet atmospheres.0000",
+      "similarity": 1.0000000000000002
+    },
+    {
+      "paper_a": "doi:10.5555/exoplanet atmospheres.0006",
+      "paper_b": "doi:10.5555/exoplanet atmospheres.0024",
+      "similarity": 1.0000000000000002
+    },
+    {
+      "paper_a": "doi:10.5555/exoplanet atmospheres.0006",
+      "paper_b": "doi:10.5555/exoplanet atmospheres.0048",
+      "similarity": 1.0000000000000002
+    },
+    {
+      "paper_a": "doi:10.5555/exoplanet atmospheres.0007",
+      "paper_b": "doi:10.5555/exoplanet atmospheres.0001",
+      "similarity": 1.0000000000000002
+    },
+    {
+      "paper_a": "doi:10.5555/exoplanet atmospheres.0007",
+      "paper_b": "doi:10.5555/exoplanet atmospheres.0049",
+      "similarity": 1.0000000000000002
+    },
+    {
+      "paper_a": "doi:10.5555/exoplanet atmospheres.0007",
+      "paper_b": "doi:10.5555/exoplanet atmospheres.0073",
+      "similarity": 1.0000000000000002
+    },
+    {
+      "paper_a": "doi:10.5555/exoplanet atmospheres.0009",
+      "paper_b": "doi:10.5555/exoplanet atmospheres.0063",
+      "similarity": 1.0000000000000002
+    },
+    {
+      "paper_a": "doi:10.5555/exoplanet atmospheres.0024",
+      "paper_b": "doi:10.5555/exoplanet atmospheres.0000",
+      "similarity": 1.0000000000000002
+    },
+    {
+      "paper_a": "doi:10.5555/exoplanet atmospheres.0024",
+      "paper_b": "doi:10.5555/exoplanet atmospheres.0006",
+      "similarity": 1.0000000000000002
+    },
+    {
+      "paper_a": "doi:10.5555/exoplanet atmospheres.0024",
+      "paper_b": "doi:10.5555/exoplanet atmospheres.0048",
+      "similarity": 1.0000000000000002
+    },
+    {
+      "paper_a": "doi:10.5555/exoplanet atmospheres.0031",
+      "paper_b": "doi:10.5555/exoplanet atmospheres.0055",
+      "similarity": 1.0000000000000002
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+\frametitle{LLM-Based Content Filtering}
+\phantomsection\label{llm-based-content-filtering}
+Three LLM-based content filters were designed for this review:
+
+\begin{enumerate}
+\item
+  \textbf{Study Type Classification}: Categorizes papers as
+  observational, theoretical, review, or other. Keeps only observational
+  and theoretical studies for analysis.
+\item
+  \textbf{JWST Data Analysis}: Identifies papers that analyze actual
+  JWST observational data, distinguishing from theoretical JWST
+  predictions.
+\item
+  \textbf{Molecular Detection Focus}: Filters for papers primarily
+  focused on detecting and measuring specific atmospheric molecules.
+\end{enumerate}
+
+These filters are configurable through \breaktt{manuscript/config.yaml}
+and can be enabled for specific phases or applied across the entire
+corpus. When enabled, they use a local Ollama LLM instance for
+cost-effective, privacy-preserving content classification.

@@ -1,0 +1,152 @@
+{
+  "generated": {
+    "total_papers": 70,
+    "schema_version": "1.0",
+    "generator": "descriptive_stats.build_meta_report"
+  },
+  "descriptive_stats": {
+    "total": 70,
+    "year_min": 2000,
+    "year_max": 2023,
+    "counts_by_year": {
+      "2000": 2,
+      "2001": 1,
+      "2002": 2,
+      "2003": 3,
+      "2004": 4,
+      "2005": 2,
+      "2006": 4,
+      "2008": 4,
+      "2009": 2,
+      "2010": 2,
+      "2011": 3,
+      "2012": 3,
+      "2013": 2,
+      "2014": 3,
+      "2015": 2,
+      "2016": 3,
+      "2017": 3,
+      "2018": 5,
+      "2019": 2,
+      "2020": 1,
+      "2021": 6,
+      "2022": 2,
+      "2023": 9
+    },
+    "counts_by_venue": {
+      "Astronomy and Astrophysics": 11,
+      "Publications of the Astronomical Society of the Pacific": 11,
+      "The Astrophysical Journal": 10,
+      "Monthly Notices of the Royal Astronomical Society": 9,
+      "Nature Astronomy": 9,
+      "Research Notes of the AAS": 9,
+      "Icarus": 6,
+      "The Astronomical Journal": 5
+    },
+    "unique_authors": 144,
+    "papers_per_author_mean": 1.5138888888888888,
+    "papers_per_author_median": 1.0,
+    "citation_count_mean": 37.042857142857144,
+    "citation_count_median": 31.0,
+    "citation_count_max": 110,
+    "citation_count_total": 2593,
+    "pct_open_access": 40.0,
+    "pct_with_abstract": 100.0,
+    "pct_with_doi": 100.0
+  },
+  "citation_distribution": {
+    "histogram": {
+      "0": 0,
+      "1-9": 12,
+      "10-49": 39,
+      "50-99": 16,
+      "100-499": 3,
+      "500+": 0
+    },
+    "gini": 0.42078673351330503,
+    "n": 70,
+    "total_citations": 2593
+  },
+  "author_productivity": [
+    [
+      "A. Fournier",
+      4
+    ],
+    [
+      "B. Owens",
+      4
+    ],
+    [
+      "D. Ito",
+      4
+    ],
+    [
+      "D. Nakamura",
+      4
+    ],
+    [
+      "G. Ito",
+      4
+    ],
+    [
+      "K. Ito",
+      4
+    ],
+    [
+      "B. Kowalski",
+      3
+    ],
+    [
+      "C. Singh",
+      3
+    ],
+    [
+      "E. Tanaka",
+      3
+    ],
+    [
+      "F. Lindgren",
+      3
+    ],
+    [
+      "G. Petrov",
+      3
+    ],
+    [
+      "H. Devlin",
+      3
+    ],
+    [
+      "H. Hassan",
+      3
+    ],
+    [
+      "J. Ito",
+      3
+    ],
+    [
+      "K. Moreau",
+      3
+    ],
+    [
+      "L. Carter",
+      3
+    ],
+    [
+      "A. Jensen",
+      2
+    ],
+    [
+      "A. Kowalski",
+      2
+    ],
+    [
+      "A. Quinn",
+      2
+    ],
+    [
+      "A. Singh",
+      2
+    ]
+  ]
+}

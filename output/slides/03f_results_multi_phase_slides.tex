@@ -1,0 +1,197 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+  ignorenonframetext,
+]{beamer}
+\usepackage{pgfpages}
+\setbeamertemplate{caption}[numbered]
+\setbeamertemplate{caption label separator}{: }
+\setbeamercolor{caption name}{fg=normal text.fg}
+\beamertemplatenavigationsymbolsempty
+% Prevent slide breaks in the middle of a paragraph
+\widowpenalties 1 10000
+\raggedbottom
+\setbeamertemplate{part page}{
+  \centering
+  \begin{beamercolorbox}[sep=16pt,center]{part title}
+    \usebeamerfont{part title}\insertpart\par
+  \end{beamercolorbox}
+}
+\setbeamertemplate{section page}{
+  \centering
+  \begin{beamercolorbox}[sep=12pt,center]{part title}
+    \usebeamerfont{section title}\insertsection\par
+  \end{beamercolorbox}
+}
+\setbeamertemplate{subsection page}{
+  \centering
+  \begin{beamercolorbox}[sep=8pt,center]{part title}
+    \usebeamerfont{subsection title}\insertsubsection\par
+  \end{beamercolorbox}
+}
+\AtBeginPart{
+  \frame{\partpage}
+}
+\AtBeginSection{
+  \ifbibliography
+  \else
+    \frame{\sectionpage}
+  \fi
+}
+\AtBeginSubsection{
+  \frame{\subsectionpage}
+}
+\usepackage{amsmath,amssymb}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\newif\ifbibliography
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+% Slide layout defaults for warning-clean scientific decks.
+\usepackage{etoolbox}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{}
+\IfFileExists{seqsplit.sty}{\usepackage{seqsplit}}{\newcommand{\seqsplit}[1]{#1}}
+\protected\def\breakseq#1{\seqsplit{#1}}
+\protected\def\breaktt#1{\begingroup\ttfamily\seqsplit{#1}\endgroup}
+\setlength{\emergencystretch}{6em}
+\tolerance=5000
+\hbadness=10000
+\hfuzz=1pt
+\setlength{\tabcolsep}{2pt}
+\AtBeginEnvironment{longtable}{\tiny\renewcommand{\arraystretch}{0.86}\setlength{\tabcolsep}{1pt}}
+\AtBeginEnvironment{tabular}{\tiny\renewcommand{\arraystretch}{0.86}\setlength{\tabcolsep}{1pt}}
+
+% Natbib and cross-reference fallbacks — slides don't load natbib
+% or cleveref, but combined-PDF manuscript prose may emit these
+% commands. The fallback renders citations as a bracketed key list
+% and cross-references as detokenized labels so slides don't fail on
+% undefined control sequences or raw underscores. \providecommand is
+% a no-op if packages load later.
+\providecommand{\citep}[1]{[#1]}
+\providecommand{\citet}[1]{#1}
+\providecommand{\citealp}[1]{#1}
+\providecommand{\citeauthor}[1]{#1}
+\providecommand{\citeyear}[1]{#1}
+\providecommand{\cref}[1]{\texttt{\detokenize{#1}}}
+\providecommand{\Cref}[1]{\texttt{\detokenize{#1}}}
+
+\newtheorem{proposition}{Proposition}
+\newtheorem{hypothesis}{Hypothesis}
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\usepackage{bookmark}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\author{}
+\date{}
+
+\begin{document}
+
+\section{Multi-Phase Results and Cross-Phase
+Analysis}\label{multi-phase-results-and-cross-phase-analysis}
+
+\begin{frame}[allowframebreaks]{Phase-Specific Findings}
+\phantomsection\label{phase-specific-findings}
+\begin{block}{Foundation Phase (Phase 1)}
+\phantomsection\label{foundation-phase-phase-1}
+The configured foundation phase retained \{\{PHASE\_1\_PAPERS\}\}
+records after its search, filtering, and de-duplication rules. Its
+taxonomy includes transit spectroscopy, emission spectroscopy,
+phase-curve analysis, and direct imaging. These labels describe the
+configured retrieval design; the synthetic fixture cannot establish how
+widely those approaches occur in the published literature.
+\end{block}
+
+\begin{block}{JWST Phase (Phase 2)}
+\phantomsection\label{jwst-phase-phase-2}
+Phase 2 retained \{\{PHASE\_2\_PAPERS\}\} records under the
+JWST-oriented queries and the configured year filter (≥2020). The
+boundary is intended to include pre-launch calibration work and
+post-launch observations. It is a design choice, not evidence that the
+phase is exhaustive or that any instrument caused a change in the field.
+\end{block}
+
+\begin{block}{Molecular Detection Phase (Phase 3)}
+\phantomsection\label{molecular-detection-phase-phase-3}
+Phase 3 retained \{\{PHASE\_3\_PAPERS\}\} records under five configured
+molecule-oriented query groups: H₂O, CO₂, CH₄, H₂S, and Na/K. The query
+groups operationalize the review question; they do not assert that these
+are the most commonly detected species or that the fixture establishes a
+scientific trend.
+\end{block}
+\end{frame}
+
+\begin{frame}[allowframebreaks]{Knowledge Graph Results}
+\phantomsection\label{knowledge-graph-results}
+The optional knowledge-graph stage reports
+\textbf{\{\{TOTAL\_ASSERTIONS\}\}} assertions from the eligible sample.
+The configuration-derived hypothesis table is the authoritative mapping
+from review question to score:
+
+\{\{HYPOTHESIS\_TABLE\}\}
+
+The configured scores are descriptive evidence summaries, not calibrated
+probabilities, causal effects, or conclusions about instrument
+performance. The table should be read together with the claim ledger and
+source-tier metadata. A fixture run cannot establish whether models and
+observations agree in the broader literature.
+\end{frame}
+
+\begin{frame}[allowframebreaks]{Citation Network Analysis}
+\phantomsection\label{citation-network-analysis}
+The combined corpus contains \textbf{\{\{CITATION\_EDGES\}\}} citation
+relationships across \textbf{\{\{CITATION\_NODES\}\}} papers, with a
+network density of \{\{CITATION\_DENSITY\_PCT\}\}\%. This is a
+descriptive statistic for the retained corpus; it does not establish a
+field-wide citation structure or community claim.
+\end{frame}
+
+\begin{frame}[allowframebreaks]{Reproducibility Assessment}
+\phantomsection\label{reproducibility-assessment}
+Reproducibility assessment of the sampled papers revealed a mean
+composite reproducibility score of \{\{REPRO\_MEAN\_SCORE\}\}, with
+\{\{REPRO\_PAPERS\_SCORED\}\} papers successfully scored. This analysis
+examines the computational workflow transparency of each paper,
+evaluating source data availability, method documentation, experimental
+reproducibility, and output accessibility.
+\end{frame}
+
+\end{document}

@@ -1,0 +1,7 @@
+\frametitle{Reproducibility}
+\phantomsection\label{reproducibility}
+The rendered manuscript is generated from \breaktt{output/data/*.json},
+figures, manifests, registries, and validation reports. A second clean
+run should match under the repository's canonical normalized-diff rules.
+Any unexplained difference is a release finding. No generated output
+should be edited by hand.

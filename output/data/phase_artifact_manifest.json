@@ -1,0 +1,57 @@
+{
+  "artifacts": [
+    {
+      "paper_count": 46,
+      "path": "phase_1_foundation_corpus.jsonl",
+      "phases": [
+        "phase_1_foundation"
+      ]
+    },
+    {
+      "paper_count": 17,
+      "path": "phase_2_jwst_corpus.jsonl",
+      "phases": [
+        "phase_2_jwst"
+      ]
+    },
+    {
+      "paper_count": 29,
+      "path": "phase_3_molecules_corpus.jsonl",
+      "phases": [
+        "phase_3_molecules"
+      ]
+    },
+    {
+      "paper_count": 46,
+      "path": "combined_corpus.jsonl",
+      "phases": [
+        "phase_1_foundation",
+        "phase_2_jwst",
+        "phase_3_molecules"
+      ]
+    },
+    {
+      "path": "phase_metadata.json",
+      "phases": [
+        "phase_1_foundation",
+        "phase_2_jwst",
+        "phase_3_molecules"
+      ]
+    },
+    {
+      "path": "phase_validation_report.json",
+      "phases": [
+        "phase_1_foundation",
+        "phase_2_jwst",
+        "phase_3_molecules"
+      ]
+    }
+  ],
+  "execution_mode": "fixture",
+  "phase_order": [
+    "phase_1_foundation",
+    "phase_2_jwst",
+    "phase_3_molecules"
+  ],
+  "schema_version": "advanced-literature-review/phase-artifact-manifest/1"
+}
