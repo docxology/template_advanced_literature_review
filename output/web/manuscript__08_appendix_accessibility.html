@@ -1,11 +1,14 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 <head>
   <meta charset="utf-8" />
-  <meta name="generator" content="pandoc" />
+  <meta name="generator" content="pandoc 3.10.1" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
   <title>08_appendix_accessibility.md.web</title>
   <style>
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
     html {
       color: #1a1a1a;
       background-color: #fdfdfd;
@@ -38,7 +41,6 @@
       body {
         background-color: transparent;
         color: black;
-        font-size: 12pt;
       }
       p, h2, h3 {
         orphans: 3;
@@ -88,6 +90,7 @@
       color: #606060;
     }
     code {
+      white-space: pre-wrap;
       font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
       font-size: 85%;
       margin: 0;
@@ -107,8 +110,8 @@
      overflow: visible;
     }
     hr {
-      background-color: #1a1a1a;
       border: none;
+      border-top: 1px solid #1a1a1a;
       height: 1px;
       margin: 1em 0;
     }
@@ -151,10 +154,13 @@
     #TOC a:not(:hover) {
       text-decoration: none;
     }
-    code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
-    div.columns{display: flex; gap: min(4vw, 1.5em);}
-    div.column{flex: auto; overflow-x: auto;}
+    div.columns{display: flex; gap: 1.5em;}
+    div.column{flex: auto;}
+    @media screen {
+    div.columns{gap: min(4vw, 1.5em);}
+    div.column{overflow-x: auto;}
+    }
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
     /* The extra [class] is a hack that increases specificity enough to
        override a similar rule in reveal.js */
@@ -166,7 +172,6 @@
       vertical-align: middle;
     }
   </style>
-  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
   <script data-template-mathjax-config>
 window.MathJax = window.MathJax || {};
 window.MathJax.chtml = Object.assign({}, window.MathJax.chtml, {
@@ -188,7 +193,8 @@ window.MathJax.startup = Object.assign({}, window.MathJax.startup, {
   }
 });
 </script>
-<script src="https://cdn.jsdelivr.net/npm/mathjax@4.0.0/tex-chtml.js"
+<script defer=""
+  src="https://cdn.jsdelivr.net/npm/mathjax@4.0.0/tex-chtml.js"
   type="text/javascript" integrity="sha384-2BWc4dVaHADUocwKrUrK9u3iDwHxVMKXWEcoRmUkXYSFKhAsgVAYClu9ydNuo5Oz" crossorigin="anonymous"></script>
 
 <link data-template-favicon rel="icon" href="favicon.ico">
@@ -199,12 +205,12 @@ window.MathJax.startup = Object.assign({}, window.MathJax.startup, {
 <h1 id="appendix-c-accessibility-and-provenance">Appendix C:
 Accessibility and Provenance</h1>
 <h2 id="figure-accessibility">Figure Accessibility</h2>
-<p>All {{NUM_FIGURES}} figures are rendered with a colourblind-safe
-palette (Wong 2011, 8 colours) and high-contrast labels at publication
-DPI (300). Each figure carries a descriptive caption so the visual
-claims are recoverable from text alone. The palette avoids red-green
-colour pairs that are indistinguishable for deuteranopia and protanopia;
-when more than 8 categories are needed, continuous colormaps
+<p>All 18 figures are rendered with a colourblind-safe palette (Wong
+2011, 8 colours) and high-contrast labels at publication DPI (300). Each
+figure carries a descriptive caption so the visual claims are
+recoverable from text alone. The palette avoids red-green colour pairs
+that are indistinguishable for deuteranopia and protanopia; when more
+than 8 categories are needed, continuous colormaps
 (<code>viridis</code>, <code>plasma</code>) are used instead of
 extending the discrete palette. Font sizes are enforced at <span
 class="math inline">\(\geq 16\)</span>pt via a centralized style module,
@@ -227,10 +233,11 @@ corpus → <code>*.json</code> data files</li>
 <li><code>scripts/05_inject_variables.py</code> computes variables from
 data files → manuscript text</li>
 </ol>
-<p>Each figure in <code>figure_registry.json</code> records its source
-data file, generation parameters, and SHA-256 hash, binding the visual
-output to the exact pipeline run. Re-running the pipeline with the same
-configuration and seed produces identical data outputs.</p>
+<p>Each figure in <code>figure_registry.json</code> records its label,
+caption, filename, and generating stage, binding the visual output to
+the analysis artifacts of the exact pipeline run. Re-running the
+pipeline with the same configuration and seed produces identical data
+outputs.</p>
 <h2 id="fair-data-principles">FAIR Data Principles</h2>
 <p>The pipeline supports FAIR (Findable, Accessible, Interoperable,
 Reusable) data principles:</p>
@@ -250,7 +257,7 @@ configuration reproduces identical outputs.</li>
 <h2 id="honesty">Honesty</h2>
 <p>The default corpus is synthetic and labelled as such; the manuscript
 does not present fixture-derived numbers as empirical findings about
-{{SEARCH_TERM}}. Live findings require a real retrieval run with
+exoplanet atmospheres. Live findings require a real retrieval run with
 regenerated artifacts and source-level provenance.</p>
 </main>
 </body>

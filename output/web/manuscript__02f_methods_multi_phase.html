@@ -1,11 +1,14 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 <head>
   <meta charset="utf-8" />
-  <meta name="generator" content="pandoc" />
+  <meta name="generator" content="pandoc 3.10.1" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
   <title>02f_methods_multi_phase.md.web</title>
   <style>
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
     html {
       color: #1a1a1a;
       background-color: #fdfdfd;
@@ -38,7 +41,6 @@
       body {
         background-color: transparent;
         color: black;
-        font-size: 12pt;
       }
       p, h2, h3 {
         orphans: 3;
@@ -88,6 +90,7 @@
       color: #606060;
     }
     code {
+      white-space: pre-wrap;
       font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
       font-size: 85%;
       margin: 0;
@@ -107,8 +110,8 @@
      overflow: visible;
     }
     hr {
-      background-color: #1a1a1a;
       border: none;
+      border-top: 1px solid #1a1a1a;
       height: 1px;
       margin: 1em 0;
     }
@@ -151,10 +154,13 @@
     #TOC a:not(:hover) {
       text-decoration: none;
     }
-    code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
-    div.columns{display: flex; gap: min(4vw, 1.5em);}
-    div.column{flex: auto; overflow-x: auto;}
+    div.columns{display: flex; gap: 1.5em;}
+    div.column{flex: auto;}
+    @media screen {
+    div.columns{gap: min(4vw, 1.5em);}
+    div.column{overflow-x: auto;}
+    }
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
     /* The extra [class] is a hack that increases specificity enough to
        override a similar rule in reveal.js */
@@ -194,9 +200,9 @@ Scholar</p>
 <p><strong>Deterministic Filters:</strong> - Minimum year: 2010 -
 Maximum year: 2026 - Minimum citation count: 0 (inclusive to capture
 recent work)</p>
-<p><strong>Results:</strong> {{PHASE_1_PAPERS}} papers discovered,
-forming the foundational knowledge base for the review. This phase
-captures the broadest scope of atmospheric research, from observational
+<p><strong>Results:</strong> 46 papers discovered, forming the
+foundational knowledge base for the review. This phase captures the
+broadest scope of atmospheric research, from observational
 characterizations to theoretical modeling studies.</p>
 <h3 id="phase-2-james-webb-space-telescope-studies">Phase 2: James Webb
 Space Telescope Studies</h3>
@@ -214,11 +220,10 @@ Scholar</p>
 (capturing pre-launch calibration papers) - Maximum year: 2026</p>
 <p><strong>Dependencies:</strong> Builds on Phase 1 foundational
 papers.</p>
-<p><strong>Results:</strong> {{PHASE_2_PAPERS}} papers after
-deterministic filtering. This phase targets records associated with
-JWST-era observations and analysis. Any claim about instrumental
-capability or scientific findings requires live, source-backed
-review.</p>
+<p><strong>Results:</strong> 17 papers after deterministic filtering.
+This phase targets records associated with JWST-era observations and
+analysis. Any claim about instrumental capability or scientific findings
+requires live, source-backed review.</p>
 <h3 id="phase-3-molecular-detection-studies">Phase 3: Molecular
 Detection Studies</h3>
 <p><strong>Objective:</strong> Identify papers focused on detecting and
@@ -237,26 +242,24 @@ Scholar</p>
 Maximum year: 2026</p>
 <p><strong>Dependencies:</strong> Builds on both Phase 1 and Phase 2
 papers.</p>
-<p><strong>Results:</strong> {{PHASE_3_PAPERS}} papers covering
-molecular detection across diverse exoplanet populations, from hot
-Jupiters to terrestrial worlds.</p>
+<p><strong>Results:</strong> 29 papers covering molecular detection
+across diverse exoplanet populations, from hot Jupiters to terrestrial
+worlds.</p>
 <h2 id="cross-phase-analysis">Cross-Phase Analysis</h2>
 <h3 id="phase-overlap">Phase Overlap</h3>
 <p>The three phases produced complementary but overlapping corpora, with
-{{CROSS_PHASE_OVERLAP_PCT}}% average Jaccard similarity between phases.
-Papers discovered in multiple phases are tracked with full provenance,
-enabling analysis of papers that span multiple research paradigms.</p>
+49.5% average Jaccard similarity between phases. Papers discovered in
+multiple phases are tracked with full provenance, enabling analysis of
+papers that span multiple research paradigms.</p>
 <h3 id="citation-validation">Citation Validation</h3>
-<p>Cross-phase citation analysis records that
-{{CROSS_PHASE_CITATION_RATE}}% of later-phase papers cite foundational
-work from Phase 1. This is a descriptive connection statistic for the
-retained corpus; it does not establish methodological coherence across
-the field.</p>
+<p>Cross-phase citation analysis records that 39.4% of later-phase
+papers cite foundational work from Phase 1. This is a descriptive
+connection statistic for the retained corpus; it does not establish
+methodological coherence across the field.</p>
 <h3 id="combined-corpus">Combined Corpus</h3>
-<p>The deduplicated combined corpus contains {{CORPUS_SIZE}} unique
-papers spanning {{YEAR_START}}–{{YEAR_END}} ({{YEAR_SPAN}} years). It
-provides a multi-phase description of the retained retrieval slice, not
-a field-wide account.</p>
+<p>The deduplicated combined corpus contains 46 unique papers spanning
+2010–2023 (13 years). It provides a multi-phase description of the
+retained retrieval slice, not a field-wide account.</p>
 <h2 id="llm-based-content-filtering">LLM-Based Content Filtering</h2>
 <p>Three LLM-based content filters were designed for this review:</p>
 <ol type="1">

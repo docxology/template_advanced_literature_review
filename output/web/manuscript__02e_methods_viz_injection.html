@@ -1,11 +1,14 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 <head>
   <meta charset="utf-8" />
-  <meta name="generator" content="pandoc" />
+  <meta name="generator" content="pandoc 3.10.1" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
   <title>02e_methods_viz_injection.md.web</title>
   <style>
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
     html {
       color: #1a1a1a;
       background-color: #fdfdfd;
@@ -38,7 +41,6 @@
       body {
         background-color: transparent;
         color: black;
-        font-size: 12pt;
       }
       p, h2, h3 {
         orphans: 3;
@@ -88,6 +90,7 @@
       color: #606060;
     }
     code {
+      white-space: pre-wrap;
       font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
       font-size: 85%;
       margin: 0;
@@ -107,8 +110,8 @@
      overflow: visible;
     }
     hr {
-      background-color: #1a1a1a;
       border: none;
+      border-top: 1px solid #1a1a1a;
       height: 1px;
       margin: 1em 0;
     }
@@ -151,10 +154,13 @@
     #TOC a:not(:hover) {
       text-decoration: none;
     }
-    code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
-    div.columns{display: flex; gap: min(4vw, 1.5em);}
-    div.column{flex: auto; overflow-x: auto;}
+    div.columns{display: flex; gap: 1.5em;}
+    div.column{flex: auto;}
+    @media screen {
+    div.columns{gap: min(4vw, 1.5em);}
+    div.column{overflow-x: auto;}
+    }
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
     /* The extra [class] is a hack that increases specificity enough to
        override a similar rule in reveal.js */
@@ -166,7 +172,6 @@
       vertical-align: middle;
     }
   </style>
-  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
   <script data-template-mathjax-config>
 window.MathJax = window.MathJax || {};
 window.MathJax.chtml = Object.assign({}, window.MathJax.chtml, {
@@ -188,7 +193,8 @@ window.MathJax.startup = Object.assign({}, window.MathJax.startup, {
   }
 });
 </script>
-<script src="https://cdn.jsdelivr.net/npm/mathjax@4.0.0/tex-chtml.js"
+<script defer=""
+  src="https://cdn.jsdelivr.net/npm/mathjax@4.0.0/tex-chtml.js"
   type="text/javascript" integrity="sha384-2BWc4dVaHADUocwKrUrK9u3iDwHxVMKXWEcoRmUkXYSFKhAsgVAYClu9ydNuo5Oz" crossorigin="anonymous"></script>
 
 <link data-template-favicon rel="icon" href="favicon.ico">
@@ -205,26 +211,31 @@ the publication growth curve, the citation network, topic-term bars, a
 term cloud, and embedding projections. All figures use a
 colourblind-safe palette (Wong 2011, 8 colours) with high-contrast
 labels at <span class="math inline">\(\geq 16\)</span>pt. This run
-produced {{NUM_FIGURES}} figures at 300 DPI. The full figure set
-includes:</p>
+produced 18 figures at 300 DPI. The full figure set includes:</p>
 <ul>
 <li><strong>Field overview</strong>: field summary and subfield
 distribution ((Figure field summary; Figure subfield distribution))</li>
 <li><strong>Temporal</strong>: growth curve and subfield timeline
 ((Figure growth curve; Figure subfield timeline))</li>
+<li><strong>Descriptive</strong>: citation distribution, top venues, and
+author productivity ((Figure citation distribution; Figure top venues;
+Figure author productivity))</li>
 <li><strong>Citation network</strong>: network layout and degree
 distribution ((Figure citation network; Figure degree
 distribution))</li>
-<li><strong>Hypothesis</strong>: dashboard and evidence timeline
-((Figure hypothesis dashboard))</li>
+<li><strong>Hypothesis</strong>: evidence dashboard ((Figure hypothesis
+dashboard))</li>
 <li><strong>Text analytics</strong>: word cloud, topic-term bars, PCA
 embeddings, term heatmap, dendrogram, and co-occurrence matrix ((Figure
 word cloud; Figure topic term bars; Figure pca embeddings; Figure term
 heatmap; Figure dendrogram; Figure cooccurrence matrix))</li>
+<li><strong>Entities</strong>: named-entity bar chart and
+similar-document pairs ((Figure entity bar chart; Figure similarity
+heatmap))</li>
 </ul>
 <p>Each figure is registered in <code>figure_registry.json</code> with
-its source data file, generation parameters, and SHA-256 hash, binding
-the visual output to the exact pipeline run.</p>
+its label, caption, filename, and generating stage, binding the visual
+output to the analysis artifacts of the exact pipeline run.</p>
 <h2 id="variable-injection">Variable Injection</h2>
 <p>The manuscript itself is generated, not hand-maintained. A variable
 computation step reads the configuration and the pipeline outputs and
@@ -235,7 +246,8 @@ placeholder is a hard error rather than a silent gap. Every number in
 the rendered document is guaranteed to trace to a committed artifact.
 Re-running the pipeline after a configuration change re-computes the
 values and re-targets the prose automatically.</p>
-<p>The injection system computes variables from seven sources:</p>
+<p>The injection system computes variables from the configuration and
+generated artifacts, including:</p>
 <ol type="1">
 <li><code>manuscript/config.yaml</code>: search term, engine roster,
 subfield taxonomy, hypotheses</li>

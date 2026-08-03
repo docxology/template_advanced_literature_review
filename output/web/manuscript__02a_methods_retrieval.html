@@ -1,11 +1,14 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 <head>
   <meta charset="utf-8" />
-  <meta name="generator" content="pandoc" />
+  <meta name="generator" content="pandoc 3.10.1" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
   <title>02a_methods_retrieval.md.web</title>
   <style>
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
     html {
       color: #1a1a1a;
       background-color: #fdfdfd;
@@ -38,7 +41,6 @@
       body {
         background-color: transparent;
         color: black;
-        font-size: 12pt;
       }
       p, h2, h3 {
         orphans: 3;
@@ -88,6 +90,7 @@
       color: #606060;
     }
     code {
+      white-space: pre-wrap;
       font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
       font-size: 85%;
       margin: 0;
@@ -107,8 +110,8 @@
      overflow: visible;
     }
     hr {
-      background-color: #1a1a1a;
       border: none;
+      border-top: 1px solid #1a1a1a;
       height: 1px;
       margin: 1em 0;
     }
@@ -151,10 +154,13 @@
     #TOC a:not(:hover) {
       text-decoration: none;
     }
-    code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
-    div.columns{display: flex; gap: min(4vw, 1.5em);}
-    div.column{flex: auto; overflow-x: auto;}
+    div.columns{display: flex; gap: 1.5em;}
+    div.column{flex: auto;}
+    @media screen {
+    div.columns{gap: min(4vw, 1.5em);}
+    div.column{overflow-x: auto;}
+    }
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
     /* The extra [class] is a hack that increases specificity enough to
        override a similar rule in reveal.js */
@@ -166,7 +172,6 @@
       vertical-align: middle;
     }
   </style>
-  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
   <script data-template-mathjax-config>
 window.MathJax = window.MathJax || {};
 window.MathJax.chtml = Object.assign({}, window.MathJax.chtml, {
@@ -188,7 +193,8 @@ window.MathJax.startup = Object.assign({}, window.MathJax.startup, {
   }
 });
 </script>
-<script src="https://cdn.jsdelivr.net/npm/mathjax@4.0.0/tex-chtml.js"
+<script defer=""
+  src="https://cdn.jsdelivr.net/npm/mathjax@4.0.0/tex-chtml.js"
   type="text/javascript" integrity="sha384-2BWc4dVaHADUocwKrUrK9u3iDwHxVMKXWEcoRmUkXYSFKhAsgVAYClu9ydNuo5Oz" crossorigin="anonymous"></script>
 
 <link data-template-favicon rel="icon" href="favicon.ico">
@@ -197,9 +203,9 @@ window.MathJax.startup = Object.assign({}, window.MathJax.startup, {
 <a class="skip-link" href="#main-content">Skip to main content</a>
 <main id="main-content" tabindex="-1">
 <h1 id="retrieval-and-de-duplication">Retrieval and De-duplication</h1>
-<p>Retrieval dispatches the configured query across {{N_ENGINES}}
-independent literature engines ({{ENGINE_LIST}}). Each engine is an
-isolated adapter exposing a uniform
+<p>Retrieval dispatches the configured query across 4 independent
+literature engines (arXiv, OpenAlex, Semantic Scholar, and Crossref).
+Each engine is an isolated adapter exposing a uniform
 <code>search(query) -&gt; list[Record]</code> interface; engines that
 are keyless — arXiv, OpenAlex [priem2022openalex], Crossref
 [hendricks2020crossref], PubMed/Entrez [sayers2022entrez], SovietRxiv /
@@ -237,7 +243,7 @@ engine hardcodes its URL inside the function body.</p>
 <col style="width: 25%" />
 </colgroup>
 <thead>
-<tr class="header">
+<tr>
 <th>Engine</th>
 <th>Rate limit</th>
 <th>Pagination</th>
@@ -245,55 +251,55 @@ engine hardcodes its URL inside the function body.</p>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td>arXiv</td>
 <td>3s between requests</td>
 <td>100/page, offset</td>
 <td>Keyless</td>
 </tr>
-<tr class="even">
+<tr>
 <td>Semantic Scholar</td>
 <td>1 req/s (unauth.)</td>
 <td>100/page, offset</td>
 <td>Optional key</td>
 </tr>
-<tr class="odd">
+<tr>
 <td>OpenAlex</td>
 <td>Polite pool (mailto)</td>
 <td>200/page, cursor</td>
 <td>Keyless</td>
 </tr>
-<tr class="even">
+<tr>
 <td>Crossref</td>
 <td>Polite pool (mailto)</td>
 <td>1,000/page, offset</td>
 <td>Keyless</td>
 </tr>
-<tr class="odd">
+<tr>
 <td>PubMed</td>
 <td>NCBI usage policy</td>
 <td>retstart/retmax</td>
 <td>Keyless</td>
 </tr>
-<tr class="even">
+<tr>
 <td>SovietRxiv</td>
 <td>30/min (300/min polite)</td>
 <td>1–100/page, cursor</td>
 <td><code>X-API-Email</code></td>
 </tr>
-<tr class="odd">
+<tr>
 <td>ChinaRxiv</td>
 <td>30/min (300/min polite)</td>
 <td>1–100/page, cursor</td>
 <td><code>X-API-Email</code></td>
 </tr>
-<tr class="even">
+<tr>
 <td>Europe PMC</td>
 <td>~10 req/s (undocumented hard limit)</td>
 <td>Up to 1,000/page</td>
 <td>Keyless</td>
 </tr>
-<tr class="odd">
+<tr>
 <td>bioRxiv/medRxiv</td>
 <td>No documented limit</td>
 <td>100/page fixed, cursor</td>
@@ -321,18 +327,18 @@ title. When two records share a canonical identifier they are merged,
 keeping the version with the most complete metadata (a count of non-None
 optional fields). The DOI is normalized: case-folded, resolver-prefix
 stripped, so the same paper returned by two engines under
-case/format-variant DOIs merges. For this run, {{DOI_COUNT}} records
-carry DOIs, {{OPENALEX_ID_COUNT}} carry OpenAlex IDs, and
-{{ARXIV_ID_COUNT}} carry arXiv IDs. The de-duplicated corpus for this
-run holds <span class="math inline">\(N = {{CORPUS_SIZE}}\)</span>
-records published across {{YEAR_START}}–{{YEAR_END}}.</p>
+case/format-variant DOIs merges. For this run, 46 records carry DOIs, 5
+carry OpenAlex IDs, and 0 carry arXiv IDs. The de-duplicated corpus for
+this run holds <span class="math inline">\(N = 46\)</span> records
+published across 2010–2023.</p>
 <h2 id="relevance-filtering">Relevance Filtering</h2>
 <p>After de-duplication, a relevance filter drops papers whose title and
-abstract contain none of the configured relevance keywords
-({{KEYWORDS_RELEVANCE}}). Keywords are matched case-insensitively; an
-empty keyword list is treated as no filter to avoid silently wiping the
-corpus. A year filter then excludes papers published before the
-configured start year ({{YEAR_START}}).</p>
+abstract contain none of the configured relevance keywords (exoplanet,
+atmosphere, transit spectroscopy, JWST, molecular detection, atmospheric
+composition). Keywords are matched case-insensitively; an empty keyword
+list is treated as no filter to avoid silently wiping the corpus. A year
+filter then excludes papers published before the configured start year
+(2010).</p>
 </main>
 </body>
 </html>

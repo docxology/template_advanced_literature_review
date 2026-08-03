@@ -1,17 +1,6 @@
 {
-  "fig:hypothesis_dashboard": {
-    "figure_id": "figure_000",
-    "filename": "hypothesis_dashboard.png",
-    "caption": "Dashboard showing evidence scores for proposed hypotheses.",
-    "label": "fig:hypothesis_dashboard",
-    "section": null,
-    "width": "0.8\\textwidth",
-    "placement": "h",
-    "generated_by": "04_generate_figures.py",
-    "metadata": {}
-  },
   "fig:field_summary": {
-    "figure_id": "figure_001",
+    "figure_id": "figure_000",
     "filename": "field_summary.png",
     "caption": "High-level overview of retrieved literature and subfield counts.",
     "label": "fig:field_summary",
@@ -22,7 +11,7 @@
     "metadata": {}
   },
   "fig:subfield_distribution": {
-    "figure_id": "figure_002",
+    "figure_id": "figure_001",
     "filename": "subfield_distribution.png",
     "caption": "Distribution of distinct subfields identified in the literature.",
     "label": "fig:subfield_distribution",
@@ -33,7 +22,7 @@
     "metadata": {}
   },
   "fig:growth_curve": {
-    "figure_id": "figure_003",
+    "figure_id": "figure_002",
     "filename": "growth_curve.png",
     "caption": "Annual and cumulative growth of publications over time.",
     "label": "fig:growth_curve",
@@ -44,7 +33,7 @@
     "metadata": {}
   },
   "fig:subfield_timeline": {
-    "figure_id": "figure_004",
+    "figure_id": "figure_003",
     "filename": "subfield_timeline.png",
     "caption": "Temporal evolution of publications by subfield.",
     "label": "fig:subfield_timeline",
@@ -55,7 +44,7 @@
     "metadata": {}
   },
   "fig:citation_network": {
-    "figure_id": "figure_005",
+    "figure_id": "figure_004",
     "filename": "citation_network.png",
     "caption": "Citation network demonstrating connections between top papers.",
     "label": "fig:citation_network",
@@ -66,10 +55,21 @@
     "metadata": {}
   },
   "fig:degree_distribution": {
-    "figure_id": "figure_006",
+    "figure_id": "figure_005",
     "filename": "degree_distribution.png",
     "caption": "Degree distribution of nodes within the citation network.",
     "label": "fig:degree_distribution",
+    "section": null,
+    "width": "0.8\\textwidth",
+    "placement": "h",
+    "generated_by": "04_generate_figures.py",
+    "metadata": {}
+  },
+  "fig:hypothesis_dashboard": {
+    "figure_id": "figure_006",
+    "filename": "hypothesis_dashboard.png",
+    "caption": "Dashboard showing evidence scores for proposed hypotheses.",
+    "label": "fig:hypothesis_dashboard",
     "section": null,
     "width": "0.8\\textwidth",
     "placement": "h",

@@ -1,11 +1,14 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 <head>
   <meta charset="utf-8" />
-  <meta name="generator" content="pandoc" />
+  <meta name="generator" content="pandoc 3.10.1" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
   <title>03b_results_subfields.md.web</title>
   <style>
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
     html {
       color: #1a1a1a;
       background-color: #fdfdfd;
@@ -38,7 +41,6 @@
       body {
         background-color: transparent;
         color: black;
-        font-size: 12pt;
       }
       p, h2, h3 {
         orphans: 3;
@@ -88,6 +90,7 @@
       color: #606060;
     }
     code {
+      white-space: pre-wrap;
       font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
       font-size: 85%;
       margin: 0;
@@ -107,8 +110,8 @@
      overflow: visible;
     }
     hr {
-      background-color: #1a1a1a;
       border: none;
+      border-top: 1px solid #1a1a1a;
       height: 1px;
       margin: 1em 0;
     }
@@ -151,10 +154,13 @@
     #TOC a:not(:hover) {
       text-decoration: none;
     }
-    code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
-    div.columns{display: flex; gap: min(4vw, 1.5em);}
-    div.column{flex: auto; overflow-x: auto;}
+    div.columns{display: flex; gap: 1.5em;}
+    div.column{flex: auto;}
+    @media screen {
+    div.columns{gap: min(4vw, 1.5em);}
+    div.column{overflow-x: auto;}
+    }
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
     /* The extra [class] is a hack that increases specificity enough to
        override a similar rule in reveal.js */
@@ -174,22 +180,53 @@
 <main id="main-content" tabindex="-1">
 <h1 id="results-subfield-structure">Results: Subfield Structure</h1>
 <p>The subfield taxonomy is configuration-owned. For this instance it
-contains {{N_SUBFIELDS}} buckets ({{SUBFIELD_LIST}}), and each retained
-record is assigned using the documented keyword precedence. The
-resulting distribution is descriptive of the retrieval slice and should
-not be read as a prevalence estimate for the complete field.</p>
+contains 4 buckets (Observational Methods, Atmospheric Molecules, Jwst
+Instruments, and Theoretical Modeling), and each retained record is
+assigned using the documented keyword precedence. The resulting
+distribution is descriptive of the retrieval slice and should not be
+read as a prevalence estimate for the complete field.</p>
 <h2 id="per-subfield-characterization">Per-subfield
 characterization</h2>
 <p>The configured buckets distinguish observational methods, atmospheric
 molecules, JWST instrumentation, and theoretical modeling. A fork may
 add or rename buckets without changing the analysis code; the taxonomy,
 keyword lists, and phase relevance should be reviewed together.</p>
-<p>The largest bucket is <strong>{{TOP_SUBFIELD}}</strong> at
-{{TOP_SUBFIELD_PCT}}%. Table 2 and the generated subfield artifacts
-provide the counts and annual breakdown. Where the fixture corpus is
-used, these values demonstrate classification behavior only and are
-marked synthetic in the evidence registry.</p>
-<p>{{SUBFIELD_TABLE}}</p>
+<p>The largest bucket is <strong>Observational Methods</strong> at
+50.0%. Table 2 and the generated subfield artifacts provide the counts
+and annual breakdown. Where the fixture corpus is used, these values
+demonstrate classification behavior only and are marked synthetic in the
+evidence registry.</p>
+<table>
+<thead>
+<tr>
+<th>Subfield</th>
+<th>Papers</th>
+<th>Share</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Observational Methods</td>
+<td>23</td>
+<td>50.0%</td>
+</tr>
+<tr>
+<td>Atmospheric Molecules</td>
+<td>7</td>
+<td>15.2%</td>
+</tr>
+<tr>
+<td>Jwst Instruments</td>
+<td>9</td>
+<td>19.6%</td>
+</tr>
+<tr>
+<td>Theoretical Modeling</td>
+<td>7</td>
+<td>15.2%</td>
+</tr>
+</tbody>
+</table>
 </main>
 </body>
 </html>

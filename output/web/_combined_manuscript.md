@@ -19,7 +19,7 @@ is tested in `src/`.
 
 The manuscript is generated from configuration and recorded artifacts. Offline runs use
 a clearly labelled synthetic fixture corpus with reserved identifiers and generated
-authors; they exercise pipeline behavior and are not evidence about {{SEARCH_TERM}}.
+authors; they exercise pipeline behavior and are not evidence about exoplanet atmospheres.
 Live runs
 must retain retrieval reports, source provenance, claim classifications, and the exact
 configuration needed to interpret reported results.
@@ -28,7 +28,7 @@ The contribution is therefore infrastructural: it makes phase-aware search desig
 evidence boundaries, accessibility metadata, and reproducibility checks explicit while
 leaving domain claims subject to source-backed review.
 
-**Keywords:** {{KEYWORDS_LIST}}
+**Keywords:** exoplanet atmospheres, literature review pipeline, systematic-review reporting, multi-phase search, LLM filtering, James Webb Space Telescope, atmospheric composition, transit spectroscopy, bibliometrics, cross-validation
 
 
 
@@ -52,7 +52,7 @@ protocol. A live review must define eligibility criteria, search dates, source
 coverage, screening procedures, and a domain-appropriate synthesis plan before its
 results are interpreted.
 
-The bundled configuration targets **{{SEARCH_TERM_TITLE}}**. It defines three ordered
+The bundled configuration targets **Exoplanet Atmospheres**. It defines three ordered
 phases for foundational methods, JWST-era observations, and molecular detection. The
 phase labels are configuration, not conclusions: a live review must justify its
 boundaries and update its claim ledger when the domain or search strategy changes.
@@ -107,7 +107,8 @@ and boundary I/O.
    assertions and phase-aware hypothesis evidence; disabled or unmeasured LLM outputs
    remain explicitly pending.
 4. **Visualization** (`04_generate_figures.py`) renders figures from analysis artifacts
-   and records source paths, hashes, captions, and alt text in the figure registry.
+   and records each figure's label, caption, filename, and generating stage in the
+   figure registry.
 5. **Manuscript hydration** (`05_inject_variables.py`) computes variables from outputs
    and writes rendered Markdown without changing source sections.
 6. **Full-text assessment** (`06_fulltext_assessment.py`) records abstract, open-access,
@@ -147,8 +148,8 @@ provenance tier and fixture/synthetic status of manuscript-facing claims.
 
 # Retrieval and De-duplication
 
-Retrieval dispatches the configured query across {{N_ENGINES}} independent literature
-engines ({{ENGINE_LIST}}). Each engine is an isolated adapter exposing a uniform
+Retrieval dispatches the configured query across 4 independent literature
+engines (arXiv, OpenAlex, Semantic Scholar, and Crossref). Each engine is an isolated adapter exposing a uniform
 `search(query) -> list[Record]` interface; engines that are keyless — arXiv, OpenAlex
 [@priem2022openalex], Crossref [@hendricks2020crossref], PubMed/Entrez
 [@sayers2022entrez], SovietRxiv / RussiaRxiv, ChinaRxiv, Europe PMC, and bioRxiv/medRxiv —
@@ -201,18 +202,18 @@ DOI $>$ arXiv ID $>$ Semantic Scholar ID $>$ OpenAlex ID $>$ a stable digest of 
 normalized title. When two records share a canonical identifier they are merged, keeping
 the version with the most complete metadata (a count of non-None optional fields). The
 DOI is normalized: case-folded, resolver-prefix stripped, so the same paper returned by
-two engines under case/format-variant DOIs merges. For this run, {{DOI_COUNT}} records
-carry DOIs, {{OPENALEX_ID_COUNT}} carry OpenAlex IDs, and {{ARXIV_ID_COUNT}} carry arXiv
-IDs. The de-duplicated corpus for this run holds $N = {{CORPUS_SIZE}}$ records published
-across {{YEAR_START}}--{{YEAR_END}}.
+two engines under case/format-variant DOIs merges. For this run, 46 records
+carry DOIs, 5 carry OpenAlex IDs, and 0 carry arXiv
+IDs. The de-duplicated corpus for this run holds $N = 46$ records published
+across 2010--2023.
 
 ## Relevance Filtering
 
 After de-duplication, a relevance filter drops papers whose title and abstract contain
-none of the configured relevance keywords ({{KEYWORDS_RELEVANCE}}). Keywords are matched
+none of the configured relevance keywords (exoplanet, atmosphere, transit spectroscopy, JWST, molecular detection, atmospheric composition). Keywords are matched
 case-insensitively; an empty keyword list is treated as no filter to avoid silently
 wiping the corpus. A year filter then excludes papers published before the configured
-start year ({{YEAR_START}}).
+start year (2010).
 
 
 
@@ -233,24 +234,24 @@ An open-access resolver maps each record to a downloadable PDF where one exists 
 it to a deterministic path. Full-text availability is summarized without requiring any
 download, so the offline default still reports coverage. For this run:
 
-- **Abstract coverage**: {{ABSTRACT_COVERAGE_PCT}}\% of records ({{ABSTRACT_COUNT}} of
-  {{CORPUS_SIZE}}) carry an abstract; {{NO_ABSTRACT_COUNT}} records lack one.
-- **Open-access status**: {{OA_PCT}}\% of records are open access ({{OA_COUNT}} records);
+- **Abstract coverage**: 100.0\% of records (46 of
+  46) carry an abstract; 0 records lack one.
+- **Open-access status**: 43.5\% of records are open access (20 records);
   the remainder are closed or unknown.
-- **PDF availability**: {{PDF_AVAIL_PCT}}\% of records ({{PDF_AVAIL_COUNT}}) have a direct
-  PDF link; {{PUBLISHER_PDF_COUNT}} have a publisher PDF, and {{NO_FULLTEXT_COUNT}} have
+- **PDF availability**: 43.5\% of records (20) have a direct
+  PDF link; 20 have a publisher PDF, and 26 have
   no full-text source available.
 
-The identifier coverage for this corpus is: {{DOI_COUNT}} DOIs, {{OPENALEX_ID_COUNT}}
-OpenAlex IDs, and {{ARXIV_ID_COUNT}} arXiv IDs. DOI coverage dominates and supports
+The identifier coverage for this corpus is: 46 DOIs, 5
+OpenAlex IDs, and 0 arXiv IDs. DOI coverage dominates and supports
 cross-engine de-duplication.
 
 ## Language and Entity Extraction
 
 Titles, abstracts, and (when present) full text are tokenized and reduced to keyphrases
 and named entities by offline, dependency-light extractors — no mandatory LLM.
-Term-frequency statistics drive a TF-IDF representation over a {{NUM_VOCAB_FEATURES}}-feature
-vocabulary. The most frequent terms in the corpus are: {{TOP_VOCAB_TERMS}}. These terms
+Term-frequency statistics drive a TF-IDF representation over a 137-feature
+vocabulary. The most frequent terms in the corpus are: atmospheric, uncertainty, spectra, temperature, abundance, coverage, opacity, sources, analysis, assumptions, observed, retrievals, models, stellar, across, evaluated, retrieval, structure, composition, jwst. These terms
 reflect the configured domain and the records retained by the retrieval and filtering
 policy; fixture-derived terms are not evidence about the live field.
 
@@ -260,7 +261,7 @@ Every title, abstract, and full text is embedded into a shared vector space by a
 deterministic, offline method — TF-IDF followed by truncated SVD, i.e. latent semantic
 analysis [@deerwester1990indexing]. The embedding dimensionality is 50 components (configurable
 via `project_config.embeddings.n_components`), and the TF-IDF vocabulary is capped at
-{{NUM_VOCAB_FEATURES}} features (configurable via `project_config.embeddings.max_features`).
+137 features (configurable via `project_config.embeddings.max_features`).
 The embedding is byte-stable across runs: the same input text always yields identical
 vectors, so the derived similarity matrix, nearest-neighbour lists, clusters, and
 two-dimensional projection are all reproducible.
@@ -285,10 +286,10 @@ geography of the literature, and a hierarchical clustering dendrogram
 Descriptive statistics summarize the corpus along every available axis: counts by year,
 venue, and author; citation-count distributions; and author productivity. Temporal
 analysis fits the publication time series, reporting a compound annual growth rate of
-{{CAGR_PCT}}\% across {{YEAR_START}}--{{YEAR_END}} (a span of {{YEAR_SPAN}} years), with
-a mean year-over-year growth rate of {{MEAN_YOY_GROWTH_PCT}}\% and a doubling time of
-{{DOUBLING_TIME}} years. The peak publication year is {{PEAK_YEAR}} with
-{{PEAK_YEAR_PUBS}} records.
+12.27\% across 2010--2023 (a span of 13 years), with
+a mean year-over-year growth rate of 63.3\% and a doubling time of
+1.4 years. The peak publication year is 2023 with
+9 records.
 
 ## Growth Metrics
 
@@ -298,18 +299,18 @@ $$
 \text{CAGR} = \left(\frac{N_{\text{end}}}{N_{\text{start}}}\right)^{1/(\text{year span})} - 1
 $$
 
-where $N_{\text{start}}$ is the publication count in the first year ({{YEAR_START}}) and $N_{\text{end}}$
-is the count in the last year ({{YEAR_END}}). The mean year-over-year growth rate
+where $N_{\text{start}}$ is the publication count in the first year (2010) and $N_{\text{end}}$
+is the count in the last year (2023). The mean year-over-year growth rate
 $\bar{g}$ is the arithmetic mean of annual ratios. The doubling time is
 $t_d = \ln(2) / \ln(1 + \text{CAGR})$. These metrics are stored in `temporal_analysis.json`
 and injected into the manuscript at render time.
 
 ## Subfield Classification
 
-Subfield classification assigns each record to one of {{N_SUBFIELDS}} configurable buckets
-({{SUBFIELD_LIST}}) by priority-aware keyword matching; the taxonomy is defined entirely
+Subfield classification assigns each record to one of 4 configurable buckets
+(Observational Methods, Atmospheric Molecules, Jwst Instruments, and Theoretical Modeling) by priority-aware keyword matching; the taxonomy is defined entirely
 in configuration (`project_config.subfield_keywords`). The largest bucket is
-**{{TOP_SUBFIELD}}** at {{TOP_SUBFIELD_PCT}}\% of the classified corpus. A per-subfield
+**Observational Methods** at 50.0\% of the classified corpus. A per-subfield
 temporal breakdown (`subfield_timeline.json`) tracks how each sub-area has grown over
 time, enabling identification of emerging or declining research threads.
 
@@ -319,7 +320,7 @@ A TF-IDF term-weighting of titles and abstracts [@salton1988term] feeds non-nega
 factorization (NMF) [@lee1999learning], implemented with scikit-learn
 [@pedregosa2011scikit]. NMF decomposes the document-term matrix $\mathbf{V} \approx \mathbf{W} \mathbf{H}$,
 where $\mathbf{W}$ is the document-topic matrix and $\mathbf{H}$ is the topic-term matrix. The
-factorization extracts {{NUM_TOPICS}} latent topics that cross-cut the keyword taxonomy.
+factorization extracts 5 latent topics that cross-cut the keyword taxonomy.
 The random seed is fixed at 42 for reproducibility. The reporting follows established
 systematic-review practice [@page2021prisma], with every figure and statistic traceable to
 a committed artifact.
@@ -336,7 +337,7 @@ An optional, **LLM-gated** stage lifts the corpus from bibliometrics to hypothes
 evidence. For each eligible record, a local language model (Ollama, default model
 `gemma3:4b`) extracts structured *assertions*. Each assertion encodes a direction
 (supports, contradicts, or neutral), a confidence score, and a short natural-language
-justification against one of the {{N_HYPOTHESES}} hypotheses declared in configuration.
+justification against one of the 4 hypotheses declared in configuration.
 Assertions are serialized as
 RDF-compatible nanopublications [@kuhn2016decentralized] and scored by a
 citation-weighted evidence function.
@@ -377,7 +378,7 @@ configured and the extraction stage completes, scores are populated from the rec
 citation-weighted assertions. The hypotheses themselves, including their names and
 scope, come from configuration and are reported regardless of whether scoring has run.
 
-The hypotheses explored in this instance are: {{HYPOTHESIS_LIST}}.
+The hypotheses explored in this instance are: H1 JWST Atmospheric Characterization; H2 Molecular Diversity Detection; H3 Cross-Method Consistency; H4 Theoretical-Observational Agreement.
 
 
 
@@ -393,20 +394,25 @@ Figures are rendered headlessly (matplotlib Agg backend) and deterministically f
 analysis artifacts: subfield distributions, the publication growth curve, the citation
 network, topic-term bars, a term cloud, and embedding projections. All figures use a
 colourblind-safe palette (Wong 2011, 8 colours) with high-contrast labels at $\geq 16$pt.
-This run produced {{NUM_FIGURES}} figures at 300 DPI. The full figure set includes:
+This run produced 18 figures at 300 DPI. The full figure set includes:
 
 - **Field overview**: field summary and subfield distribution
   ((Figure field summary; Figure subfield distribution))
 - **Temporal**: growth curve and subfield timeline ((Figure growth curve; Figure subfield timeline))
+- **Descriptive**: citation distribution, top venues, and author productivity
+  ((Figure citation distribution; Figure top venues; Figure author productivity))
 - **Citation network**: network layout and degree distribution
   ((Figure citation network; Figure degree distribution))
-- **Hypothesis**: dashboard and evidence timeline ((Figure hypothesis dashboard))
+- **Hypothesis**: evidence dashboard ((Figure hypothesis dashboard))
 - **Text analytics**: word cloud, topic-term bars, PCA embeddings, term heatmap,
   dendrogram, and co-occurrence matrix
   ((Figure word cloud; Figure topic term bars; Figure pca embeddings; Figure term heatmap; Figure dendrogram; Figure cooccurrence matrix))
+- **Entities**: named-entity bar chart and similar-document pairs
+  ((Figure entity bar chart; Figure similarity heatmap))
 
-Each figure is registered in `figure_registry.json` with its source data file, generation
-parameters, and SHA-256 hash, binding the visual output to the exact pipeline run.
+Each figure is registered in `figure_registry.json` with its label, caption,
+filename, and generating stage, binding the visual output to the analysis
+artifacts of the exact pipeline run.
 
 ## Variable Injection
 
@@ -418,7 +424,8 @@ placeholder is a hard error rather than a silent gap. Every number in the render
 guaranteed to trace to a committed artifact. Re-running the pipeline after a
 configuration change re-computes the values and re-targets the prose automatically.
 
-The injection system computes variables from seven sources:
+The injection system computes variables from the configuration and generated
+artifacts, including:
 
 1. `manuscript/config.yaml`: search term, engine roster, subfield taxonomy, hypotheses
 2. `corpus.jsonl`: corpus size
@@ -460,7 +467,7 @@ studies, covering the broadest range of research from 2010 onwards.
 - Maximum year: 2026
 - Minimum citation count: 0 (inclusive to capture recent work)
 
-**Results:** {{PHASE_1_PAPERS}} papers discovered, forming the foundational
+**Results:** 46 papers discovered, forming the foundational
 knowledge base for the review. This phase captures the broadest scope of
 atmospheric research, from observational characterizations to theoretical
 modeling studies.
@@ -484,7 +491,7 @@ high-precision spectroscopic observations.
 
 **Dependencies:** Builds on Phase 1 foundational papers.
 
-**Results:** {{PHASE_2_PAPERS}} papers after deterministic filtering. This phase
+**Results:** 17 papers after deterministic filtering. This phase
 targets records associated with JWST-era observations and analysis. Any claim about
 instrumental capability or scientific findings requires live, source-backed review.
 
@@ -508,26 +515,26 @@ atmospheric molecules (H₂O, CO₂, CH₄, H₂S, Na, K) in the configured doma
 
 **Dependencies:** Builds on both Phase 1 and Phase 2 papers.
 
-**Results:** {{PHASE_3_PAPERS}} papers covering molecular detection across
+**Results:** 29 papers covering molecular detection across
 diverse exoplanet populations, from hot Jupiters to terrestrial worlds.
 
 ## Cross-Phase Analysis
 
 ### Phase Overlap
 The three phases produced complementary but overlapping corpora, with
-{{CROSS_PHASE_OVERLAP_PCT}}% average Jaccard similarity between phases. Papers
+49.5% average Jaccard similarity between phases. Papers
 discovered in multiple phases are tracked with full provenance, enabling
 analysis of papers that span multiple research paradigms.
 
 ### Citation Validation
-Cross-phase citation analysis records that {{CROSS_PHASE_CITATION_RATE}}% of
+Cross-phase citation analysis records that 39.4% of
 later-phase papers cite foundational work from Phase 1. This is a descriptive
 connection statistic for the retained corpus; it does not establish methodological
 coherence across the field.
 
 ### Combined Corpus
-The deduplicated combined corpus contains {{CORPUS_SIZE}} unique papers spanning
-{{YEAR_START}}--{{YEAR_END}} ({{YEAR_SPAN}} years). It provides a multi-phase
+The deduplicated combined corpus contains 46 unique papers spanning
+2010--2023 (13 years). It provides a multi-phase
 description of the retained retrieval slice, not a field-wide account.
 
 ## LLM-Based Content Filtering
@@ -557,11 +564,16 @@ content classification.
 
 # Results: Hypotheses and Evidence
 
-The configuration declares {{N_HYPOTHESES}} hypotheses about exoplanet atmospheric
+The configuration declares 4 hypotheses about exoplanet atmospheric
 research. Their names, scopes, relevant phases, and scores are emitted from the
 knowledge-graph artifacts rather than typed into the manuscript.
 
-{{HYPOTHESIS_TABLE}}
+| ID | Hypothesis | Scope | Evidence score |
+| --- | --- | --- | --- |
+| H1 | JWST Atmospheric Characterization | observational | pending |
+| H2 | Molecular Diversity Detection | chemical | pending |
+| H3 | Cross-Method Consistency | methodological | pending |
+| H4 | Theoretical-Observational Agreement | theoretical | pending |
 
 Scores are descriptive evidence summaries, not calibrated probabilities or causal
 effects. If the knowledge-graph stage is disabled, if a live language model is not
@@ -592,92 +604,135 @@ phase linkage, and serializer behavior, but cannot establish any of these hypoth
 
 # Results: Field Overview
 
-The de-duplicated corpus for **{{SEARCH_TERM_TITLE}}** contains $N = {{CORPUS_SIZE}}$
-records spanning {{YEAR_START}}--{{YEAR_END}} ({{YEAR_SPAN}} years). Publication volume
-grows at a compound annual rate of {{CAGR_PCT}}\% (mean year-over-year growth
-{{MEAN_YOY_GROWTH_PCT}}\%, doubling time {{DOUBLING_TIME}} years), peaking in {{PEAK_YEAR}}
-with {{PEAK_YEAR_PUBS}} records that year. The growth curve is a first-order descriptive
+The de-duplicated corpus for **Exoplanet Atmospheres** contains $N = 46$
+records spanning 2010--2023 (13 years). Publication volume
+grows at a compound annual rate of 12.27\% (mean year-over-year growth
+63.3\%, doubling time 1.4 years), peaking in 2023
+with 9 records that year. The growth curve is a first-order descriptive
 summary of the retained corpus; it is not a field-wide estimate of research activity.
 
 <!-- FIGURE: growth_curve.png -->
-![Publication growth curve for {{SEARCH_TERM_TITLE}}. Annual publication counts (bars) and cumulative total (line) show sustained growth from {{YEAR_START}} through {{YEAR_END}}, peaking in {{PEAK_YEAR}}.](../figures/growth_curve.png "Publication Growth Curve"){#fig:growth_curve}
+![Publication growth curve for Exoplanet Atmospheres. Annual publication counts (bars) and cumulative total (line) show sustained growth from 2010 through 2023, peaking in 2023.](../figures/growth_curve.png "Publication Growth Curve"){#fig:growth_curve}
 
 ## RQ1: Field Size and Growth
 
-The temporal analysis describes a retained literature slice spanning {{YEAR_SPAN}}
-years. The compound annual growth rate of {{CAGR_PCT}}\% implies a corpus doubling time
-of approximately {{DOUBLING_TIME}} years under the configured retrieval and indexing
-conditions. The peak year {{PEAK_YEAR}} contains {{PEAK_YEAR_PUBS}} retained records;
+The temporal analysis describes a retained literature slice spanning 13
+years. The compound annual growth rate of 12.27\% implies a corpus doubling time
+of approximately 1.4 years under the configured retrieval and indexing
+conditions. The peak year 2023 contains 9 retained records;
 that count may reflect both publication activity and delays or differences in source
 indexing, so it should not be interpreted as a causal trend without a live coverage audit.
 
 **Table 1. Top publication years.**
 
-{{YEAR_COUNT_TABLE}}
+| Year | Publications |
+| --- | --- |
+| 2010 | 2 |
+| 2011 | 3 |
+| 2012 | 3 |
+| 2013 | 2 |
+| 2014 | 3 |
+| 2016 | 3 |
+| 2017 | 3 |
+| 2018 | 5 |
+| 2021 | 6 |
+| 2023 | 9 |
 
 ## RQ2: Subfield Composition
 
-Records distribute across the {{N_SUBFIELDS}} configured subfields as shown in Table 2,
-with **{{TOP_SUBFIELD}}** the largest bucket at {{TOP_SUBFIELD_PCT}}\% of the classified
-corpus. The dominance of {{TOP_SUBFIELD}} is a property of the configured taxonomy and
+Records distribute across the 4 configured subfields as shown in Table 2,
+with **Observational Methods** the largest bucket at 50.0\% of the classified
+corpus. The dominance of Observational Methods is a property of the configured taxonomy and
 retained corpus. It is not a domain prevalence estimate without a live, source-backed
 review and a documented coverage assessment.
 
 **Table 2. Subfield distribution.**
 
-{{SUBFIELD_TABLE}}
+| Subfield | Papers | Share |
+| --- | --- | --- |
+| Observational Methods | 23 | 50.0% |
+| Atmospheric Molecules | 7 | 15.2% |
+| Jwst Instruments | 9 | 19.6% |
+| Theoretical Modeling | 7 | 15.2% |
 
 <!-- FIGURE: field_summary.png -->
-![Field summary dashboard for {{SEARCH_TERM_TITLE}}. The dashboard combines corpus size, temporal range, subfield distribution, and key bibliometric indicators in a single overview panel.](../figures/field_summary.png "Field Summary"){#fig:field_summary}
+![Field summary dashboard for Exoplanet Atmospheres. The dashboard combines corpus size, temporal range, subfield distribution, and key bibliometric indicators in a single overview panel.](../figures/field_summary.png "Field Summary"){#fig:field_summary}
 
 <!-- FIGURE: subfield_distribution.png -->
-![Subfield distribution for {{SEARCH_TERM_TITLE}}. The {{N_SUBFIELDS}}-bucket taxonomy shows the relative weight of each configured sub-area, with {{TOP_SUBFIELD}} dominant at {{TOP_SUBFIELD_PCT}}\%.](../figures/subfield_distribution.png "Subfield Distribution"){#fig:subfield_distribution}
+![Subfield distribution for Exoplanet Atmospheres. The 4-bucket taxonomy shows the relative weight of each configured sub-area, with Observational Methods dominant at 50.0\%.](../figures/subfield_distribution.png "Subfield Distribution"){#fig:subfield_distribution}
 
 \newpage
 
 <!-- FIGURE: subfield_timeline.png -->
-![Subfield timeline for {{SEARCH_TERM_TITLE}}. Stacked annual publication counts by subfield show how each sub-area has evolved over time, revealing emerging and declining research threads.](../figures/subfield_timeline.png "Subfield Timeline"){#fig:subfield_timeline}
+![Subfield timeline for Exoplanet Atmospheres. Stacked annual publication counts by subfield show how each sub-area has evolved over time, revealing emerging and declining research threads.](../figures/subfield_timeline.png "Subfield Timeline"){#fig:subfield_timeline}
 
 ## Identifier and Full-Text Coverage
 
-The corpus has measurable identifier coverage: {{DOI_COUNT}} of {{CORPUS_SIZE}} records
-({{PCT_WITH_DOI}}\%) carry DOIs, supporting cross-engine de-duplication.
-OpenAlex IDs are present for {{OPENALEX_ID_COUNT}} records. Abstract coverage stands at
-{{ABSTRACT_COVERAGE_PCT}}\% ({{ABSTRACT_COUNT}} records), which limits the text analytics
-to that subset. Open-access status is confirmed for {{OA_PCT}}\% of records, and
-{{PDF_AVAIL_PCT}}\% have a direct PDF link.
+The corpus has measurable identifier coverage: 46 of 46 records
+(100.0\%) carry DOIs, supporting cross-engine de-duplication.
+OpenAlex IDs are present for 5 records. Abstract coverage stands at
+100.0\% (46 records), which limits the text analytics
+to that subset. Open-access status is confirmed for 43.5\% of records, and
+43.5\% have a direct PDF link.
 
 ## Descriptive Bibliometrics
 
-The corpus spans {{UNIQUE_AUTHORS}} unique authors across {{CORPUS_SIZE}} papers, yielding
-a mean of {{PAPERS_PER_AUTHOR_MEAN}} papers per author. Citation counts range from zero to
-{{CITATION_MAX}} (mean {{CITATION_MEAN}}, median {{CITATION_MEDIAN}}), with a total of
-{{CITATION_TOTAL}} citations across the corpus. The Gini coefficient of citation
-concentration is {{GINI_COEFFICIENT}}. This statistic describes concentration within
+The corpus spans 104 unique authors across 46 papers, yielding
+a mean of 1.30 papers per author. Citation counts range from zero to
+110 (mean 30.0, median 25.0), with a total of
+1,381 citations across the corpus. The Gini coefficient of citation
+concentration is 0.474. This statistic describes concentration within
 the retained corpus and should not be generalized to citation behavior in the field.
 
 **Table 3. Citation count distribution.**
 
-{{CITATION_DIST_TABLE}}
+| Citations | Papers |
+| --- | --- |
+| 0 | 0 |
+| 1-9 | 12 |
+| 10-49 | 24 |
+| 50-99 | 9 |
+| 100-499 | 1 |
+| 500+ | 0 |
 
 <!-- FIGURE: citation_distribution.png -->
-![Citation distribution for {{SEARCH_TERM_TITLE}}. The histogram shows the number of papers in each citation-count bucket, with the Gini coefficient annotated. The distribution is a descriptive property of the retained corpus.](../figures/citation_distribution.png "Citation Distribution"){#fig:citation_distribution}
+![Citation distribution for Exoplanet Atmospheres. The histogram shows the number of papers in each citation-count bucket, with the Gini coefficient annotated. The distribution is a descriptive property of the retained corpus.](../figures/citation_distribution.png "Citation Distribution"){#fig:citation_distribution}
 
 \newpage
 
 **Table 4. Top publication venues.**
 
-{{TOP_VENUES_TABLE}}
+| Venue | Papers |
+| --- | --- |
+| Astronomy and Astrophysics | 8 |
+| Monthly Notices of the Royal Astronomical Society | 7 |
+| Nature Astronomy | 7 |
+| Publications of the Astronomical Society of the Pa | 7 |
+| The Astrophysical Journal | 5 |
+| Icarus | 4 |
+| Research Notes of the AAS | 4 |
+| The Astronomical Journal | 4 |
 
 <!-- FIGURE: top_venues.png -->
-![Top publication venues for {{SEARCH_TERM_TITLE}}. The horizontal bar chart shows the venues with the most retained records; it describes this corpus rather than the complete field.](../figures/top_venues.png "Top Venues"){#fig:top_venues}
+![Top publication venues for Exoplanet Atmospheres. The horizontal bar chart shows the venues with the most retained records; it describes this corpus rather than the complete field.](../figures/top_venues.png "Top Venues"){#fig:top_venues}
 
 **Table 5. Top authors by publication count.**
 
-{{TOP_AUTHORS_TABLE}}
+| Rank | Author | Papers |
+| --- | --- | --- |
+| 1 | D. Ito | 3 |
+| 2 | G. Petrov | 3 |
+| 3 | J. Ito | 3 |
+| 4 | L. Carter | 3 |
+| 5 | A. Fournier | 2 |
+| 6 | A. Jensen | 2 |
+| 7 | A. Singh | 2 |
+| 8 | B. Kowalski | 2 |
+| 9 | B. Owens | 2 |
+| 10 | C. Esposito | 2 |
 
 <!-- FIGURE: author_productivity.png -->
-![Author productivity for {{SEARCH_TERM_TITLE}}. The horizontal bar chart shows authors with the most retained records; names and counts depend on source coverage and deduplication.](../figures/author_productivity.png "Author Productivity"){#fig:author_productivity}
+![Author productivity for Exoplanet Atmospheres. The horizontal bar chart shows authors with the most retained records; names and counts depend on source coverage and deduplication.](../figures/author_productivity.png "Author Productivity"){#fig:author_productivity}
 
 
 
@@ -688,7 +743,7 @@ the retained corpus and should not be generalized to citation behavior in the fi
 # Results: Subfield Structure
 
 The subfield taxonomy is configuration-owned. For this instance it contains
-{{N_SUBFIELDS}} buckets ({{SUBFIELD_LIST}}), and each retained record is assigned using
+4 buckets (Observational Methods, Atmospheric Molecules, Jwst Instruments, and Theoretical Modeling), and each retained record is assigned using
 the documented keyword precedence. The resulting distribution is descriptive of the
 retrieval slice and should not be read as a prevalence estimate for the complete field.
 
@@ -699,12 +754,17 @@ instrumentation, and theoretical modeling. A fork may add or rename buckets with
 changing the analysis code; the taxonomy, keyword lists, and phase relevance should be
 reviewed together.
 
-The largest bucket is **{{TOP_SUBFIELD}}** at {{TOP_SUBFIELD_PCT}}%. Table 2 and the
+The largest bucket is **Observational Methods** at 50.0%. Table 2 and the
 generated subfield artifacts provide the counts and annual breakdown. Where the fixture
 corpus is used, these values demonstrate classification behavior only and are marked
 synthetic in the evidence registry.
 
-{{SUBFIELD_TABLE}}
+| Subfield | Papers | Share |
+| --- | --- | --- |
+| Observational Methods | 23 | 50.0% |
+| Atmospheric Molecules | 7 | 15.2% |
+| Jwst Instruments | 9 | 19.6% |
+| Theoretical Modeling | 7 | 15.2% |
 
 
 
@@ -717,13 +777,19 @@ synthetic in the evidence registry.
 ## RQ3: Topical and Linguistic Structure
 
 Text analysis operates over titles, abstracts, and (when available) full text. A TF-IDF
-representation over a {{NUM_VOCAB_FEATURES}}-feature vocabulary feeds non-negative matrix
-factorization, which extracts {{NUM_TOPICS}} latent topics cross-cutting the subfield
-taxonomy. The top vocabulary terms are: {{TOP_VOCAB_TERMS}}.
+representation over a 137-feature vocabulary feeds non-negative matrix
+factorization, which extracts 5 latent topics cross-cutting the subfield
+taxonomy. The top vocabulary terms are: atmospheric, uncertainty, spectra, temperature, abundance, coverage, opacity, sources, analysis, assumptions, observed, retrievals, models, stellar, across, evaluated, retrieval, structure, composition, jwst.
 
 **Table 3. NMF topics extracted from the corpus.**
 
-{{TOPIC_TABLE}}
+| Topic | Top terms |
+| --- | --- |
+| 0 | model, intervals, quantify, effect, noise, misspecification, record, data |
+| 1 | population, harmonized, studies, reporting, preprocessing, require, metallicity, variation |
+| 2 | atmospheric, abundance, opacity, changes, species, cloud, retrieved, assumptions |
+| 3 | jwst, calibration, analyses, choices, reported, extend, characterization, wavelength |
+| 4 | signals, instrument, astrophysical, alongside, modelled, systematics, contributions, high |
 
 The topic labels are computed from the retained corpus and are not hand-assigned. Their
 interpretation should be checked against the generated topic-term weights and the
@@ -731,7 +797,7 @@ configured subfield taxonomy; fixture-derived topics describe synthetic text pat
 not the scientific field.
 
 <!-- FIGURE: topic_term_bars.png -->
-![Topic-term bar charts for {{SEARCH_TERM_TITLE}}. Each panel shows the top weighted terms for one of {{NUM_TOPICS}} NMF topics, with bar length proportional to the topic-term weight in the $\mathbf{H}$ matrix.](../figures/topic_term_bars.png "Topic-Term Weights"){#fig:topic_term_bars}
+![Topic-term bar charts for Exoplanet Atmospheres. Each panel shows the top weighted terms for one of 5 NMF topics, with bar length proportional to the topic-term weight in the $\mathbf{H}$ matrix.](../figures/topic_term_bars.png "Topic-Term Weights"){#fig:topic_term_bars}
 
 ## Document Embeddings
 
@@ -741,7 +807,7 @@ vectors, so the derived similarity matrix, nearest-neighbour lists, clusters, an
 two-dimensional projection are all reproducible.
 
 <!-- FIGURE: pca_embeddings.png -->
-![PCA projection of document embeddings for {{SEARCH_TERM_TITLE}}. Each point represents one document projected onto the first two principal components of the TF-IDF/SVD embedding. Colours indicate subfield assignment, showing how the topical geography relates to the keyword taxonomy.](../figures/pca_embeddings.png "PCA Embeddings"){#fig:pca_embeddings}
+![PCA projection of document embeddings for Exoplanet Atmospheres. Each point represents one document projected onto the first two principal components of the TF-IDF/SVD embedding. Colours indicate subfield assignment, showing how the topical geography relates to the keyword taxonomy.](../figures/pca_embeddings.png "PCA Embeddings"){#fig:pca_embeddings}
 
 <!-- FIGURE: dendrogram.png -->
 ![Hierarchical clustering dendrogram of document embeddings. The tree shows the similarity structure of the corpus: documents that join low in the tree are semantically similar, while high-level splits separate the major topical clusters.](../figures/dendrogram.png "Document Dendrogram"){#fig:dendrogram}
@@ -752,49 +818,78 @@ The TF-IDF term heatmap reveals which terms discriminate between subfields: term
 high between-subfield variance (rather than high global mean) are selected for display.
 
 <!-- FIGURE: term_heatmap.png -->
-![Term heatmap for {{SEARCH_TERM_TITLE}}. Each cell shows the mean TF-IDF weight of a term within a subfield. Terms are selected by between-subfield variance to highlight discriminative vocabulary rather than globally frequent terms.](../figures/term_heatmap.png "Term Heatmap"){#fig:term_heatmap}
+![Term heatmap for Exoplanet Atmospheres. Each cell shows the mean TF-IDF weight of a term within a subfield. Terms are selected by between-subfield variance to highlight discriminative vocabulary rather than globally frequent terms.](../figures/term_heatmap.png "Term Heatmap"){#fig:term_heatmap}
 
 \newpage
 
 ## Named Entity Analysis
 
-Named entity extraction over the {{ABSTRACT_COUNT}} abstracts identified {{NUM_ENTITIES}}
+Named entity extraction over the 46 abstracts identified 1
 unique entities. The most frequent entities reflect the retained corpus and the
 configured extraction rules; source coverage and fixture status determine how they may
 be interpreted.
 
 **Table 4. Top named entities in abstracts.**
 
-{{TOP_ENTITIES_TABLE}}
+| Entity | Frequency |
+| --- | --- |
+| JWST | 15 |
 
 <!-- FIGURE: entity_bar_chart.png -->
-![Top named entities for {{SEARCH_TERM_TITLE}}. The horizontal bar chart shows the 20 most frequently extracted entities from abstracts, revealing recurring objects, instruments, methods, and concepts in the retained corpus.](../figures/entity_bar_chart.png "Named Entities"){#fig:entity_bar_chart}
+![Top named entities for Exoplanet Atmospheres. The horizontal bar chart shows the 20 most frequently extracted entities from abstracts, revealing recurring objects, instruments, methods, and concepts in the retained corpus.](../figures/entity_bar_chart.png "Named Entities"){#fig:entity_bar_chart}
 
 \clearpage
 
 **Table 5. Top keyphrases by TF-IDF score.**
 
-{{TOP_KEYPHRASES_TABLE}}
+| Keyphrase | Score |
+| --- | --- |
+| jwst | 0.0714 |
+| population | 0.0556 |
+| analyses | 0.0435 |
+| calibration | 0.0435 |
+| calibration choices | 0.0435 |
+| choices | 0.0435 |
+| combined | 0.0435 |
+| jwst analyses | 0.0435 |
+| models | 0.0435 |
+| models calibration | 0.0435 |
+| models calibration choices | 0.0435 |
+| model | 0.0400 |
+| atmospheric | 0.0392 |
+| abundance | 0.0385 |
+| assumptions | 0.0385 |
 
 ## Embedding Similarity and Clustering
 
 The TF-IDF/SVD embeddings place every document in a 50-dimensional vector space. K-means
-clustering with $k = {{NUM_EMBEDDING_CLUSTERS}}$ clusters partitions the corpus into
+clustering with $k = 5$ clusters partitions the corpus into
 topically coherent groups. The top similar document pairs, ranked by cosine similarity,
 reveal the most closely related works in the corpus.
 
 **Table 6. Top 10 most similar document pairs.**
 
-{{TOP_SIMILAR_PAIRS_TABLE}}
+| Paper A | Paper B | Similarity |
+| --- | --- | --- |
+| doi:10.5555/exoplanet atmosphe | doi:10.5555/exoplanet atmosphe | 1.0000 |
+| doi:10.5555/exoplanet atmosphe | doi:10.5555/exoplanet atmosphe | 1.0000 |
+| doi:10.5555/exoplanet atmosphe | doi:10.5555/exoplanet atmosphe | 1.0000 |
+| doi:10.5555/exoplanet atmosphe | doi:10.5555/exoplanet atmosphe | 1.0000 |
+| doi:10.5555/exoplanet atmosphe | doi:10.5555/exoplanet atmosphe | 1.0000 |
+| doi:10.5555/exoplanet atmosphe | doi:10.5555/exoplanet atmosphe | 1.0000 |
+| doi:10.5555/exoplanet atmosphe | doi:10.5555/exoplanet atmosphe | 1.0000 |
+| doi:10.5555/exoplanet atmosphe | doi:10.5555/exoplanet atmosphe | 1.0000 |
+| doi:10.5555/exoplanet atmosphe | doi:10.5555/exoplanet atmosphe | 1.0000 |
+| doi:10.5555/exoplanet atmosphe | doi:10.5555/exoplanet atmosphe | 1.0000 |
 
 <!-- FIGURE: similarity_heatmap.png -->
-![Document similarity for {{SEARCH_TERM_TITLE}}. The horizontal bar chart shows the 15 most similar document pairs ranked by cosine similarity of their TF-IDF/SVD embeddings. High-similarity pairs share topical and lexical content.](../figures/similarity_heatmap.png "Similar Document Pairs"){#fig:similarity_heatmap}
+![Document similarity for Exoplanet Atmospheres. The horizontal bar chart shows the 15 most similar document pairs ranked by cosine similarity of their TF-IDF/SVD embeddings. High-similarity pairs share topical and lexical content.](../figures/similarity_heatmap.png "Similar Document Pairs"){#fig:similarity_heatmap}
 
 <!-- FIGURE: word_cloud.png -->
-![Term cloud for {{SEARCH_TERM_TITLE}}. Term sizes are proportional to their TF-IDF weights across the corpus, providing a visual summary of the dominant vocabulary.](../figures/word_cloud.png "Term Cloud"){#fig:word_cloud}
+![Term cloud for Exoplanet Atmospheres. Term sizes are proportional to their TF-IDF weights across the corpus, providing a visual summary of the dominant vocabulary.](../figures/word_cloud.png "Term Cloud"){#fig:word_cloud}
 
 <!-- FIGURE: cooccurrence_matrix.png -->
-![Term co-occurrence matrix for {{SEARCH_TERM_TITLE}}. Each cell shows the normalized co-occurrence frequency of two terms within the same document, revealing which concepts tend to appear together in the literature.](../figures/cooccurrence_matrix.png "Term Co-occurrence"){#fig:cooccurrence_matrix}
+![Term co-occurrence matrix for Exoplanet Atmospheres. Each cell shows the normalized co-occurrence frequency of two terms within the same document, revealing which concepts tend to appear together in the literature.](../figures/cooccurrence_matrix.png "Term Co-occurrence"){#fig:cooccurrence_matrix}
 
 These embeddings support semantic retrieval over the corpus and the visual map of the
 literature's topical geography.
@@ -810,17 +905,17 @@ literature's topical geography.
 ## RQ4: Citation Geometry
 
 Resolving each record's references against the corpus yields an intra-corpus citation
-graph (built and analyzed with NetworkX [@hagberg2008exploring]) of {{CITATION_NODES}}
-nodes and {{CITATION_EDGES}} edges across {{CITATION_COMPONENTS}} connected components,
-with a graph density of {{CITATION_DENSITY_PCT}}\% and a mean in-degree of
-{{MEAN_IN_DEGREE}}. Of {{CITATION_TOTAL_REFS}} total outgoing references,
-{{CITATION_RESOLUTION_PCT}}\% resolve to another record inside the corpus. This
+graph (built and analyzed with NetworkX [@hagberg2008exploring]) of 46
+nodes and 48 edges across 10 connected components,
+with a graph density of 2.32\% and a mean in-degree of
+1.0. Of 96 total outgoing references,
+50.0\% resolve to another record inside the corpus. This
 resolution rate describes how self-contained the retrieved slice is; it is not an
 estimate of the underlying citation density of any individual work.
 
-The citation network has {{CITATION_COMMUNITIES}} communities (detected by modularity
-optimization), a maximum in-degree of {{CITATION_MAX_IN_DEGREE}} (the most-cited paper
-within the corpus), and a maximum out-degree of {{CITATION_MAX_OUT_DEGREE}} (the paper
+The citation network has 15 communities (detected by modularity
+optimization), a maximum in-degree of 6 (the most-cited paper
+within the corpus), and a maximum out-degree of 4 (the paper
 that cites the most other corpus members).
 
 ## Centrality Analysis
@@ -832,32 +927,50 @@ floating-point non-associativity of the underlying iterative solvers.
 
 **Table 4. Top 5 papers by PageRank.**
 
-{{TOP_PAGERANK_TABLE}}
+| Rank | DOI | PageRank |
+| --- | --- | --- |
+| 1 | 10.5555/exoplanet atmospheres.0000 | 0.100386 |
+| 2 | 10.5555/exoplanet atmospheres.0005 | 0.094693 |
+| 3 | 10.5555/exoplanet atmospheres.0008 | 0.089991 |
+| 4 | 10.5555/exoplanet atmospheres.0010 | 0.080374 |
+| 5 | 10.5555/exoplanet atmospheres.0015 | 0.044154 |
 
 **Table 5. Top 5 authority papers (HITS).**
 
-{{TOP_AUTHORITIES_TABLE}}
+| Rank | DOI | Authority |
+| --- | --- | --- |
+| 1 | 10.5555/exoplanet atmospheres.0010 | 0.328136 |
+| 2 | 10.5555/exoplanet atmospheres.0016 | 0.117442 |
+| 3 | 10.5555/exoplanet atmospheres.0047 | 0.097992 |
+| 4 | 10.5555/exoplanet atmospheres.0009 | 0.080540 |
+| 5 | 10.5555/exoplanet atmospheres.0015 | 0.076253 |
 
 **Table 6. Top 5 hub papers (HITS).**
 
-{{TOP_HUBS_TABLE}}
+| Rank | DOI | Hub |
+| --- | --- | --- |
+| 1 | 10.5555/exoplanet atmospheres.0057 | 0.126454 |
+| 2 | 10.5555/exoplanet atmospheres.0018 | 0.121085 |
+| 3 | 10.5555/exoplanet atmospheres.0078 | 0.115800 |
+| 4 | 10.5555/exoplanet atmospheres.0056 | 0.111057 |
+| 5 | 10.5555/exoplanet atmospheres.0015 | 0.089171 |
 
-The highest-ranked paper by PageRank (DOI {{TOP_PAGERANK_DOI}}) is a central node in the
+The highest-ranked paper by PageRank (DOI 10.5555/exoplanet atmospheres.0000) is a central node in the
 retained citation graph. Its score indicates relative centrality within this graph, not
 scientific importance or causal influence. Hub papers cite many corpus members and may
 connect threads of the retrieved literature, but their role should be checked against
 their source type and content.
 
 <!-- FIGURE: citation_network.png -->
-![Citation network for {{SEARCH_TERM_TITLE}}. Nodes represent papers; directed edges represent citation links. Node colours indicate community membership ({{CITATION_COMMUNITIES}} communities detected by modularity optimization). Layout uses a spring-based algorithm with a fixed seed for reproducibility.](../figures/citation_network.png "Citation Network"){#fig:citation_network}
+![Citation network for Exoplanet Atmospheres. Nodes represent papers; directed edges represent citation links. Node colours indicate community membership (15 communities detected by modularity optimization). Layout uses a spring-based algorithm with a fixed seed for reproducibility.](../figures/citation_network.png "Citation Network"){#fig:citation_network}
 
 <!-- FIGURE: degree_distribution.png -->
-![Degree distribution for the {{SEARCH_TERM_TITLE}} citation network. The histogram shows the frequency of each in-degree value on a log-linear scale, revealing the heavy-tailed structure characteristic of citation networks.](../figures/degree_distribution.png "Degree Distribution"){#fig:degree_distribution}
+![Degree distribution for the Exoplanet Atmospheres citation network. The histogram shows the frequency of each in-degree value on a log-linear scale, revealing the heavy-tailed structure characteristic of citation networks.](../figures/degree_distribution.png "Degree Distribution"){#fig:degree_distribution}
 
 The heavy-tailed degree distribution is characteristic of citation networks: a small
 number of highly-cited papers anchor the structure, while the long tail of low-degree
 nodes represents newer or peripheral works. The low graph density
-({{CITATION_DENSITY_PCT}}\%) reflects the sparsity of intra-corpus citation links.
+(2.32\%) reflects the sparsity of intra-corpus citation links.
 Many papers may cite works outside the retrieved slice, especially under a capped
 retrieval design.
 
@@ -868,15 +981,21 @@ papers bridge different communities), closeness centrality (which papers are nea
 others), degree assortativity (do highly-cited papers cite other highly-cited papers?),
 and average clustering coefficient (how tightly knit are local neighborhoods).
 
-The degree assortativity coefficient is {{DEGREE_ASSORTATIVITY}}, and the average
-clustering coefficient is {{AVG_CLUSTERING}}. A negative assortativity indicates that
+The degree assortativity coefficient is -0.0325, and the average
+clustering coefficient is 0.0601. A negative assortativity indicates that
 highly-cited papers tend to cite less-cited papers (dissortative mixing), which is
 typical of citation networks where review papers (high in-degree) cite many primary
 studies (low in-degree).
 
 **Table 7. Top 5 papers by betweenness centrality.**
 
-{{TOP_BETWEENNESS_TABLE}}
+| Rank | DOI | Betweenness |
+| --- | --- | --- |
+| 1 | 10.5555/exoplanet atmospheres.0010 | 0.021717 |
+| 2 | 10.5555/exoplanet atmospheres.0008 | 0.016667 |
+| 3 | 10.5555/exoplanet atmospheres.0015 | 0.012879 |
+| 4 | 10.5555/exoplanet atmospheres.0005 | 0.010606 |
+| 5 | 10.5555/exoplanet atmospheres.0017 | 0.005051 |
 
 Papers with high betweenness centrality occupy shortest paths between communities in
 the retained graph. Removing one may alter connectivity, but that graph operation does
@@ -896,8 +1015,8 @@ workflow graph of source, method, experiment, and sink steps, rates how reproduc
 each step is from the paper's own text, and combines a content score with a structural
 graph-coverage score into one composite reproducibility score per paper (geometric mean,
 so a paper cannot buy a high score by being strong on one axis alone). Across
-{{REPRODUCIBILITY_N_PAPERS_SCORED}} scored papers the mean composite score is
-{{REPRODUCIBILITY_MEAN_SCORE}}, with {{REPRODUCIBILITY_LOW_SCORE_COUNT}} papers falling
+0 scored papers the mean composite score is
+pending, with 0 papers falling
 below the configured low-score threshold.
 
 ## Low-Scoring Papers
@@ -907,7 +1026,8 @@ their content and structural component scores.
 
 **Table 8. Low-scoring papers by composite reproducibility score.**
 
-{{REPRODUCIBILITY_TABLE}}
+| Paper | Composite | Content | Structural |
+| --- | --- | --- | --- |
 
 ## Gating and Defaults
 
@@ -941,7 +1061,7 @@ rather than treated as a single undifferentiated verdict.
 
 ### Foundation Phase (Phase 1)
 
-The configured foundation phase retained {{PHASE_1_PAPERS}} records after its search,
+The configured foundation phase retained 46 records after its search,
 filtering, and de-duplication rules. Its taxonomy includes transit spectroscopy,
 emission spectroscopy, phase-curve analysis, and direct imaging. These labels describe
 the configured retrieval design; the synthetic fixture cannot establish how widely
@@ -949,25 +1069,30 @@ those approaches occur in the published literature.
 
 ### JWST Phase (Phase 2)
 
-Phase 2 retained {{PHASE_2_PAPERS}} records under the JWST-oriented queries and the
+Phase 2 retained 17 records under the JWST-oriented queries and the
 configured year filter (≥2020). The boundary is intended to include pre-launch
 calibration work and post-launch observations. It is a design choice, not evidence
 that the phase is exhaustive or that any instrument caused a change in the field.
 
 ### Molecular Detection Phase (Phase 3)
 
-Phase 3 retained {{PHASE_3_PAPERS}} records under five configured molecule-oriented
+Phase 3 retained 29 records under five configured molecule-oriented
 query groups: H₂O, CO₂, CH₄, H₂S, and Na/K. The query groups operationalize the review
 question; they do not assert that these are the most commonly detected species or that
 the fixture establishes a scientific trend.
 
 ## Knowledge Graph Results
 
-The optional knowledge-graph stage reports **{{TOTAL_ASSERTIONS}}** assertions from
+The optional knowledge-graph stage reports **pending** assertions from
 the eligible sample. The configuration-derived hypothesis table is the authoritative
 mapping from review question to score:
 
-{{HYPOTHESIS_TABLE}}
+| ID | Hypothesis | Scope | Evidence score |
+| --- | --- | --- | --- |
+| H1 | JWST Atmospheric Characterization | observational | pending |
+| H2 | Molecular Diversity Detection | chemical | pending |
+| H3 | Cross-Method Consistency | methodological | pending |
+| H4 | Theoretical-Observational Agreement | theoretical | pending |
 
 The configured scores are descriptive evidence summaries, not calibrated probabilities,
 causal effects, or conclusions about instrument performance. The table should be read
@@ -976,15 +1101,15 @@ whether models and observations agree in the broader literature.
 
 ## Citation Network Analysis
 
-The combined corpus contains **{{CITATION_EDGES}}** citation relationships
-across **{{CITATION_NODES}}** papers, with a network density of
-{{CITATION_DENSITY_PCT}}%. This is a descriptive statistic for the retained
+The combined corpus contains **48** citation relationships
+across **46** papers, with a network density of
+2.32%. This is a descriptive statistic for the retained
 corpus; it does not establish a field-wide citation structure or community claim.
 
 ## Reproducibility Assessment
 
 Reproducibility assessment of the sampled papers revealed a mean composite
-reproducibility score of {{REPRO_MEAN_SCORE}}, with {{REPRO_PAPERS_SCORED}}
+reproducibility score of pending, with 0
 papers successfully scored. This analysis examines the computational workflow
 transparency of each paper, evaluating source data availability, method
 documentation, experimental reproducibility, and output accessibility.
@@ -1050,7 +1175,7 @@ reproducibility assessment, and export into independently checkable stages.
 The central result is architectural: configuration and recorded artifacts determine the
 manuscript, while the claim ledger records what is configured, synthetic, or
 source-backed. A deterministic fixture run can prove that the pipeline and validators
-work; it cannot establish conclusions about {{SEARCH_TERM_TITLE}}. Live conclusions
+work; it cannot establish conclusions about Exoplanet Atmospheres. Live conclusions
 require refreshed retrieval evidence, provenance, domain review, and a clean release
 audit.
 
@@ -1071,53 +1196,62 @@ finding. No generated output should be edited by hand.
 
 The pipeline is a two-layer system: generic infrastructure (rendering, validation,
 logging) shared across the template monorepo, and project-local `src/` modules that
-implement the meta-analysis. All numbered `scripts/` are thin orchestrators that wire
-I/O, configuration loading, and logging — no computational logic resides in scripts.
+implement the multi-phase literature review. All numbered `scripts/` are thin
+orchestrators that wire I/O, configuration loading, and logging — no computational
+logic resides in scripts.
 
 ## Reproduce the Offline Default Run
 
-No network, no language model required:
+No network, no language model required. The default analysis lane replays the
+tracked three-phase evidence snapshot, then runs deterministic analysis, figure
+generation, assessment, evaluation, deep-research replay, bibliography export, and
+variable injection:
 
 ```bash
-uv run python scripts/generate_fixture_corpus.py --out output/data/corpus.jsonl
-uv run python scripts/02_meta_analysis_pipeline.py
-uv run python scripts/03_build_knowledge_graph.py --max-papers 0
-uv run python scripts/04_generate_figures.py --dpi 300
-uv run python scripts/05_inject_variables.py
+uv run python projects/templates/template_advanced_literature_review/scripts/01b_fixture_phase_replay.py
+uv run python projects/templates/template_advanced_literature_review/scripts/02_meta_analysis_pipeline.py
+uv run python projects/templates/template_advanced_literature_review/scripts/04_generate_figures.py --dpi 300
+uv run python projects/templates/template_advanced_literature_review/scripts/06_fulltext_assessment.py
+uv run python projects/templates/template_advanced_literature_review/scripts/07_literature_evaluation.py
+uv run python projects/templates/template_advanced_literature_review/scripts/08_deep_research_dispatch.py
+uv run python projects/templates/template_advanced_literature_review/scripts/09_export_bibliography.py
+uv run python projects/templates/template_advanced_literature_review/scripts/05_inject_variables.py
 ```
 
-## Reproduce the Live Run
+`scripts/01b_fixture_phase_replay.py` replays the committed corpus through the
+phase-provenance contract, writing the per-phase corpora, `phase_metadata.json`,
+and `cross_phase_analysis.json` without any network access.
 
-This manuscript was generated from a live retrieval run. To reproduce:
+## Reproduce a Live Retrieval Run
+
+Refreshing the evidence snapshot is an intentional live operation. The multi-phase
+search stage reads every phase's queries, engines, and filters from
+`manuscript/config.yaml` — there is no per-phase command-line surface:
 
 ```bash
-# Live search (all 9 engines, max 1000 per engine)
-uv run python scripts/01_literature_search.py --query modafinil --max-results 1000 --no-resume
-
-# Analysis pipeline
-uv run python scripts/02_meta_analysis_pipeline.py
-uv run python scripts/03_build_knowledge_graph.py --max-papers 0
-uv run python scripts/04_generate_figures.py --dpi 300
-uv run python scripts/05_inject_variables.py
-uv run python scripts/06_fulltext_assessment.py
-uv run python scripts/07_literature_evaluation.py
-uv run python scripts/09_export_bibliography.py
+uv run python projects/templates/template_advanced_literature_review/scripts/01_multi_phase_search.py
 ```
+
+then re-run the deterministic downstream stages above and re-inject variables so
+the manuscript reflects the new evidence. The committed corpus is a dated evidence
+snapshot; live claims require source-tier provenance and domain review, per the
+project `AGENTS.md` contracts.
 
 ## Re-target to Another Topic
 
 Edit `manuscript/config.yaml` — `project_config.search.term`, `query`,
-`relevance_keywords`, `subfield_keywords`, and `hypothesis_definitions` — then regenerate
-the seed corpus and re-run. No code changes are required; the manuscript re-targets
-through token injection.
+`relevance_keywords`, `subfield_keywords`, `hypothesis_definitions`, and the phase
+definitions under `project_config.search_phases` (queries, engines, temporal
+filters, `depends_on`) — then regenerate the seed corpus and re-run. No code
+changes are required; the manuscript re-targets through token injection.
 
 ## Live Retrieval
 
-Enable engines under `project_config.search.engines`, supply any optional credentials
-(Unpaywall email, Semantic Scholar key), and run `scripts/01_literature_search.py`; absent
-engines degrade to skipped sources. The CLI supports per-engine skip flags:
-`--skip-arxiv`, `--skip-s2`, `--skip-openalex`, `--skip-crossref`, `--skip-pubmed`,
-`--skip-sovietrxiv`, `--skip-chinarxiv`, `--skip-europepmc`, `--skip-biorxiv`.
+Enable engines under each phase's `engines` map, supply any optional credentials
+(Unpaywall email, Semantic Scholar key), and run `scripts/01_multi_phase_search.py`;
+absent engines degrade to skipped sources. Each phase's engine set is configured
+independently (the bundled default enables arXiv, OpenAlex, Crossref, and Semantic
+Scholar per phase, with biomedical archives disabled for the astronomy domain).
 
 ## Deep Research (Offline Fixture Replay)
 
@@ -1137,24 +1271,27 @@ dispatch, so a fork can enable real providers behind an explicit live-only comma
 
 ```bash
 # Offline (default): replays the recorded report, no key required
-uv run python scripts/08_deep_research_dispatch.py
+uv run python projects/templates/template_advanced_literature_review/scripts/08_deep_research_dispatch.py
 ```
 
 ## Test Suite
 
-Every stage is covered by a no-mocks test suite (real computation and
-`pytest-httpserver` for network adapters) gated at $\geq 90\%$ statement coverage on
-`src/`. The suite covers:
+Every project-owned stage is covered by a no-mocks test suite (real computation and
+`pytest-httpserver` for network adapters) gated at $\geq 90\%$ coverage on the
+project-owned `src/multi_phase/` surface (`pyproject.toml` → `fail_under = 90`).
+The suite covers:
 
-- Record models and serialization (deduplication, canonical ID hierarchy)
-- All 9 engine clients (arXiv, Semantic Scholar, OpenAlex, Crossref, PubMed, SovietRxiv,
-  ChinaRxiv, Europe PMC, bioRxiv/medRxiv) with pytest-httpserver integration tests
-- Search runner (multi-engine dispatch, relevance filtering, resume/clear, YAML config)
-- Bibliometric analysis (subfield classification, temporal metrics, TF-IDF, NMF, citation
-  network)
-- Knowledge graph (schema, nanopublications, hypothesis scoring, LLM extraction)
-- Visualization (headless figure generation, style config)
-- Manuscript variable computation and injection
+- Multi-phase configuration validation (search, sampling, hypotheses, LLM filters)
+- Deterministic filters and phase metadata structure
+- Cross-phase overlap (Jaccard) and corpus coverage
+- Multi-phase search runner and fixture replay contracts
+- Phase-aware manuscript variable extraction (including pending/unmeasured states)
+- Deep-research offline replay (provider-neutral, fails closed)
+- Publication-extension and fixture-honesty contracts
+
+Symlinked shared modules (`src/analysis/`, `src/knowledge_graph/`,
+`src/reproducibility/`, `src/visualization/`) are covered by
+`template_literature_meta_analysis`'s own suite, not duplicated here.
 
 
 
@@ -1200,7 +1337,7 @@ merges to a single canonical ID.
 Non-negative matrix factorization decomposes the TF-IDF document-term matrix
 $\mathbf{V} \in \mathbb{R}^{m \times n}$ (where $m$ is the number of documents and $n$ is the
 vocabulary size) into $\mathbf{W} \in \mathbb{R}^{m \times k}$ and $\mathbf{H} \in \mathbb{R}^{k \times n}$,
-where $k$ is the number of topics (here {{NUM_TOPICS}}). The factorization minimizes:
+where $k$ is the number of topics (here 5). The factorization minimizes:
 
 $$
 \min_{\mathbf{W}, \mathbf{H} \geq 0} \|\mathbf{V} - \mathbf{W} \mathbf{H}\|_F^2
@@ -1220,15 +1357,15 @@ $$
 
 where $N_{\text{start}}$ and $N_{\text{end}}$ are the publication counts in the first and
 last years of the corpus, respectively. The doubling time is
-$t_d = \ln(2) / \ln(1 + \text{CAGR})$. For this run: CAGR = {{CAGR_PCT}}\%, doubling time
-= {{DOUBLING_TIME}} years.
+$t_d = \ln(2) / \ln(1 + \text{CAGR})$. For this run: CAGR = 12.27\%, doubling time
+= 1.4 years.
 
 ## Configuration Surface
 
 A single `manuscript/config.yaml` controls the search term, per-engine query and keyword
 sets, engine enable toggles, subfield taxonomy, hypotheses, full-text and embedding
-options, and paper metadata. This run drew on {{N_ENGINES}} engines, a
-{{N_SUBFIELDS}}-bucket taxonomy, and {{N_HYPOTHESES}} hypotheses.
+options, and paper metadata. This run drew on 4 engines, a
+4-bucket taxonomy, and 4 hypotheses.
 
 ## Artifacts
 
@@ -1236,7 +1373,7 @@ Intermediate and final outputs live under `output/` and are disposable and regen
 
 | File | Stage | Description |
 | --- | --- | --- |
-| `corpus.jsonl` | 01 | De-duplicated corpus ({{CORPUS_SIZE}} records) |
+| `corpus.jsonl` | 01 | De-duplicated corpus (46 records) |
 | `temporal_analysis.json` | 02 | Year counts, CAGR, doubling time, peak year |
 | `subfield_classification.json` | 02 | Per-bucket paper counts |
 | `subfield_timeline.json` | 02 | Per-subfield annual breakdown |
@@ -1246,6 +1383,7 @@ Intermediate and final outputs live under `output/` and are disposable and regen
 | `citation_graph.gml` | 02 | GraphML citation graph |
 | `nanopublications.jsonl` | 03 | LLM-extracted assertions (0 in this run) |
 | `hypothesis_scores.json` | 03 | Per-hypothesis evidence scores |
+| `cross_phase_analysis.json` | 01 / 03 | Phase membership, overlap, citation sufficiency, and explicit hypothesis-score claim boundary |
 | `fulltext_assessment.json` | 06 | Abstract/OA/PDF coverage report |
 
 
@@ -1258,7 +1396,7 @@ Intermediate and final outputs live under `output/` and are disposable and regen
 
 ## Figure Accessibility
 
-All {{NUM_FIGURES}} figures are rendered with a colourblind-safe palette (Wong 2011,
+All 18 figures are rendered with a colourblind-safe palette (Wong 2011,
 8 colours) and high-contrast labels at publication DPI (300). Each figure carries a
 descriptive caption so the visual claims are recoverable from text alone. The palette
 avoids red-green colour pairs that are indistinguishable for deuteranopia and
@@ -1280,9 +1418,10 @@ to the exact pipeline run that produced it. The provenance chain is:
 4. `scripts/04_generate_figures.py` renders figures → `*.png` + `figure_registry.json`
 5. `scripts/05_inject_variables.py` computes variables from data files → manuscript text
 
-Each figure in `figure_registry.json` records its source data file, generation parameters,
-and SHA-256 hash, binding the visual output to the exact pipeline run. Re-running the
-pipeline with the same configuration and seed produces identical data outputs.
+Each figure in `figure_registry.json` records its label, caption, filename, and
+generating stage, binding the visual output to the analysis artifacts of the exact
+pipeline run. Re-running the pipeline with the same configuration and seed produces
+identical data outputs.
 
 ## FAIR Data Principles
 
@@ -1301,7 +1440,7 @@ principles:
 ## Honesty
 
 The default corpus is synthetic and labelled as such; the manuscript does not present
-fixture-derived numbers as empirical findings about {{SEARCH_TERM}}. Live findings
+fixture-derived numbers as empirical findings about exoplanet atmospheres. Live findings
 require a real retrieval run with regenerated artifacts and source-level provenance.
 
 
@@ -1316,14 +1455,14 @@ require a real retrieval run with regenerated artifacts and source-level provena
 | --- | --- |
 | **Record / Paper** | A single bibliographic entry with metadata and identifiers. |
 | **Canonical identifier** | The highest-priority available ID (DOI $>$ arXiv $>$ Semantic Scholar $>$ OpenAlex $>$ title digest) used for de-duplication and citation resolution. |
-| **Engine** | An independent literature source adapter ({{ENGINE_LIST}}) with a uniform search interface and graceful skip-on-failure. |
-| **Subfield** | One of the {{N_SUBFIELDS}} configurable keyword-defined buckets ({{SUBFIELD_LIST}}) into which records are classified. |
+| **Engine** | An independent literature source adapter (arXiv, OpenAlex, Semantic Scholar, and Crossref) with a uniform search interface and graceful skip-on-failure. |
+| **Subfield** | One of the 4 configurable keyword-defined buckets (Observational Methods, Atmospheric Molecules, Jwst Instruments, and Theoretical Modeling) into which records are classified. |
 | **Topic** | A latent theme from non-negative matrix factorization over the TF-IDF representation. |
 | **Embedding** | A deterministic offline vector (TF-IDF $\rightarrow$ truncated SVD) for a title, abstract, or full text. |
-| **Hypothesis** | One of the {{N_HYPOTHESES}} configured claims about the topic, optionally scored by the knowledge-graph stage. |
+| **Hypothesis** | One of the 4 configured claims about the topic, optionally scored by the knowledge-graph stage. |
 | **Assertion** | A directional (supports / contradicts / neutral) statement extracted from a record against a hypothesis, with a confidence score. |
 | **Nanopublication** | An RDF-serialized assertion plus its provenance. |
-| **CAGR** | Compound annual growth rate of publication volume ({{CAGR_PCT}}\% for this corpus). |
+| **CAGR** | Compound annual growth rate of publication volume (12.27\% for this corpus). |
 | **Living literature review** | A synthesis that can be re-executed as the field evolves, with every number regenerable. |
 
 
