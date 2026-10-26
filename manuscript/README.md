@@ -68,6 +68,6 @@ Key sections:
 - `authors` — name, ORCID, affiliation
 - `publication` — DOI, journal, year, license
 - `project_config.hypothesis_definitions` — configuration-keyed review questions (controls LLM extraction)
-- `project_config.subfield_keywords` — A1–C5 keyword lists (controls domain classification)
+- `project_config.subfield_keywords` — named domain subfield keyword lists (controls domain classification)
 - `project_config.search` — arXiv queries, max results, resume behavior
 - `project_config.knowledge_graph` — checkpointing, LLM model, temperature

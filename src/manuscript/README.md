@@ -17,7 +17,7 @@ Reads from `output_dir/` (or `output_dir/data/`):
 |---|---|
 | `corpus.jsonl` | `CORPUS_SIZE`, `YEAR_START_PUBS`, `YEAR_END_PUBS`, `TOTAL_REFERENCES` |
 | `temporal_analysis.json` | `YEAR_START`, `YEAR_END`, `PEAK_YEAR`, `PEAK_YEAR_PUBS`, `CAGR_PCT`, `MEAN_YOY_GROWTH_PCT`, `DOUBLING_TIME` |
-| `subfield_classification.json` | `A1_COUNT`, `A2_COUNT`, `B_COUNT`, `C1–C5_COUNT`, `*_PCT` per subfield |
+| `subfield_classification.json` | `N_SUBFIELDS`, `TOP_SUBFIELD`, `TOP_SUBFIELD_PCT`, and a per-subfield table via `SUBFIELD_TABLE` |
 | `citation_network.json` | `CITATION_EDGES`, `CITATION_COMPONENTS`, `CITATION_DENSITY_PCT`, `MEAN_IN_DEGREE`, `CITATION_RESOLUTION_PCT`, `CITATION_TOTAL_REFS` |
 | `hypothesis_scores.json` + `config.yaml` | configuration-keyed `*_SCORE` values and `HYPOTHESIS_TABLE` |
 | `assertion_summary.json` | `TOTAL_ASSERTIONS`, `TOTAL_SUPPORT`, `TOTAL_NEUTRAL`, `TOTAL_CONTRADICT` |

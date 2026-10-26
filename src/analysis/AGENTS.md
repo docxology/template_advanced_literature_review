@@ -29,8 +29,8 @@ modules and is imported by `scripts/02_meta_analysis_pipeline.py`.
 ### Subfield classification priority
 Config `subfield_keywords` override the generic defaults; each configured bucket's
 priority comes from the prefix map in `subfield_registry.load_subfields_from_config`
-(`C`=1, `B`=2, `A1`=3, otherwise 4). With the bundled modafinil taxonomy all six
-buckets carry priority 4, so the classifier selects the bucket with the highest
+(`C`=1, `B`=2, `A1`=3, otherwise 4). With the bundled exoplanet taxonomy the four
+configured buckets carry priority 4, so the classifier selects the bucket with the highest
 keyword-match count; papers with no keyword matches fall to the catch-all (the
 highest-priority bucket, first in definition order when tied).
 

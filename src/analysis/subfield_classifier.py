@@ -3,7 +3,8 @@
 Maps each paper to one of the configured domains by priority-aware keyword
 matching. Keyword definitions live in :mod:`analysis.subfield_defaults` (generic
 fallbacks) and are overridden via :func:`configure_subfields` /
-``config.yaml`` ``subfield_keywords`` (the bundled default targets "modafinil").
+``config.yaml`` ``subfield_keywords`` (the bundled default targets the
+"exoplanet atmosphere" taxonomy).
 
 Each domain carries a ``priority`` integer; lower numbers are more specific and
 win ties. The highest-priority-number domain acts as the catch-all default for
