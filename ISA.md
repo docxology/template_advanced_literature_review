@@ -12,7 +12,7 @@ iteration: 1
 
 ## Problem
 
-Systematic literature reviews of rapidly evolving fields require more sophisticated search strategies than single-term queries. In exoplanet atmospheric science, the field has undergone distinct methodological phases: early foundational work (pre-2010), the JWST preparation era (2010-2021), and the current high-precision molecular detection period (2022+). A comprehensive review must capture papers from each phase while applying phase-appropriate filtering criteria and cross-validating findings across temporal boundaries.
+Systematic literature reviews of rapidly evolving fields require more sophisticated search strategies than single-term queries. In exoplanet atmospheric science, the field has undergone distinct methodological phases: the foundational survey period (2010+), the JWST-era observational period (2020+), and the molecular-detection period (2015+). A comprehensive review must capture papers from each phase while applying phase-appropriate filtering criteria and cross-validating findings across temporal boundaries.
 
 ## Vision
 

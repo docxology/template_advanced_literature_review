@@ -132,7 +132,7 @@ Content-based filtering using local LLM:
 The default configuration demonstrates a three-phase pipeline over a synthetic
 fixture corpus for exoplanet-atmosphere research:
 
-1. **Foundation Phase**: General atmospheric studies (2010+, 5+ citations)
+1. **Foundation Phase**: General atmospheric studies (2010+, no citation floor)
 2. **JWST Phase**: James Webb Space Telescope observations (2020+, new field)
 3. **Molecular Phase**: Specific atmospheric molecule detections (2015+)
 

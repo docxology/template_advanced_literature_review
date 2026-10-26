@@ -3,14 +3,14 @@ name = "template-advanced-literature-review"
 version = "0.1.0"
 description = "Multi-phase systematic literature review with LLM filtering"
 authors = [{name = "Daniel Ari Friedman", email = "daniel@activeinference.institute"}]
-license = {text = "CC-BY-4.0"}
+license = "CC-BY-4.0"
+license-files = ["LICENSE"]
 readme = "README.md"
 requires-python = ">=3.10"
 keywords = ["literature-review", "systematic-review", "multi-phase", "llm-filtering", "exoplanets"]
 classifiers = [
     "Development Status :: 4 - Beta",
     "Intended Audience :: Science/Research",
-    "License :: OSI Approved :: MIT License",
     "Programming Language :: Python :: 3",
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
@@ -41,12 +41,12 @@ dependencies = [
 
 [project.optional-dependencies]
 dev = [
-    "pytest>=7.4.0",
-    "pytest-cov>=4.1.0",
-    "pytest-xdist>=3.3.0",
-    "pytest-timeout>=2.1.0",
-    "ruff>=0.0.280",
-    "mypy>=1.5.0",
+    "pytest>=9.1.1",
+    "pytest-cov>=7.1.0",
+    "pytest-xdist>=3.8.0",
+    "pytest-timeout>=2.4.0",
+    "ruff>=0.15.21",
+    "mypy>=2.3.0",
     "types-requests>=2.31.0",
     "types-PyYAML>=6.0.0",
 ]
@@ -62,7 +62,7 @@ llm = [
 ]
 
 [build-system]
-requires = ["setuptools>=61.0", "wheel"]
+requires = ["setuptools>=77.0"]
 build-backend = "setuptools.build_meta"
 
 [tool.setuptools.packages.find]
@@ -78,7 +78,7 @@ addopts = [
     "--disable-warnings",
     "--tb=short",
     "--timeout=10",
-    "--cov=projects/templates/template_advanced_literature_review/src/multi_phase",
+    "--cov=src/multi_phase",
     "--cov-branch",
     "--cov-report=term-missing:skip-covered",
     "--cov-report=html:htmlcov",

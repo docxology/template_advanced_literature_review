@@ -41,10 +41,10 @@ License: CC-BY-4.0
 
 ```bash
 # From project root
-PYTHONPATH=/path/to/template python scripts/05_inject_variables.py
+uv run python scripts/05_inject_variables.py
 
 # The source manuscript is never overwritten
-PYTHONPATH=/path/to/template python scripts/05_inject_variables.py
+uv run python scripts/05_inject_variables.py
 ```
 
 Output goes to `output/manuscript/`. Source files in `manuscript/` are never overwritten.
@@ -67,7 +67,7 @@ Key sections:
 - `paper` — title, version
 - `authors` — name, ORCID, affiliation
 - `publication` — DOI, journal, year, license
-- `hypothesis_definitions` — configuration-keyed review questions (controls LLM extraction)
-- `subfield_keywords` — A1–C5 keyword lists (controls domain classification)
+- `project_config.hypothesis_definitions` — configuration-keyed review questions (controls LLM extraction)
+- `project_config.subfield_keywords` — A1–C5 keyword lists (controls domain classification)
 - `project_config.search` — arXiv queries, max results, resume behavior
 - `project_config.knowledge_graph` — checkpointing, LLM model, temperature
