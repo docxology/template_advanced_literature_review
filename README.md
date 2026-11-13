@@ -186,7 +186,7 @@ llm_filters:
 
 ## Dependencies
 
-- Python 3.10+
+- Python 3.11+
 - Academic database access (most are keyless)
 - Optional local LLM server for model-backed filtering when explicitly enabled
 - Standard scientific Python stack (pandas, matplotlib, networkx)
