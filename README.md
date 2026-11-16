@@ -187,6 +187,7 @@ llm_filters:
 ## Dependencies
 
 - Python 3.11+
+- Build backend: setuptools 84.1.0+; the lockfile also pins the patched 84.1.0 for optional embeddings dependencies ([GHSA-xmj3-9gf7-h52w](https://github.com/advisories/GHSA-xmj3-9gf7-h52w)).
 - Academic database access (most are keyless)
 - Optional local LLM server for model-backed filtering when explicitly enabled
 - Standard scientific Python stack (pandas, matplotlib, networkx)
