@@ -19,7 +19,7 @@ import logging
 import re
 import uuid
 from dataclasses import dataclass
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from pathlib import Path
 from typing import TYPE_CHECKING
 
@@ -96,7 +96,7 @@ def create_nanopub(assertion: Assertion, attribution: str = "") -> Nanopublicati
         nanopub_id=f"nanopub:{uuid.uuid4().hex[:12]}",
         assertion=assertion,
         attribution=attribution,
-        created_date=datetime.now(timezone.utc).isoformat(),
+        created_date=datetime.now(UTC).isoformat(),
     )
 
 
@@ -178,7 +178,7 @@ def deserialize_nanopubs(path: Path) -> list[Nanopublication]:
         List of deserialized Nanopublication instances.
     """
     nanopubs: list[Nanopublication] = []
-    with open(path, "r", encoding="utf-8") as fh:
+    with open(path, encoding="utf-8") as fh:
         for line in fh:
             line = line.strip()
             if line:
@@ -281,7 +281,7 @@ def _safe_uri_fragment(s: str) -> str:
 def nanopub_to_rdf(
     nanopub: Nanopublication,
     base_uri: str = AIF_NANOPUB_BASE,
-) -> "Dataset":
+) -> Dataset:
     """Serialize a single nanopublication to RDF (TriG) per https://nanopub.net/.
 
     Produces a nanopublication with four named graphs:

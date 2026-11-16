@@ -171,7 +171,8 @@ def plot_dendrogram(
     output_path: Path,
 ) -> Path:
     """Process plot dendrogram."""
-    from scipy.cluster.hierarchy import cophenet, dendrogram as scipy_dendrogram, linkage
+    from scipy.cluster.hierarchy import cophenet, linkage
+    from scipy.cluster.hierarchy import dendrogram as scipy_dendrogram
     from scipy.spatial.distance import pdist
 
     output_path = Path(output_path)

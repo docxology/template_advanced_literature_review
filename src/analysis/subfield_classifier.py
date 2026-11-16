@@ -15,9 +15,6 @@ from __future__ import annotations
 
 import logging
 from pathlib import Path
-from typing import Optional
-
-from literature.models import Paper
 
 from analysis.subfield_defaults import DEFAULT_SUBFIELDS
 from analysis.subfield_registry import (
@@ -26,6 +23,7 @@ from analysis.subfield_registry import (
     get_pattern_cache,
     load_subfields_from_config,
 )
+from literature.models import Paper
 
 logger = logging.getLogger(__name__)
 
@@ -87,7 +85,7 @@ def classify_paper(paper: Paper) -> str:
 
 def classify_corpus(
     papers: list[Paper],
-    config_path: Optional[Path] = None,
+    config_path: Path | None = None,
 ) -> dict[str, list[Paper]]:
     """Classify all papers in a corpus into domains."""
     if config_path is not None:

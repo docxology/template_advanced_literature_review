@@ -14,9 +14,9 @@ from __future__ import annotations
 
 import logging
 
-from literature.models import Paper
+from knowledge_graph.llm_extraction import LLMConfig, extract_assertions_llm
 from knowledge_graph.nanopublication import Assertion
-from knowledge_graph.llm_extraction import extract_assertions_llm, LLMConfig
+from literature.models import Paper
 
 logger = logging.getLogger(__name__)
 

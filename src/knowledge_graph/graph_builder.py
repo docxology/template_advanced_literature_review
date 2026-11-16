@@ -14,7 +14,6 @@ triple patterns of the literature meta-analysis:
 from __future__ import annotations
 
 import logging
-from typing import Optional
 
 import networkx as nx
 
@@ -31,7 +30,8 @@ logger = logging.getLogger(__name__)
 
 try:
     import rdflib
-    from rdflib import Graph as RDFGraph, URIRef, Literal, Namespace
+    from rdflib import Graph as RDFGraph
+    from rdflib import Literal, Namespace, URIRef
 
     RDFLIB_AVAILABLE = True
 except ImportError:  # pragma: no cover
@@ -75,7 +75,7 @@ class KnowledgeGraph:
         use_rdflib: Explicitly choose backend. ``None`` auto-detects.
     """
 
-    def __init__(self, use_rdflib: Optional[bool] = None) -> None:
+    def __init__(self, use_rdflib: bool | None = None) -> None:
         """Initialize the knowledge graph.
 
         Args:
@@ -134,8 +134,8 @@ class KnowledgeGraph:
         asserts_pred = ASSERTION_TYPES["asserts"]
 
         # Determine hypothesis-relationship predicate
-        rel_pred: Optional[str] = None
-        h_uri: Optional[str] = None
+        rel_pred: str | None = None
+        h_uri: str | None = None
         if assertion.assertion_type == "supports":
             rel_pred = ASSERTION_TYPES["supports"]
         elif assertion.assertion_type == "contradicts":

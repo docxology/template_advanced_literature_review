@@ -21,11 +21,10 @@ import logging
 import math
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Optional
 
-from literature.models import Paper
 from knowledge_graph.nanopublication import Assertion
 from knowledge_graph.schema import configure_hypothesis_categories
+from literature.models import Paper
 
 logger = logging.getLogger(__name__)
 
@@ -115,9 +114,9 @@ def load_hypotheses_from_config(config_path: Path) -> list[Hypothesis]:
         return list(STANDARD_HYPOTHESES)
 
     try:
-        with open(config_path, "r", encoding="utf-8") as f:
+        with open(config_path, encoding="utf-8") as f:
             data = yaml.safe_load(f) or {}
-    except (OSError, IOError) as exc:
+    except OSError as exc:
         logger.warning("Cannot read config %s: %s", config_path, exc)
         return list(STANDARD_HYPOTHESES)
 
@@ -172,7 +171,7 @@ def config_key_to_hypothesis_id(key: str, name: str = "") -> str:
     return _config_key_to_id(key, name)
 
 
-def configure_hypotheses(config_path: Optional[Path] = None) -> list[Hypothesis]:
+def configure_hypotheses(config_path: Path | None = None) -> list[Hypothesis]:
     """Set the module-level HYPOTHESES from config or defaults.
 
     Call this before scoring to ensure the correct hypothesis set is
@@ -275,7 +274,7 @@ def score_all_hypotheses(assertions: list[Assertion]) -> dict[str, float]:
     return {h.hypothesis_id: score_hypothesis(assertions, h.hypothesis_id) for h in HYPOTHESES}
 
 
-def get_hypothesis_by_id(hypothesis_id: str) -> Optional[Hypothesis]:
+def get_hypothesis_by_id(hypothesis_id: str) -> Hypothesis | None:
     """Look up a standard hypothesis by its identifier.
 
     Args:

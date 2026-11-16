@@ -40,7 +40,6 @@ from visualization.hypothesis_charts import (
 from visualization.style import VIZ_CONFIG, apply_visual_style, load_viz_labels_from_config
 from visualization.temporal_plots import plot_growth_curve, plot_subfield_timeline
 
-
 FIGURE_SPECS: tuple[str, ...] = (
     "subfield_classification.json",
     "temporal_analysis.json",
@@ -145,7 +144,7 @@ def generate_all_figures(args: argparse.Namespace) -> list[str]:
             if graph.number_of_nodes() > 0:
                 generated_paths.append(str(plot_citation_network(graph, output_dir / "citation_network.png")))
                 generated_paths.append(str(plot_degree_distribution(graph, output_dir / "degree_distribution.png")))
-        except Exception as exc:  # noqa: BLE001 -- safety net: one figure group must not abort the batch
+        except Exception as exc:
             logger.error("Citation network figures skipped: %s", exc)
 
     # hypothesis_dashboard.png is referenced unconditionally by

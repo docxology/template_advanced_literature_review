@@ -7,7 +7,6 @@ import logging
 import statistics
 from collections import Counter
 from pathlib import Path
-from typing import Optional
 
 import numpy as np
 
@@ -24,7 +23,7 @@ def _percentage(numerator: int, denominator: int) -> float:
     return (numerator / denominator) * 100.0
 
 
-def _resolve_buckets(buckets: Optional[list[int]]) -> list[int]:
+def _resolve_buckets(buckets: list[int] | None) -> list[int]:
     if buckets is None:
         return list(_DEFAULT_BUCKETS)
 
@@ -122,7 +121,7 @@ def descriptive_stats(papers: list[Paper], top_venues: int = 10) -> dict:
 def citation_distribution(
     papers: list[Paper],
     *,
-    buckets: Optional[list[int]] = None,
+    buckets: list[int] | None = None,
 ) -> dict:
     """Summarize citation-count dispersion with a histogram and Gini coefficient.
 
@@ -142,7 +141,7 @@ def citation_distribution(
     """
     bucket_edges = _resolve_buckets(buckets)
     labels = _bucket_labels(bucket_edges)
-    histogram = {label: 0 for label in labels}
+    histogram = dict.fromkeys(labels, 0)
     citation_counts = [paper.citation_count for paper in papers]
 
     for citation_count in citation_counts:
@@ -195,7 +194,7 @@ def author_productivity(papers: list[Paper], top_k: int = 20) -> list[tuple[str,
     return sorted_counts[: max(top_k, 0)]
 
 
-def build_meta_report(papers: list[Paper], *, extras: Optional[dict] = None) -> dict:
+def build_meta_report(papers: list[Paper], *, extras: dict | None = None) -> dict:
     """Build a JSON-serializable meta-analysis report artifact.
 
     Core sections are populated first, then ``extras`` is shallow-merged on top

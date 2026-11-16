@@ -17,8 +17,6 @@ exactly, for the same inputs and parameters.
 
 from __future__ import annotations
 
-from typing import Optional
-
 import numpy as np
 
 from literature.models import Paper
@@ -71,7 +69,7 @@ def embed_texts(
     return _l2_normalize(np.asarray(reduced, dtype=float))
 
 
-def _field_text(paper: Paper, field: str, fulltext: Optional[dict[str, str]]) -> str:
+def _field_text(paper: Paper, field: str, fulltext: dict[str, str] | None) -> str:
     if field == "title":
         return paper.title or ""
     if field == "abstract":
@@ -89,7 +87,7 @@ def embed_corpus(
     papers: list[Paper],
     field: str = "abstract",
     *,
-    fulltext: Optional[dict[str, str]] = None,
+    fulltext: dict[str, str] | None = None,
     n_components: int = 50,
     max_features: int = 2000,
     seed: int = DEFAULT_SEED,

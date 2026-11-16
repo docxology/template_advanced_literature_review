@@ -14,7 +14,7 @@ import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 
-from visualization.style import VIZ_CONFIG, HYPOTHESIS_NAMES
+from visualization.style import HYPOTHESIS_NAMES, VIZ_CONFIG
 
 
 def _format_hypothesis_label(key: str) -> str:
