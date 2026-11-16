@@ -65,13 +65,13 @@ from __future__ import annotations
 import json
 import logging
 from dataclasses import dataclass, field
-from enum import Enum
+from enum import StrEnum
 from pathlib import Path
 
 logger = logging.getLogger(__name__)
 
 
-class NodeType(str, Enum):
+class NodeType(StrEnum):
     """The four workflow-step categories a paper's pipeline is decomposed into."""
 
     SOURCE = "source"
@@ -179,7 +179,7 @@ class WorkflowGraph:
         }
 
     @classmethod
-    def from_dict(cls, data: dict) -> "WorkflowGraph":
+    def from_dict(cls, data: dict) -> WorkflowGraph:
         """Deserialize a workflow graph from a plain dictionary.
 
         Args:
@@ -284,7 +284,7 @@ def deserialize_workflow_graphs(path: Path) -> list[WorkflowGraph]:
         List of deserialized WorkflowGraph instances.
     """
     graphs: list[WorkflowGraph] = []
-    with open(path, "r", encoding="utf-8") as fh:
+    with open(path, encoding="utf-8") as fh:
         for line in fh:
             line = line.strip()
             if line:

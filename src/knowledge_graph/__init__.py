@@ -2,33 +2,33 @@
 
 from __future__ import annotations
 
-from .schema import AIF_NAMESPACE
-from .nanopublication import Assertion, Nanopublication
-from .hypothesis import Hypothesis, score_hypothesis
-from .graph_builder import KnowledgeGraph
-from .llm_extraction import extract_assertions_llm, LLMConfig
 from .extraction import extract_assertions
+from .graph_builder import KnowledgeGraph
+from .hypothesis import Hypothesis, score_hypothesis
+from .llm_extraction import LLMConfig, extract_assertions_llm
+from .nanopublication import Assertion, Nanopublication
 from .query import (
-    query_papers_by_hypothesis,
-    query_assertions_for_paper,
-    query_supporting_papers,
-    query_contradicting_papers,
     count_triples_by_type,
+    query_assertions_for_paper,
+    query_contradicting_papers,
+    query_papers_by_hypothesis,
+    query_supporting_papers,
 )
+from .schema import AIF_NAMESPACE
 
 __all__ = [
     "AIF_NAMESPACE",
     "Assertion",
-    "Nanopublication",
     "Hypothesis",
-    "score_hypothesis",
     "KnowledgeGraph",
-    "extract_assertions_llm",
     "LLMConfig",
-    "extract_assertions",
-    "query_papers_by_hypothesis",
-    "query_assertions_for_paper",
-    "query_supporting_papers",
-    "query_contradicting_papers",
+    "Nanopublication",
     "count_triples_by_type",
+    "extract_assertions",
+    "extract_assertions_llm",
+    "query_assertions_for_paper",
+    "query_contradicting_papers",
+    "query_papers_by_hypothesis",
+    "query_supporting_papers",
+    "score_hypothesis",
 ]

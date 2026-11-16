@@ -14,7 +14,7 @@ matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import numpy as np
 
-from visualization.style import VIZ_CONFIG, SUBFIELD_NAMES
+from visualization.style import SUBFIELD_NAMES, VIZ_CONFIG
 
 
 def _format_subfield_label(sf: str) -> str:

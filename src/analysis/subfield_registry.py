@@ -5,7 +5,6 @@ from __future__ import annotations
 import logging
 import re
 from pathlib import Path
-from typing import Optional
 
 GENERIC_DEFAULT_SUBFIELDS: dict[str, dict] = {
     "A1_formal": {
@@ -326,7 +325,7 @@ def load_subfields_from_config(config_path: Path) -> dict[str, dict]:
     return result
 
 
-def configure_subfields(config_path: Optional[Path] = None) -> dict[str, dict]:
+def configure_subfields(config_path: Path | None = None) -> dict[str, dict]:
     """Set module-level SUBFIELDS from config or defaults.
 
     Mutates the existing SUBFIELDS dict IN PLACE (clear + update) rather than

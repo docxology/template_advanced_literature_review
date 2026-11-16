@@ -96,7 +96,7 @@ def count_triples_by_type(kg: KnowledgeGraph) -> dict[str, int]:
     Returns:
         Dictionary mapping predicate name to count.
     """
-    counts: dict[str, int] = {name: 0 for name in ASSERTION_TYPES}
+    counts: dict[str, int] = dict.fromkeys(ASSERTION_TYPES, 0)
 
     if kg._use_rdflib:
         for pred_name, pred_uri in ASSERTION_TYPES.items():

@@ -67,7 +67,7 @@ import difflib
 import math
 from collections import deque
 from dataclasses import dataclass
-from typing import Any, Optional
+from typing import Any
 
 from reproducibility.models import NodeType, WorkflowGraph, WorkflowNode
 
@@ -165,7 +165,7 @@ def normalized_rating(node: WorkflowNode) -> float:
     return (clamped - 1) / 3
 
 
-def stage_average(graph: WorkflowGraph, node_type: NodeType) -> Optional[float]:
+def stage_average(graph: WorkflowGraph, node_type: NodeType) -> float | None:
     """Compute the mean normalized rating over one stage's nodes.
 
     Args:
