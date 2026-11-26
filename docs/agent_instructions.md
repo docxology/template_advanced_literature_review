@@ -6,7 +6,7 @@ project root [`AGENTS.md`](../AGENTS.md), which this file specializes for
 
 ## Rule 1: Config Owns Phase Design and Domain Policy
 
-`manuscript/config.yaml` → `project_config.search_phases` is the control
+`docs/manuscript/config.yaml` → `project_config.search_phases` is the control
 surface for how many phases exist, their queries, engines, and temporal
 filters. `llm_filters`, `phase_integration`, and `hypothesis_definitions`
 control content filtering and cross-phase policy. Retargeting to a new domain
@@ -23,14 +23,11 @@ Two scripts share the `11_` prefix (`11_fulltext_download.py`,
 Order" documents that `11_fulltext_download.py` must run before
 `10_reproducibility_assessment.py`, ahead of `11_validate_outputs.py`.
 
-## Rule 3: Symlinked Modules Are Edited At The Source
+## Rule 3: Standalone Module Ownership
 
-`src/analysis/`, `src/knowledge_graph/`, `src/reproducibility/`,
-`src/visualization/`, and `src/config_loader.py` are filesystem symlinks into
-`template_literature_meta_analysis/src/`. An edit made through this
-project's path lands in the sibling project's repository location — verify
-with `readlink` first, and make the change (with its tests) in the sibling
-project unless you specifically intend to affect both templates.
+The analysis, knowledge-graph, reproducibility, and visualization modules and
+`src/config_loader.py` are regular files in this checkout. Coordinate
+changes to shared behavior with the single-term exemplar.
 
 ## Rule 4: No Mocks
 
@@ -66,22 +63,10 @@ in `../../../../docs/_generated/active_projects.md` and
 Every generated artifact that depends on the corpus should be traceable back
 to the phase(s) that contributed its data — `phase_metadata.json` is the
 source of truth. Do not add a new pipeline stage that drops phase attribution
-silently; see `TODO.md` → `ARL-PHASE-PROVENANCE-1` for the tracked follow-up
-to complete this end-to-end.
+silently; see the [historical backlog](archive/TODO.md)
+for the original phase provenance follow-up.
 
-## Rule 9: Verify The Touched Surface
+## Rule 9: Verify the touched surface
 
-```bash
-uv run pytest projects/templates/template_advanced_literature_review/tests/ \
-  --cov=projects/templates/template_advanced_literature_review/src --cov-fail-under=90 -q
-uv run python projects/templates/template_advanced_literature_review/scripts/02_meta_analysis_pipeline.py
-uv run python projects/templates/template_advanced_literature_review/scripts/04_generate_figures.py --dpi 300
-uv run python projects/templates/template_advanced_literature_review/scripts/05_inject_variables.py
-```
-
-For docs/manifest changes, also run:
-
-```bash
-uv run python scripts/audit/check_template_drift.py --strict --project templates/template_advanced_literature_review
-uv run python scripts/docgen/exemplar_roster.py --check
-```
+Use the [native test command](quickstart.md) and the
+[pinned manuscript build](rendering_pipeline.md).

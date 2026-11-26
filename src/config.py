@@ -50,7 +50,7 @@ FIGURES_DIR = OUTPUT_DIR / "figures"
 
 # Key artifact paths
 CORPUS_PATH = DATA_DIR / "corpus.jsonl"
-MANUSCRIPT_DIR = PROJECT_ROOT / "manuscript"
+MANUSCRIPT_DIR = PROJECT_ROOT / "docs" / "manuscript"
 
 # ---------------------------------------------------------------------------
 # Analysis defaults (02_meta_analysis_pipeline.py)
@@ -72,14 +72,14 @@ DEFAULT_CHECKPOINT_INTERVAL = 50
 # Reproducibility assessment defaults (10_reproducibility_assessment.py)
 # ---------------------------------------------------------------------------
 DEFAULT_REPRO_CHECKPOINT_INTERVAL = 50
-# Matches manuscript/config.yaml's `project_config.fulltext.download_dir`
+# Matches docs/manuscript/config.yaml's `project_config.fulltext.download_dir`
 # ("output/fulltext") when no config file / no override is present.
 FULLTEXT_DIR = OUTPUT_DIR / "fulltext"
 
 # Literature search defaults (01_multi_phase_search.py).
 #
 # This template is DOMAIN-AGNOSTIC: the live search term, per-engine queries, and
-# relevance keywords are supplied by ``manuscript/config.yaml`` (bundled default:
+# relevance keywords are supplied by ``docs/manuscript/config.yaml`` (bundled default:
 # "exoplanet atmospheres"). These module-level fallbacks are intentionally EMPTY so that no
 # domain term is hardcoded in source — the config file is the single source of
 # truth for what to search. ``config_loader`` falls back to these only when no

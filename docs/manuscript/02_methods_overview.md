@@ -45,7 +45,7 @@ Seeds and timestamp-free serializers are used where the pipeline supports exact 
 
 ## Configuration surface
 
-`manuscript/config.yaml` owns search terms, engines, phase boundaries, filters, sampling
+`docs/manuscript/config.yaml` owns search terms, engines, phase boundaries, filters, sampling
 seeds, full-text policy, embedding settings, knowledge-graph settings, hypotheses, and
 subfield taxonomy. `domain_profile.yaml` owns package and gate expectations;
 `experiment_plan.yaml` records the review design; `data/claim_ledger.yaml` records the

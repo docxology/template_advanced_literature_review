@@ -1,200 +1,16 @@
-# Reproducible Multi-Phase Literature-Review Pipeline
+# Advanced literature review template
 
-A public pipeline exemplar that implements multi-phase search, provenance-aware
-filtering, corpus description, and optional model-backed analysis. It is a
-reproducibility template, not a completed empirical domain review.
+A configurable multi-phase literature-review pipeline with phase provenance,
+deduplication, bibliometrics, and manuscript generation. The bundled
+exoplanet-atmosphere corpus is synthetic demonstration data. The offline
+workflow replays that corpus and regenerates the analysis, figures, and
+paper without retrieval or model providers.
 
-![Multi-phase literature-review corpus summary generated from the committed synthetic fixture run](output/figures/field_summary.png)
+Start with the [documentation](docs/README.md) for setup, verification,
+configuration, and rendering. The [manuscript source](docs/manuscript/README.md)
+includes methods, results, appendices, and citations.
 
-## Overview
-
-The exemplar demonstrates a **three-phase search strategy** that combines:
-
-1. **Phase-based query refinement**: Sequential phases targeting different aspects of a domain
-2. **Deterministic filtering**: Publication year, citation count, venue quality filters
-3. **LLM-based content filtering**: Abstract classification for study type and relevance
-4. **Cross-phase validation**: Citation analysis and configured overlap checks
-
-The committed default run uses a synthetic fixture corpus. Live retrieval,
-full-text assessment, and optional LLM stages must be enabled explicitly and are
-reported as pending when they did not run. The methods are informed by
-systematic-review reporting practice, but the repository does not claim a
-completed systematic review without live retrieval, a documented protocol, and
-domain-expert assessment.
-
-## When to use this template
-
-Use this template when one review question needs distinct retrieval phases,
-phase-specific filters, and explicit cross-phase provenance. For a single-term
-review without phased comparison, start from `template_literature_meta_analysis`
-instead. See `STANDALONE.md` for the fork checklist and template-integrity gates.
-
-## Publication and rendering
-
-This exemplar is an explicit public draft: its publication status and repository
-identity come from `manuscript/config.yaml`, while the committed offline replay
-and claim ledger provide the reproducible evidence boundary. Run it in the
-[template monorepo](https://github.com/docxology/template) with:
-
-```bash
-uv run python scripts/pipeline/stage_01_test.py \
-  --project templates/template_advanced_literature_review --project-only
-uv run python scripts/pipeline/stage_03_render.py \
-  --project templates/template_advanced_literature_review
-```
-
-Do not present a DOI or published-platform status until one is recorded in the
-project config and the generated publication records are refreshed.
-
-## Features
-
-### Multi-Phase Search Architecture
-- **Phase 1**: Foundational literature discovery with broad queries
-- **Phase 2**: Technology-specific or method-specific focused search
-- **Phase 3**: Detailed analysis of specific phenomena or applications
-- Cross-phase deduplication with provenance tracking
-
-### Intelligent Filtering
-- **Deterministic filters**: Year ranges, citation thresholds, venue patterns
-- **LLM classification**: Study type (observational/theoretical/review), content relevance
-- **Quality gates**: Configured phase checks with explicit fixture/live status
-
-### Advanced Analytics
-- Phase overlap analysis (Jaccard similarity)
-- Cross-phase citation validation
-- Temporal evolution tracking across phases
-- Knowledge graph extraction with phase-aware hypothesis scoring
-
-### Reproducible Pipeline
-- Configuration-driven template variables
-- Automated figure generation
-- PDF manuscript rendering
-- Contract tests for phase filtering, provenance, local HTTP integration, and configuration
-
-## Quick Start
-
-1. **Configure your domain** in `manuscript/config.yaml`:
-   ```yaml
-   project_config:
-     search_phases:
-       phase_1_foundation:
-         queries: ["your domain terms"]
-         engines: {arxiv: true, openalex: true}
-         deterministic_filters: {min_year: 2015}
-   ```
-
-2. **Replay the committed fixture (offline default)**:
-   ```bash
-   uv run python scripts/01_multi_phase_search.py
-   ```
-
-   Live retrieval is an explicit opt-in and never runs from the default
-   command:
-
-   ```bash
-   uv run python scripts/01_multi_phase_search.py --live
-   ```
-
-3. **Execute analysis pipeline**:
-   ```bash
-   uv run python scripts/02_meta_analysis_pipeline.py
-   uv run python scripts/04_generate_figures.py
-   uv run python scripts/05_inject_variables.py
-   ```
-
-4. **Render manuscript** from the template repository root:
-   ```bash
-   uv run python scripts/pipeline/stage_03_render.py --project templates/template_advanced_literature_review
-   ```
-
-## Configuration
-
-The template is configured through `manuscript/config.yaml`:
-
-### Search Phases
-Each phase defines:
-- **Query sets**: Multiple search terms targeting different aspects
-- **Engine selection**: Which databases to query (arXiv, OpenAlex, etc.)
-- **Result limits**: Papers per query and total phase limits
-- **Dependencies**: Which previous phases this phase builds upon
-
-### LLM Filters
-Content-based filtering using local LLM:
-- **Study type classification**: Observational vs theoretical vs review
-- **Content relevance**: Domain-specific abstract analysis
-- **Quality screening**: Method-specific inclusion criteria
-
-### Analysis Configuration
-- **Sampling rates**: LLM processing fraction for large corpora
-- **Hypothesis definitions**: Domain-specific research questions
-- **Subfield taxonomies**: Keyword-based paper classification
-
-## Example: Exoplanet Atmospheric Composition
-
-The default configuration demonstrates a three-phase pipeline over a synthetic
-fixture corpus for exoplanet-atmosphere research:
-
-1. **Foundation Phase**: General atmospheric studies (2010+, no citation floor)
-2. **JWST Phase**: James Webb Space Telescope observations (2020+, new field)
-3. **Molecular Phase**: Specific atmospheric molecule detections (2015+)
-
-LLM filters are configured but not implied to have executed in the fixture run;
-their status is carried into the generated evidence and manuscript variables.
-
-## Architecture
-
-```
-template_advanced_literature_review/
-├── scripts/
-│   ├── 01_multi_phase_search.py     # Multi-phase search orchestrator
-│   ├── 02_meta_analysis_pipeline.py # Phase-aware analysis
-│   └── ...
-├── src/
-│   ├── literature/                  # Search engine interfaces
-│   ├── multi_phase/                 # Phase filtering and provenance
-│   ├── analysis/                    # Bibliometric analysis
-│   ├── knowledge_graph/             # LLM-based extraction
-│   └── manuscript/variables/        # Template variable injection
-├── manuscript/
-│   ├── config.yaml                  # Complete configuration
-│   ├── 00_abstract.md              # Multi-phase aware abstract
-│   └── ...
-└── tests/                           # Comprehensive test suite
-```
-
-## Extending the Template
-
-### Adding New Phases
-1. Define phase in `config.yaml` under `search_phases`
-2. Specify queries, engines, and filters
-3. Add LLM filters if needed
-4. Update manuscript variables for new phase metrics
-
-### Custom LLM Filters
-```yaml
-llm_filters:
-  custom_filter:
-    name: "Custom Classification"
-    prompt: "Classify this abstract: {abstract}"
-    apply_to_phases: ["phase_1"]
-    keep_values: ["relevant"]
-```
-
-### Domain Adaptation
-1. Replace search queries with domain terms
-2. Update deterministic filters (years, venues, citations)
-3. Modify hypothesis definitions
-4. Adapt manuscript templates and variable extractors
-
-## Dependencies
-
-- Python 3.11+
-- Build backend: setuptools 84.1.0+; the lockfile also pins the patched 84.1.0 for optional embeddings dependencies ([GHSA-xmj3-9gf7-h52w](https://github.com/advisories/GHSA-xmj3-9gf7-h52w)).
-- Academic database access (most are keyless)
-- Optional local LLM server for model-backed filtering when explicitly enabled
-- Standard scientific Python stack (pandas, matplotlib, networkx)
-
-## Citation
+## Publication
 
 <!-- PUBLISHING-STATUS:START (generated by infrastructure.publishing.status_report) -->
 **A Reproducible Multi-Phase Literature-Review Pipeline for Exoplanet Atmospheres** · v0.1.0 · CC-BY-4.0 · Daniel Ari Friedman
@@ -228,24 +44,7 @@ Publishing surface — 20 platforms, 1 published:
 
 _Keywords: exoplanet atmospheres, literature review pipeline, systematic-review reporting, multi-phase search, LLM filtering, James Webb Space Telescope, atmospheric composition, transit spectroscopy, bibliometrics, cross-validation._
 
-_Status legend: ✅ published (durable identifier recorded in `config.yaml`) · 🔵 reserved (identifier reserved but not yet registered by final publication) · ⚪ available (adapter implemented and locally verifiable) · 🟡 planned. This block is generated — edit `manuscript/config.yaml`, then regenerate with `uv run python -m infrastructure.publishing.status_report --project <path> --write`._
+_Status legend: ✅ published (durable identifier recorded in `config.yaml`) · 🔵 reserved (identifier reserved but not yet registered by final publication) · ⚪ available (adapter implemented and locally verifiable) · 🟡 planned. This block is generated — edit `docs/manuscript/config.yaml`, then regenerate with `uv run python -m infrastructure.publishing.status_report --project <path> --write`._
 <!-- PUBLISHING-STATUS:END -->
 
-```bibtex
-@software{advanced_literature_review_template,
-  title = {Advanced Multi-Phase Literature Review Template},
-  author = {Friedman, Daniel Ari},
-  year = {2026},
-  url = {https://github.com/docxology/template_advanced_literature_review},
-  license = {CC-BY-4.0}
-}
-```
-
-## License
-
-CC-BY-4.0, granted by this exemplar's own [`LICENSE`](LICENSE) and declared in
-[`CITATION.cff`](CITATION.cff) (`license:`), [`pyproject.toml`](pyproject.toml)
-(`[project] license`), and [`manuscript/config.yaml`](manuscript/config.yaml)
-(`metadata.license`), from which the `codemeta.json` and `.zenodo.json` sidecars
-are generated. The template monorepo's own root `LICENSE` is Apache-2.0 and does
-not govern this project's content.
+The project is licensed under [CC BY 4.0](LICENSE).

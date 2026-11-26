@@ -3,7 +3,7 @@
 Converts :class:`literature.models.Paper` records into BibTeX entries and
 renders them to a single ``.bib``-formatted string. This module is a NEW,
 standalone export path — it does not read from or write to the manuscript's
-hand-maintained ``manuscript/references.bib`` (that file backs the
+hand-maintained ``docs/manuscript/references.bib`` (that file backs the
 manuscript's own ``\\citep{}`` keys and must stay untouched).
 
 Cross-boundary import note — SELF-CONTAINED BY NECESSITY.

@@ -148,7 +148,7 @@ def generate_all_figures(args: argparse.Namespace) -> list[str]:
             logger.error("Citation network figures skipped: %s", exc)
 
     # hypothesis_dashboard.png is referenced unconditionally by
-    # manuscript/03_results_hypothesis.md, and plot_hypothesis_dashboard is
+    # docs/manuscript/03_results_hypothesis.md, and plot_hypothesis_dashboard is
     # explicitly designed to render a "no scores available" placeholder when
     # given an empty mapping (offline/no-LLM default run, before the optional
     # knowledge-graph stage has populated hypothesis_scores.json). Always call
@@ -272,10 +272,14 @@ def _register_figures(generated_paths: list[str], output_dir: Path, logger: logg
             f"Figure showing {filename.replace('.png', '').replace('_', ' ')}.",
         )
         label = f"fig:{path.stem}"
-        if not figure_manager.get_figure(label):
+        previous = figure_manager.get_figure(label)
+        metadata = dict(previous.metadata) if previous else {}
+        if not metadata.get("alt_text"):
+            metadata["alt_text"] = caption
             figure_manager.register_figure(
                 filename=filename,
                 caption=caption,
                 label=label,
                 generated_by="04_generate_figures.py",
+                metadata=metadata,
             )

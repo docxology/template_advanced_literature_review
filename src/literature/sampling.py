@@ -26,7 +26,7 @@ def load_sampling_config(config: dict[str, Any]) -> tuple[float, int]:
     """Extract sampling fraction and seed from a config dict.
 
     Args:
-        config: The ``project_config`` dict from ``manuscript/config.yaml``.
+        config: The ``project_config`` dict from ``docs/manuscript/config.yaml``.
 
     Returns:
         A ``(fraction, seed)`` tuple. Defaults to ``(1.0, 42)`` when no

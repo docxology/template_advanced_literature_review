@@ -1,5 +1,5 @@
 # Copy to config.yaml and replace the example identity and search phases.
-# Shape-mirrors manuscript/config.yaml: placeholder values only, no live domain terms.
+# Shape-mirrors docs/manuscript/config.yaml: placeholder values only, no live domain terms.
 paper:
   title: "A Reproducible Multi-Phase Literature-Review Pipeline"
   subtitle: "Configured research question and evidence boundary"

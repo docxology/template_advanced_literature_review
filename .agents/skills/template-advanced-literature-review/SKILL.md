@@ -21,12 +21,9 @@ new phased literature-review pipeline.
 
 ## Quick Reference
 
-```bash
-uv run python scripts/pipeline/stage_01_test.py --project templates/template_advanced_literature_review --project-only
-uv run python scripts/pipeline/stage_02_analysis.py --project templates/template_advanced_literature_review
-uv run python scripts/pipeline/stage_03_render.py --project templates/template_advanced_literature_review
-uv run python scripts/pipeline/stage_04_validate.py --project templates/template_advanced_literature_review
-```
+Use the [standalone quick start](../../../docs/quickstart.md) for local tests
+and the [pinned build](../../../docs/rendering_pipeline.md) for synthetic
+fixture replay and PDF/HTML verification.
 
 ## Pitfalls
 

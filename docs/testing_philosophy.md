@@ -48,11 +48,9 @@ than injected mock exceptions.
 
 ## Coverage
 
-```bash
-uv run pytest projects/templates/template_advanced_literature_review/tests/ \
-  --cov=projects/templates/template_advanced_literature_review/src --cov-fail-under=90 -q
+```sh
+uv run --no-sync pytest -m 'not llm' -q
 ```
 
-Live pass/fail counts and the current coverage percentage belong in
-[`../../../../docs/_generated/COUNTS.md`](../../../../docs/_generated/COUNTS.md)
-— do not hardcode them here.
+The test command reports the selected suite and measured coverage.
+Template also maintains a [monorepo counts snapshot](https://github.com/docxology/template/blob/87704feae0a4490ef7dad9c931d268e8c30273c2/docs/_generated/COUNTS.md).

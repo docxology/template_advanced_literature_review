@@ -8,7 +8,7 @@ stages:
     tags: [science, deterministic]
     contract:
       gate: literature_retrieval
-      input_artifacts: ["projects/{project}/manuscript/config.yaml"]
+      input_artifacts: ["projects/{project}/docs/manuscript/config.yaml"]
       output_artifacts:
         - "projects/{project}/output/data/combined_corpus.jsonl"
         - "projects/{project}/output/data/phase_metadata.json"
@@ -95,7 +95,7 @@ stages:
     depends_on: [Literature Evaluation]
     tags: [optional-network]
     contract:
-      input_artifacts: ["projects/{project}/manuscript/config.yaml"]
+      input_artifacts: ["projects/{project}/docs/manuscript/config.yaml"]
       output_artifacts: ["projects/{project}/output/data/deep_research_replay.json"]
       definition_of_done: "The configured dispatch completes or records an explicit, reproducible skip."
       failure_code: ARL_RESEARCH_DISPATCH_FAILED
@@ -131,7 +131,7 @@ stages:
     depends_on: [Manuscript Hydration, Full-Text Assessment, Research Dispatch, Bibliography Export, Reproducibility Assessment]
     tags: [publication, deterministic]
     contract:
-      input_artifacts: ["projects/{project}/manuscript/", "projects/{project}/output/"]
+      input_artifacts: ["projects/{project}/docs/manuscript/", "projects/{project}/output/"]
       output_artifacts:
         - "projects/{project}/output/reports/artifact_manifest.json"
         - "projects/{project}/output/reports/evidence_registry.json"
