@@ -3,7 +3,7 @@
 Variable computation and injection for the literature meta-analysis manuscript.
 Reads pipeline output JSONs and produces a `dict[str, str]` of registered template variables
 that `scripts/05_inject_variables.py` substitutes into `{{VAR}}` placeholders in every
-`manuscript/*.md` file, writing rendered copies to `output/manuscript/`.
+`docs/manuscript/*.md` file, writing rendered copies to `output/manuscript/`.
 
 ## Module
 

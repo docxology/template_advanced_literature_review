@@ -5,7 +5,7 @@ previous phases, apply both deterministic and LLM-based filters, and
 maintain detailed phase metadata for analysis.
 
 Usage:
-    python 01_multi_phase_search.py [--config-path manuscript/config.yaml]
+    python 01_multi_phase_search.py [--config-path docs/manuscript/config.yaml]
 """
 
 from __future__ import annotations
@@ -751,7 +751,7 @@ def main() -> None:  # pragma: no cover - exercised through the thin CLI script
     parser.add_argument(
         "--config-path",
         type=Path,
-        default=PROJECT_ROOT / "manuscript" / "config.yaml",
+        default=PROJECT_ROOT / "docs" / "manuscript" / "config.yaml",
         help="Path to configuration file",
     )
     parser.add_argument("--phase", type=str, help="Run only a specific phase")

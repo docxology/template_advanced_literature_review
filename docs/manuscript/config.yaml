@@ -433,3 +433,9 @@ project_config:
       - "chemical equilibrium"
       - "circulation models"
       - "retrieval algorithms"
+
+render:
+  formats:
+    pdf: true
+    html: true
+    slides: false

@@ -4,12 +4,14 @@ from __future__ import annotations
 
 import json
 import re
+import subprocess
+import sys
 from pathlib import Path
 
 import pytest
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
-MANUSCRIPT_ROOT = PROJECT_ROOT / "manuscript"
+MANUSCRIPT_ROOT = PROJECT_ROOT / "docs" / "manuscript"
 
 
 def test_fixture_corpus_is_deterministic_and_reserved() -> None:
@@ -195,6 +197,26 @@ def test_manuscript_citations_resolve_to_bibliography() -> None:
 
     assert citation_keys <= bibliography_keys
     assert "friston2010free" not in bibliography_keys
+
+
+def test_literature_evaluation_cli_audits_canonical_manuscript(tmp_path: Path) -> None:
+    completed = subprocess.run(
+        [
+            sys.executable,
+            str(PROJECT_ROOT / "scripts" / "07_literature_evaluation.py"),
+            "--fixture-honesty",
+            "--output-dir",
+            str(tmp_path),
+        ],
+        cwd=PROJECT_ROOT,
+        capture_output=True,
+        text=True,
+        check=True,
+    )
+
+    assert f"Fixture honesty audit passed ({MANUSCRIPT_ROOT})" in completed.stderr
+    report = json.loads((tmp_path / "literature_evaluation.json").read_text(encoding="utf-8"))
+    assert report["total_papers"] > 0
 
 
 def test_fixture_honesty_detects_empirical_language(tmp_path: Path) -> None:

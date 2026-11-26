@@ -19,7 +19,7 @@ from multi_phase.search import MultiPhaseSearchRunner
 
 def main() -> None:
     """Generate deterministic phase artifacts from the bundled corpus."""
-    config_path = PROJECT_ROOT / "manuscript" / "config.yaml"
+    config_path = PROJECT_ROOT / "docs" / "manuscript" / "config.yaml"
     corpus_path = PROJECT_ROOT / "output" / "data" / "corpus.jsonl"
     if not corpus_path.is_file():
         raise FileNotFoundError(f"fixture corpus not found: {corpus_path}")

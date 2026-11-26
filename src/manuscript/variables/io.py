@@ -11,7 +11,7 @@ from manuscript.variables._logging import logger
 
 def load_config(project_root: Path) -> dict[str, Any]:
     """Load config from a file."""
-    config_path = project_root / "manuscript" / "config.yaml"
+    config_path = project_root / "docs" / "manuscript" / "config.yaml"
     if not config_path.exists():
         logger.warning("config.yaml not found at %s; domain tokens use fallbacks", config_path)
         return {}

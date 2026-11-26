@@ -23,8 +23,8 @@ their content and structural component scores.
 This stage is optional and gated by full-text availability. With no fulltext
 available and no language model configured, the stage is skipped and the
 reproducibility aggregates read *pending* — the same graceful-degradation convention used by the
-knowledge-graph assertion-extraction stage (see
-[`02d_methods_knowledge_graph.md`](02d_methods_knowledge_graph.md)). When fulltext is
+assertion-extraction stage described in *Optional Knowledge-Graph Layer*.
+When fulltext is
 available and a language model is explicitly configured, the mean score, low-score
 count, and per-paper table are populated from extracted workflow graphs. The default
 fixture run does not imply that this optional model-backed assessment has occurred.

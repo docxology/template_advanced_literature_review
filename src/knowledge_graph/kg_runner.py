@@ -74,7 +74,7 @@ def run_knowledge_graph_pipeline(args: argparse.Namespace, *, project_root: Path
     """Build knowledge graph artifacts and score hypotheses."""
     logger = logging.getLogger("build_knowledge_graph")
     explicit_options: frozenset[str] = getattr(args, "_explicit_options", frozenset())
-    config_path = Path(args.config) if args.config else project_root / "manuscript" / "config.yaml"
+    config_path = Path(args.config) if args.config else project_root / "docs" / "manuscript" / "config.yaml"
     if args.config and not config_path.exists():
         raise FileNotFoundError(f"Configuration file does not exist: {config_path}")
     if config_path.exists():

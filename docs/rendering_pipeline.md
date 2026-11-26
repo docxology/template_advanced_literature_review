@@ -1,92 +1,56 @@
-# Rendering Pipeline
+# Rebuild the manuscript from the synthetic corpus
 
-The advanced exemplar renders by first merging three phase-scoped corpora,
-then hydrating manuscript variables from generated JSON artifacts (same as
-the single-term sibling), then delegating PDF/HTML/DOCX/EPUB work to the root
-template renderers.
+Install Git, uv, Pandoc 3.14 with pandoc-crossref 0.3.26b, and XeLaTeX with the
+[required TeX packages](https://github.com/docxology/template/blob/87704feae0a4490ef7dad9c931d268e8c30273c2/docs/usage/output-formats.md).
+Use a spare checkout because the preparation steps regenerate files under
+`output/`, which also holds the versioned evidence snapshot.
 
-## Phase 0: Multi-Phase Search (only when refreshing the corpus)
+From a clean checkout of this repository:
 
-```bash
-uv run python projects/templates/template_advanced_literature_review/scripts/01_multi_phase_search.py
+```sh
+set -e
+project_root="$(pwd -P)"
+renderer="$(mktemp -d)/template"
+git clone https://github.com/docxology/template.git "$renderer"
+git -C "$renderer" checkout --detach 87704feae0a4490ef7dad9c931d268e8c30273c2
+mkdir -p "$renderer/projects/working"
+project_copy="$renderer/projects/working/template_advanced_literature_review"
+git clone --no-hardlinks "$project_root" "$project_copy"
+git -C "$project_copy" checkout --detach "$(git -C "$project_root" rev-parse HEAD)"
+cd "$renderer"
+uv sync --locked --no-dev
+
+cd "$project_copy"
+uv sync --locked --python 3.13 --extra dev
+export PYTHONPATH="$renderer${PYTHONPATH:+:$PYTHONPATH}"
+export MPLBACKEND=Agg
+# Remove prior generated figures from the disposable build copy.
+find output/figures -maxdepth 1 -type f -name '*.png' -delete
+rm -f output/figures/figure_registry.json
+uv run --no-sync python scripts/01b_fixture_phase_replay.py
+uv run --no-sync python scripts/02_meta_analysis_pipeline.py
+uv run --no-sync python scripts/04_generate_figures.py --dpi 300
+uv run --no-sync python scripts/06_fulltext_assessment.py
+uv run --no-sync python scripts/07_literature_evaluation.py --fixture-honesty
+uv run --no-sync python scripts/08_deep_research_dispatch.py
+uv run --no-sync python scripts/09_export_bibliography.py
+uv run --no-sync python scripts/05_inject_variables.py
+
+cd "$renderer"
+uv run --no-sync python scripts/pipeline/stage_03_render.py --project working/template_advanced_literature_review --skip-manuscript-hydration
+uv run --no-sync python scripts/pipeline/stage_04_validate.py --project working/template_advanced_literature_review
 ```
 
-Writes `output/data/phase_1_foundation_corpus.jsonl`,
-`phase_2_jwst_corpus.jsonl`, `phase_3_molecules_corpus.jsonl`,
-`combined_corpus.jsonl`, and `phase_metadata.json`. Skip this stage for a
-deterministic replay of the tracked corpus snapshot.
+Stage 03 uses the manuscript already hydrated by the project’s step 05.
+Find the combined PDF in `output/pdf/`, the HTML index at
+`output/web/index.html`, and validation reports and provenance under
+`output/reports/` in the disposable project copy. Authored Markdown and its
+methodological bibliography remain in [manuscript/](manuscript/README.md).
+The exported corpus bibliography under `output/data/` serves a separate
+purpose.
 
-## Phase 1: Produce Data Artifacts
-
-```bash
-uv run python projects/templates/template_advanced_literature_review/scripts/02_meta_analysis_pipeline.py
-uv run python projects/templates/template_advanced_literature_review/scripts/03_build_knowledge_graph.py --max-papers 0
-uv run python projects/templates/template_advanced_literature_review/scripts/04_generate_figures.py --dpi 300
-```
-
-Optional enrichment, in dependency order (network/LLM):
-
-```bash
-uv run python projects/templates/template_advanced_literature_review/scripts/11_fulltext_download.py
-uv run python projects/templates/template_advanced_literature_review/scripts/10_reproducibility_assessment.py
-```
-
-## Phase 2: Hydrate Manuscript Tokens
-
-```bash
-uv run python projects/templates/template_advanced_literature_review/scripts/05_inject_variables.py
-```
-
-Inputs are `manuscript/config.yaml` plus `output/data/*.json` /
-`output/data/*.jsonl`, including `phase_metadata.json` and
-`hypothesis_scores.json` for phase-aware tokens (`src/manuscript/variables/extractors/multi_phase.py`,
-`extractors/hypotheses.py`). Outputs are resolved markdown files under
-`output/manuscript/`. This stage must run **after** stage 10/11 if you want
-reproducibility/full-text evidence reflected in the manuscript.
-
-## Phase 3: Validate Markdown Before Render
-
-```bash
-uv run python -m infrastructure.validation.cli prerender \
-  projects/templates/template_advanced_literature_review/manuscript --repo-root .
-```
-
-## Phase 4: Render
-
-```bash
-uv run python scripts/pipeline/stage_03_render.py --project templates/template_advanced_literature_review
-```
-
-Working render artifacts land under
-`projects/templates/template_advanced_literature_review/output/`. Repo-level
-copied outputs are generated by:
-
-```bash
-uv run python scripts/pipeline/stage_05_copy.py --project templates/template_advanced_literature_review
-```
-
-## Phase 5: Validate Outputs (project-local)
-
-```bash
-uv run python projects/templates/template_advanced_literature_review/scripts/11_validate_outputs.py
-```
-
-Writes `output/reports/validation_report.json` / `.md` — a deterministic
-report over the artifact manifest and coverage snapshot for this project. See
-`output_inventory.md` for the distinction between this project-local report
-and the repo-level test/evidence reports also written under `output/reports/`.
-
-## Common Failures
-
-- Literal `{{TOKEN}}`: rerun `scripts/05_inject_variables.py`; if still
-  present, add the token in `src/manuscript/variables/compute.py` (or the
-  relevant `extractors/` module) and test it.
-- Missing per-phase corpus or `phase_metadata.json`: rerun
-  `scripts/01_multi_phase_search.py`, or confirm the tracked snapshot under
-  `output/data/` wasn't deleted.
-- Missing figure: rerun `scripts/04_generate_figures.py --dpi 300` and check
-  `output/figures/figure_registry.json`.
-- Citation error: check `manuscript/references.bib` and the generated
-  `_combined_manuscript.log`.
-- Mermaid/Chrome error: install `chrome-headless-shell` as described in the
-  root rendering docs, then rerun `scripts/pipeline/stage_03_render.py`.
+The offline workflow uses the tracked synthetic corpus and local replay
+fixture. Live retrieval, model-backed filtering and extraction, full-text
+downloads, and reproducibility scoring are optional workflows outside this
+build. A fork can configure those workflows in
+[config.yaml](manuscript/config.yaml).

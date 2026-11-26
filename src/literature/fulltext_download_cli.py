@@ -8,7 +8,7 @@ reproducibility runner reads the .txt files this script produces.
 Network-gated and opt-in: when ``project_config.fulltext.enabled`` is
 false (the default), this script is a no-op that logs a warning. Enable
 it by setting ``fulltext.enabled: true`` and ``fulltext.unpaywall_email``
-in ``manuscript/config.yaml``.
+in ``docs/manuscript/config.yaml``.
 """
 
 from __future__ import annotations
@@ -52,7 +52,7 @@ def parse_args() -> argparse.Namespace:
         "--config",
         type=str,
         default=None,
-        help="Path to manuscript/config.yaml for fulltext settings.",
+        help="Path to docs/manuscript/config.yaml for fulltext settings.",
     )
     parser.add_argument(
         "--log-level",
@@ -72,7 +72,7 @@ def main() -> None:
     )
     logger = logging.getLogger("fulltext_download")
 
-    config_path = Path(args.config) if args.config else PROJECT_ROOT / "manuscript" / "config.yaml"
+    config_path = Path(args.config) if args.config else PROJECT_ROOT / "docs" / "manuscript" / "config.yaml"
     fulltext_cfg = load_fulltext_config(config_path) if config_path.exists() else {}
 
     fulltext_enabled = bool(fulltext_cfg.get("enabled"))

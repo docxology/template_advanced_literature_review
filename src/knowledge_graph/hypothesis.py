@@ -46,7 +46,7 @@ class Hypothesis:
 
 # A generic, domain-neutral default hypothesis set. These are FALLBACKS only —
 # the real hypotheses for a given study come from the ``hypothesis_definitions``
-# block of ``manuscript/config.yaml`` (the bundled default targets "modafinil").
+# block of ``docs/manuscript/config.yaml`` (the bundled default targets "modafinil").
 STANDARD_HYPOTHESES: list[Hypothesis] = [
     Hypothesis(
         "PRIMARY_EFFICACY",

@@ -393,7 +393,7 @@ class TestMultiPhaseConfig:
 
     def test_config_has_three_phases(self):
         """Test that the advanced config has three search phases."""
-        config_path = _ROOT / "manuscript" / "config.yaml"
+        config_path = _ROOT / "docs" / "manuscript" / "config.yaml"
         if not config_path.exists():
             pytest.skip("Config file not found")
 
@@ -408,7 +408,7 @@ class TestMultiPhaseConfig:
 
     def test_phase_1_queries(self):
         """Test Phase 1 has the expected queries."""
-        config_path = _ROOT / "manuscript" / "config.yaml"
+        config_path = _ROOT / "docs" / "manuscript" / "config.yaml"
         if not config_path.exists():
             pytest.skip("Config file not found")
 
@@ -422,7 +422,7 @@ class TestMultiPhaseConfig:
 
     def test_phase_2_year_filter(self):
         """Test Phase 2 has the expected year filter."""
-        config_path = _ROOT / "manuscript" / "config.yaml"
+        config_path = _ROOT / "docs" / "manuscript" / "config.yaml"
         if not config_path.exists():
             pytest.skip("Config file not found")
 
@@ -435,7 +435,7 @@ class TestMultiPhaseConfig:
 
     def test_phase_dependencies(self):
         """Test that phases have correct dependency tracking."""
-        config_path = _ROOT / "manuscript" / "config.yaml"
+        config_path = _ROOT / "docs" / "manuscript" / "config.yaml"
         if not config_path.exists():
             pytest.skip("Config file not found")
 
@@ -451,7 +451,7 @@ class TestMultiPhaseConfig:
 
     def test_llm_filters_configured(self):
         """Test that LLM filters are configured but disabled for initial run."""
-        config_path = _ROOT / "manuscript" / "config.yaml"
+        config_path = _ROOT / "docs" / "manuscript" / "config.yaml"
         if not config_path.exists():
             pytest.skip("Config file not found")
 
@@ -469,8 +469,8 @@ class TestMultiPhaseConfig:
 
     def test_documented_enrichment_commands_follow_dependency_order(self):
         """The copy-paste workflow must download before scoring and reinjection."""
-        agents_text = (_ROOT / "AGENTS.md").read_text(encoding="utf-8")
-        enrichment_block = agents_text.split("Full-text download and reproducibility scoring", maxsplit=1)[1]
+        guide = (_ROOT / "docs" / "forking_guide.md").read_text(encoding="utf-8")
+        enrichment_block = guide.split("Full-text download and reproducibility scoring", maxsplit=1)[1]
 
         download = enrichment_block.index("scripts/11_fulltext_download.py")
         assessment = enrichment_block.index("scripts/10_reproducibility_assessment.py")

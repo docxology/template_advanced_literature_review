@@ -20,7 +20,6 @@ from infrastructure.core.pipeline.artifacts import (
     snapshot_current_artifact_manifest,
     validate_artifact_manifest,
 )
-from infrastructure.project.discovery import resolve_project_root
 from infrastructure.validation.content.figure_validator import validate_figure_registry
 from infrastructure.validation.evidence_registry import (
     build_project_evidence_registry,
@@ -32,7 +31,7 @@ def _parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
         "--project",
-        default="templates/template_advanced_literature_review",
+        default=PROJECT_ROOT.name,
         help="Qualified project name under projects/.",
     )
     return parser.parse_args()
@@ -40,11 +39,7 @@ def _parse_args() -> argparse.Namespace:
 
 def main() -> int:
     args = _parse_args()
-    repo_root = next(
-        (parent for parent in (PROJECT_ROOT, *PROJECT_ROOT.parents) if (parent / "infrastructure").is_dir()),
-        PROJECT_ROOT,
-    )
-    project_root = PROJECT_ROOT if repo_root == PROJECT_ROOT else resolve_project_root(repo_root, args.project)
+    project_root = PROJECT_ROOT
     output_dir = project_root / "output"
     output_dir.mkdir(parents=True, exist_ok=True)
 
@@ -58,7 +53,7 @@ def main() -> int:
     figure_ok = True
     figure_issues: list[str] = []
     if figure_path.exists():
-        figure_ok, figure_issues = validate_figure_registry(figure_path, project_root / "manuscript")
+        figure_ok, figure_issues = validate_figure_registry(figure_path, project_root / "docs" / "manuscript")
 
     cross_phase_path = output_dir / "data" / "cross_phase_analysis.json"
     cross_phase_ok = False
