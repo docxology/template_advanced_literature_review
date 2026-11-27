@@ -34,12 +34,22 @@ Package (`variables/`: `compute.py`, `context.py`, `formatters.py`, `inject.py`,
 
 ## Running Injection Manually
 
+From the standalone project root, use the locked environment in the
+[quickstart](../../docs/quickstart.md). Use the Template checkout pinned in
+the [rendering guide](../../docs/rendering_pipeline.md) for the logging
+infrastructure.
+
 ```bash
-uv run python projects/templates/template_literature_meta_analysis/scripts/05_inject_variables.py
+PYTHONPATH="/absolute/path/to/template${PYTHONPATH:+:$PYTHONPATH}" \
+  uv run --no-sync python scripts/05_inject_variables.py --dry-run
 ```
 
-Output: `output/manuscript/*.md` — rendered copies of all manuscript files with all `{{VAR}}`
-replaced. Documentation examples may contain literal token syntax; manuscript content should hydrate all real variables.
+Stage 05 reads the [manuscript sources](../../docs/manuscript/) and
+[configuration](../../docs/manuscript/config.yaml). It loads available
+pipeline artifacts from `output/data/` and `output/`.
+The preview reports substitutions and may create `output/manuscript/`.
+Omit `--dry-run` in a disposable checkout to write rendered Markdown and
+copy supporting files into that directory.
 
 ## Known Limitations
 
