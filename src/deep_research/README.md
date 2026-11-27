@@ -12,12 +12,17 @@ demonstration summary with real, metadata-only primary-paper citations. Its
 provider is explicitly `curated-fixture`, its job ID is blank, and its trace
 labels curation rather than implying a paid provider generated the report.
 
-Run from the template repository root:
+Set up the pinned Template checkout and the project environment with the
+[standalone quickstart](../../docs/quickstart.md). From the standalone project
+root, replay the fixture into a temporary directory in the same shell.
 
 ```bash
-uv run python projects/templates/template_advanced_literature_review/scripts/08_deep_research_dispatch.py
-uv run pytest projects/templates/template_advanced_literature_review/tests/test_deep_research_dispatch.py -q
+replay_dir="$(mktemp -d)"
+uv run --no-sync python scripts/08_deep_research_dispatch.py --output-dir "$replay_dir"
 ```
+
+Run the focused replay tests with `uv run --no-sync pytest --no-cov -q tests/test_deep_research_dispatch.py`.
+The [full native suite](../../tests/README.md) applies the project coverage gate.
 
 This source package never performs live dispatch. A fork that enables paid
 providers should expose that behavior through a separate explicit command.
