@@ -4,11 +4,12 @@ The project suite covers configuration, phase filtering and provenance,
 cross-phase deduplication, deep-research replay, full-text handling, manuscript
 variables, and the standalone pipeline contract.
 
-Run the canonical gate from the repository root:
+Set up the pinned Template checkout and the project environment with the
+[standalone quickstart](../docs/quickstart.md). Run the native coverage gate
+from the standalone project root in the same shell.
 
 ```bash
-uv run python scripts/pipeline/stage_01_test.py \
-  --project templates/template_advanced_literature_review --project-only
+uv run --no-sync pytest -m 'not llm' -q
 ```
 
 Tests use real parsers, temporary files, and local HTTP servers. They must not
