@@ -17,7 +17,7 @@ Advanced multi-phase literature-review pipeline exemplar with iterative search r
 | Offline deep-research replay | `src/deep_research/dispatch.py` and its tracked fixture |
 | Full 11-stage pipeline orchestration | `scripts/01_multi_phase_search.py` through `scripts/11_fulltext_download.py` |
 | Historical follow-up scope | `docs/archive/TODO.md` |
-| Live public roster/count facts | `../../../docs/_generated/active_projects.md` and `../../../docs/_generated/COUNTS.md` |
+| Live public roster/count facts | [Template public roster](https://github.com/docxology/template/blob/main/docs/_generated/active_projects.md) and [Template canonical factsheet](https://github.com/docxology/template/blob/main/docs/_generated/COUNTS.md) |
 
 Generated `output/` files are regenerable; this canonical public exemplar tracks
 its current evidence snapshot. Never hand-edit `output/manuscript/`,
